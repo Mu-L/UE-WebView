@@ -29,7 +29,7 @@ public class cefForUe : ModuleRules
         CheckLicense(""+Target.ProjectFile.ToFileInfo().Directory);
         // Target.ProjectFile.ToFileInfo().Directory
         // Console.WriteLine("============="+  Target.ProjectFile.ToFileInfo().Directory);
-        // æ£€æŸ¥licenseæˆæƒç›®å½• 
+        // ¼ì²élicenseÊÚÈ¨Ä¿Â¼ 
         // Process.GetCurrentProcess().Kill(); 
     }
     void InitCEF3(string CEFVersion, string platform, string renderName, string subfixDLL,bool isRuntime)
@@ -42,7 +42,7 @@ public class cefForUe : ModuleRules
         Dictionary<string, Dictionary<int, string>> mapFile = new Dictionary<string, Dictionary<int, string>>();
         // And the entire Resources folder. Enumerate the entire directory instead of mentioning each file manually here.
         foreach (string FileName in Directory.EnumerateFiles(CEFRoot, "*"+ split, SearchOption.AllDirectories))
-        {// è·å–åˆå¹¶æ–‡ä»¶
+        {// »ñÈ¡ºÏ²¢ÎÄ¼ş
             if(isRuntime)break;
             string file = Path.GetFileName(FileName);
             string filePath = Path.GetDirectoryName(FileName);
@@ -59,7 +59,7 @@ public class cefForUe : ModuleRules
             mapFile[splitPN].Add(idx, FileName);
         }
         const int maxBuff = 1024 * 1024 * 100;
-        byte[] readBuff = new byte[maxBuff];// å•ä¸ªæ–‡ä»¶æœ€å¤§100M
+        byte[] readBuff = new byte[maxBuff];// µ¥¸öÎÄ¼ş×î´ó100M
         foreach (KeyValuePair<string, Dictionary<int, string>> kvp in mapFile){
             if (kvp.Value.Count == 0) continue;
             FileStream fileDst = new FileStream(kvp.Key, FileMode.OpenOrCreate);
@@ -111,7 +111,7 @@ public class cefForUe : ModuleRules
         }
         RuntimeDependencies.Add(Path.Combine(LibraryPath, renderName));
         //string webviewLic = Path.Combine(ModuleDirectory, "license", "webview.dat");
-        //if (File.Exists(webviewLic)) {// å¦‚æœå­˜åœ¨åˆ™æ”¾å…¥license
+        //if (File.Exists(webviewLic)) {// Èç¹û´æÔÚÔò·ÅÈëlicense
         //    RuntimeDependencies.Add(webviewLic);
         //}
         // Restore backup
@@ -165,7 +165,7 @@ public class cefForUe : ModuleRules
         string content;
         try { content = File.ReadAllText(GameCfg/*, Encoding.UTF8*/); }
         catch
-        {// æ–‡ä»¶åœ¨ä½¿ç”¨ä¸­
+        {// ÎÄ¼şÔÚÊ¹ÓÃÖĞ
             return;
         }
             
@@ -175,7 +175,7 @@ public class cefForUe : ModuleRules
         {
             if (content.Contains(licensePak)) {
                 Console.WriteLine(GameCfg+" has configure!");
-                return;// å·²ç»æœ‰é…ç½®
+                return;// ÒÑ¾­ÓĞÅäÖÃ
             }
             content = content.Replace(licenseNode, licenseNode + "\n" + licensePak);
         }
