@@ -12,7 +12,7 @@ public class cefForUe : ModuleRules
     public cefForUe(ReadOnlyTargetRules Target) : base(Target)
     {
         Type = ModuleType.External;
-        Console.WriteLine(Target.bBuildEditor ? "editor":"runtime");
+        //Console.WriteLine(Target.bBuildEditor ? "editor":"runtime");
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
             InitCEF3("cef_94.4638", "win64", "cefhelper.exe", ".dll", !Target.bBuildEditor);
@@ -163,7 +163,7 @@ public class cefForUe : ModuleRules
         }
         //if( File.OpenWrite(GameCfg)) return ;
         string content;
-        try { content = File.ReadAllText(GameCfg, Encoding.UTF8); }
+        try { content = File.ReadAllText(GameCfg/*, Encoding.UTF8*/); }
         catch
         {// 文件在使用中
             return;

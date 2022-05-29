@@ -32,9 +32,9 @@ UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 	, styleText(FTextBlockStyle::GetDefault())
 	, ColorBackground(255, 255, 255, 255)
-	, jsWindow(TEXT("ue"))
-	, _Pixel(128,64)
+	, _Pixel(128, 64)
 	, _Zoom(9.5f)
+	, jsWindow(TEXT("ue"))
 {
 	bIsVariable = true;
 	Visibility = ESlateVisibility::SelfHitTestInvisible;
@@ -102,7 +102,29 @@ void UWebBase::ReleaseSlateResources(bool bReleaseChildren) {
 	CefCoreWidget.Reset();
 }
 
+void UWebBase::PostLoad() {
+	Super::PostLoad();
+	//SetFlags(RF_Transactional);
+}
+#if WITH_ACCESSIBILITY
+TSharedPtr<SWidget> UWebBase::GetAccessibleWidget() const
+{
+	return CefCoreWidget;
+}
+#endif
+
 TSharedRef<SWidget> UWebBase::RebuildWidget() {
+	//FString name;
+	//GetName(name);
+	if ( IsDesignTime() ) {
+		return SNew(SBox)
+			.HAlign(HAlign_Center)
+			.VAlign(VAlign_Center)
+			[
+				SNew(STextBlock)
+				.Text(LOCTEXT("WevView", "WevView"))
+			];
+	}
 	CefCoreWidget = SNew(SCefBrowser)
 		.ShowAddressBar(addressShow)
 		.InitialURL(urlInitial)
@@ -116,10 +138,12 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.ViewportSize(GetDesiredSize())
 		.Pixel(_Pixel)
 		.zoom(_Zoom)
+		.downloadTip(downloadTip)
 		.Visibility(EVisibility::SelfHitTestInvisible)
 		.OnUrlChanged_UObject(this, &UWebBase::HandleOnUrlChanged)
 		.OnBeforePopup_UObject(this, &UWebBase::HandleOnBeforePopup)
-		.OnLoadState_UObject(this, &UWebBase::HandleOnLoadState);
+		.OnLoadState_UObject(this, &UWebBase::HandleOnLoadState)
+		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip);
 	_ViewObject = NewObject<UWebViewObject>();// 隔离JS和UE4之间的数据。
 	if (_ViewObject) {
 		BindUObject("interface", _ViewObject);
@@ -143,18 +167,25 @@ void UWebBase::HandleOnLoadState(const int state) {
 
 bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
 	if (!OnBeforePopup.IsBound()) return false;
-	if (IsInGameThread()) {
-		OnBeforePopup.Broadcast(URL, Frame);
-		return true;
-	}
-	// Retry on the GameThread.
-	TWeakObjectPtr<UWebBase> WeakThis = this;
-	AsyncTask(ENamedThreads::GameThread, [WeakThis, URL, Frame]() {
-		if (!WeakThis.IsValid()) return;
-		WeakThis->HandleOnBeforePopup(URL, Frame);
-		});
+	OnBeforePopup.Broadcast(URL, Frame);
 	return true;
+	//if (IsInGameThread()) {
+	//	OnBeforePopup.Broadcast(URL, Frame);
+	//	return true;
+	//}
+	//// Retry on the GameThread.
+	//TWeakObjectPtr<UWebBase> WeakThis = this;
+	//AsyncTask(ENamedThreads::GameThread, [WeakThis, URL, Frame]() {
+	//	if (!WeakThis.IsValid()) return;
+	//	WeakThis->HandleOnBeforePopup(URL, Frame);
+	//	});
+	//return true;
 
+}
+
+void UWebBase::HandleOnDownloadTip(FString URL, FString File) {
+	if (!OnDownloadComplete.IsBound()) return;
+	OnDownloadComplete.Broadcast(URL, File);
 }
 
 #if WITH_EDITOR

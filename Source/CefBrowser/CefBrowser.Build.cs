@@ -17,9 +17,9 @@ public class CefBrowser : ModuleRules
 			PrivateIncludePaths.Add(privatep);
 			PublicDefinitions.Add("CRYPTOPP_ENABLE_NAMESPACE_WEAK=1"); //
 		}
-			
+		//PublicAdditionalLibraries.Add("d3d11.lib");
 		PublicIncludePaths.AddRange(
-			new string[] {
+			new string[] {//
 				// ... add public include paths required here ...
 			}
 			);
@@ -36,7 +36,7 @@ public class CefBrowser : ModuleRules
 				"Serialization",
 				"MediaUtils",
 				"cefForUe",
-				"HTTP",
+				"HTTP"
 			}
 		);
 		PrivateIncludePaths.AddRange(
