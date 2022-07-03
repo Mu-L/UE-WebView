@@ -74,7 +74,9 @@ public:
 	/** When Download file Whether to show Tip Dialog. */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Download Tip", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
 		bool  downloadTip = true;
-
+	/** When Download file Whether to show web cursor. */
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Use Web Cursor", UIMin = 0, UIMax = 1), Category = "Web View|Screen")
+		bool  webCursor = false;
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Web Pixel", UIMin = 64, UIMax = 8192), Category = "Web View|Screen")
 	FIntPoint _Pixel;
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Zoom Level", ClampMin = -7.5, ClampMax = 9.5), Category = "Web View|Screen")
