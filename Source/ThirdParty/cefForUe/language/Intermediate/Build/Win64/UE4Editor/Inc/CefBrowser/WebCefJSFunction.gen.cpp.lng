@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "CefBrowser/Private/WebCefJSFunction.h"
+#include "CefBrowser/Private/WidgetWrap/WebCefJSFunction.h"
 #ifdef _MSC_VER
 #pragma warning (push)
 #pragma warning (disable : 4883)
@@ -54,7 +54,7 @@ static struct FScriptStruct_CefBrowser_StaticRegisterNativesFWebCefJSResponse
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWebCefJSResponse_Statics::Struct_MetaDataParams[] = {
 		{ "Comment", "/** \n *  Representation of a remote JS async response object.\n *  UFUNCTIONs taking a FWebCefJSResponse will get it passed in automatically when called from a web browser.\n *  Pass a result or error back by invoking Success or Failure on the object.\n *  UFunctions accepting a FWebCefJSResponse should have a void return type, as any value returned from the function will be ignored.\n *  Calling the response methods does not have to happen before returning from the function, which means you can use this to implement asynchronous functionality.\n *\n *  Note that the remote object will become invalid as soon as a result has been delivered, so you can only call either Success or Failure once.\n */" },
-		{ "ModuleRelativePath", "Private/WebCefJSFunction.h" },
+		{ "ModuleRelativePath", "Private/WidgetWrap/WebCefJSFunction.h" },
 		{ "ToolTip", "Representation of a remote JS async response object.\nUFUNCTIONs taking a FWebCefJSResponse will get it passed in automatically when called from a web browser.\nPass a result or error back by invoking Success or Failure on the object.\nUFunctions accepting a FWebCefJSResponse should have a void return type, as any value returned from the function will be ignored.\nCalling the response methods does not have to happen before returning from the function, which means you can use this to implement asynchronous functionality.\n\nNote that the remote object will become invalid as soon as a result has been delivered, so you can only call either Success or Failure once." },
 	};
 #endif
@@ -90,7 +90,7 @@ static struct FScriptStruct_CefBrowser_StaticRegisterNativesFWebCefJSResponse
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FWebCefJSResponse_Hash() { return 3063583087U; }
+	uint32 Get_Z_Construct_UScriptStruct_FWebCefJSResponse_Hash() { return 895761310U; }
 
 static_assert(std::is_polymorphic<FWebCefJSFunction>() == std::is_polymorphic<FWebCefJSCallbackBase>(), "USTRUCT FWebCefJSFunction cannot be polymorphic unless super FWebCefJSCallbackBase is polymorphic");
 
@@ -127,7 +127,7 @@ static struct FScriptStruct_CefBrowser_StaticRegisterNativesFWebCefJSFunction
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWebCefJSFunction_Statics::Struct_MetaDataParams[] = {
 		{ "Comment", "/**\n * Representation of a remote JS function.\n * FWebCefJSFunction objects represent a JS function and allow calling them from native code.\n * FWebCefJSFunction objects can also be added to delegates and events using the Bind/AddLambda method.\n */" },
-		{ "ModuleRelativePath", "Private/WebCefJSFunction.h" },
+		{ "ModuleRelativePath", "Private/WidgetWrap/WebCefJSFunction.h" },
 		{ "ToolTip", "Representation of a remote JS function.\nFWebCefJSFunction objects represent a JS function and allow calling them from native code.\nFWebCefJSFunction objects can also be added to delegates and events using the Bind/AddLambda method." },
 	};
 #endif
@@ -163,7 +163,7 @@ static struct FScriptStruct_CefBrowser_StaticRegisterNativesFWebCefJSFunction
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FWebCefJSFunction_Hash() { return 578761418U; }
+	uint32 Get_Z_Construct_UScriptStruct_FWebCefJSFunction_Hash() { return 373996091U; }
 class UScriptStruct* FWebCefJSCallbackBase::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;
@@ -197,7 +197,7 @@ static struct FScriptStruct_CefBrowser_StaticRegisterNativesFWebCefJSCallbackBas
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWebCefJSCallbackBase_Statics::Struct_MetaDataParams[] = {
 		{ "Comment", "/** Base class for JS callback objects. */" },
-		{ "ModuleRelativePath", "Private/WebCefJSFunction.h" },
+		{ "ModuleRelativePath", "Private/WidgetWrap/WebCefJSFunction.h" },
 		{ "ToolTip", "Base class for JS callback objects." },
 	};
 #endif
@@ -233,7 +233,7 @@ static struct FScriptStruct_CefBrowser_StaticRegisterNativesFWebCefJSCallbackBas
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FWebCefJSCallbackBase_Hash() { return 3283370978U; }
+	uint32 Get_Z_Construct_UScriptStruct_FWebCefJSCallbackBase_Hash() { return 721701106U; }
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #ifdef _MSC_VER
 #pragma warning (pop)

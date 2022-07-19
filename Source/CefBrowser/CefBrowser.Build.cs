@@ -15,7 +15,9 @@ public class CefBrowser : ModuleRules
 		string privatep = Path.Combine(ModuleDirectory, "Private");
 		if (Directory.Exists(privatep)) {
 			PrivateIncludePaths.Add(privatep);
-			PublicDefinitions.Add("CRYPTOPP_ENABLE_NAMESPACE_WEAK=1"); //
+			PrivateIncludePaths.Add(Path.Combine(privatep, "WidgetWrap"));
+			PrivateIncludePaths.Add(Path.Combine(privatep,"CefWrap"));
+			//PublicDefinitions.Add("CRYPTOPP_ENABLE_NAMESPACE_WEAK=1"); //
 		}
 		
 		PublicIncludePaths.AddRange(
@@ -36,7 +38,8 @@ public class CefBrowser : ModuleRules
 				"Serialization",
 				"MediaUtils",
 				"cefForUe",
-				"HTTP"
+				"HTTP",
+				"OpenSSL"
 			}
 		);
 		PrivateIncludePaths.AddRange(
