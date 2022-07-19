@@ -26,6 +26,9 @@ WebView is an enterprise browser plug-in designed for virtual engine. It uses ma
 17. Scale page
 18. 120 frame rate does not drop frames
 
+# Domestic synchronized version
+https://gitee.com/aSurgingRiver/WebView.git
+
 # Using tutorials
 https://www.zhihu.com/column/c_1490114276946223104
 
