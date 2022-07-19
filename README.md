@@ -22,8 +22,8 @@ WebView is an enterprise browser plug-in designed for virtual engine. It uses ma
 14. 8K video 60fps without frame dropping
 15. GPU binding separates virtual engine and browser rendering
 
-# Using tutorials
-https://www.zhihu.com/column/c_1490114276946223104
+# Domestic synchronized version
+https://gitee.com/aSurgingRiver/WebView.git
 
 # Using tutorials
 https://blog.csdn.net/he_goodluck/article/details/122892847
