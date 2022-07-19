@@ -13,13 +13,18 @@ public class cefForUe : ModuleRules
     {
         Type = ModuleType.External;
         //Console.WriteLine(Target.bBuildEditor ? "editor":"runtime");
+        //string versionCEF="cef_95.4638";
+        string versionCEF="cef_103.5060";
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
-            InitCEF3("cef_95.4638", "win64", "cefhelper.exe", ".dll", !Target.bBuildEditor);
+            PublicDefinitions.Add("USING_CEF_SHARED=1"); //
+            PublicDefinitions.Add("CEF_WINDOWS=1"); //
+            InitCEF3(versionCEF, "win64", "cefhelper.exe", ".dll", !Target.bBuildEditor);
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-            InitCEF3("cef_95.4638", "linux", "cefhelper", ".so", !Target.bBuildEditor);
+            PublicDefinitions.Add("CEF_LINUX=1"); //
+            InitCEF3(versionCEF, "linux", "cefhelper", ".so", !Target.bBuildEditor);
         }
         else
         {
@@ -59,7 +64,7 @@ public class cefForUe : ModuleRules
             mapFile[splitPN].Add(idx, FileName);
         }
         const int maxBuff = 1024 * 1024 * 100;
-        byte[] readBuff = new byte[maxBuff];// 单个文件最大100M
+        byte[] readBuff = new byte[maxBuff];//
         foreach (KeyValuePair<string, Dictionary<int, string>> kvp in mapFile){
             if (kvp.Value.Count == 0) continue;
             FileStream fileDst = new FileStream(kvp.Key, FileMode.OpenOrCreate);
@@ -84,6 +89,12 @@ public class cefForUe : ModuleRules
         if (Target.Platform == UnrealTargetPlatform.Win64)
             foreach (string FileName in Directory.EnumerateFiles(LibraryPath, "*.lib", SearchOption.TopDirectoryOnly)){
                 PublicAdditionalLibraries.Add(FileName);
+                //Console.WriteLine("=============" + FileName);
+            }
+        if (Target.Platform == UnrealTargetPlatform.Linux)
+            foreach (string FileName in Directory.EnumerateFiles(LibraryPath, "*.a", SearchOption.TopDirectoryOnly)){
+                PublicAdditionalLibraries.Add(FileName);
+                //Console.WriteLine("=============" + FileName);
             }
         foreach (string FileName in Directory.EnumerateFiles(LibraryPath, "*"+ subfixDLL, SearchOption.TopDirectoryOnly)){
             //System.Console.WriteLine("cef3lib: " + LibraryPath+" "+ System.IO.Path.GetFileName(FileName));
@@ -94,15 +105,16 @@ public class cefForUe : ModuleRules
         Dlls.Add("icudtl.dat");
         Dlls.Add("snapshot_blob.bin");
         Dlls.Add("v8_context_snapshot.bin");
+        Dlls.Add("vk_swiftshader_icd.json");
         if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-            Dlls.Add("vk_swiftshader_icd.json");
             PublicDelayLoadDLLs.Add("libvulkan.so.1");
             RuntimeDependencies.Add(Path.Combine(LibraryPath, "libvulkan.so.1"));
         }
-        Dlls.Add(Path.Combine("swiftshader", "libEGL"+ subfixDLL));
-        Dlls.Add(Path.Combine("swiftshader", "libGLESv2"+ subfixDLL));
-        foreach (string Dll in Dlls) {
+        //Dlls.Add(Path.Combine("swiftshader", "libEGL"+ subfixDLL));
+        //Dlls.Add(Path.Combine("swiftshader", "libGLESv2"+ subfixDLL));
+        foreach (string Dll in Dlls)
+        {
             RuntimeDependencies.Add(Path.Combine(LibraryPath, Dll));
         }
         foreach (string FileName in Directory.EnumerateFiles(LibraryPath, "*.pak", SearchOption.AllDirectories)) {

@@ -13,7 +13,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define CEFBROWSER_WebCefJSFunction_generated_h
 
-#define HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_188_GENERATED_BODY \
+#define HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_188_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FWebCefJSResponse_Statics; \
 	CEFBROWSER_API static class UScriptStruct* StaticStruct(); \
 	typedef FWebCefJSCallbackBase Super;
@@ -21,7 +21,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 template<> CEFBROWSER_API UScriptStruct* StaticStruct<struct FWebCefJSResponse>();
 
-#define HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_158_GENERATED_BODY \
+#define HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_158_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FWebCefJSFunction_Statics; \
 	CEFBROWSER_API static class UScriptStruct* StaticStruct(); \
 	typedef FWebCefJSCallbackBase Super;
@@ -29,7 +29,7 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<struct FWebCefJSResponse>(
 
 template<> CEFBROWSER_API UScriptStruct* StaticStruct<struct FWebCefJSFunction>();
 
-#define HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_124_GENERATED_BODY \
+#define HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_124_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FWebCefJSCallbackBase_Statics; \
 	CEFBROWSER_API static class UScriptStruct* StaticStruct();
 
@@ -37,7 +37,7 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<struct FWebCefJSFunction>(
 template<> CEFBROWSER_API UScriptStruct* StaticStruct<struct FWebCefJSCallbackBase>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h
+#define CURRENT_FILE_ID HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
