@@ -32,7 +32,7 @@ UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 	, styleText(FTextBlockStyle::GetDefault())
 	, ColorBackground(255, 255, 255, 255)
 	, _Pixel(128, 64)
-	, _Zoom(9.5f)
+	, _Zoom(1.0f)
 	, jsWindow(TEXT("ue"))
 {
 	bIsVariable = true;
@@ -86,6 +86,10 @@ void UWebBase::WebPixel(FIntPoint pixel) const {
 	CefCoreWidget->WebPixel(pixel);
 }
 
+//void UWebBase::PreRebuild_Implementation(){
+//
+//}
+
 void UWebBase::BindUObject(const FString& VarName, UObject* Object, bool bIsPermanent) {
 	if (!CefCoreWidget.IsValid())return;
 	CefCoreWidget->BindUObject(VarName, Object, bIsPermanent);
@@ -124,6 +128,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 				.Text(LOCTEXT("WebView", "WebView"))
 			];
 	}
+	if (OnPreReBuild.IsBound())OnPreReBuild.Broadcast();
 	CefCoreWidget = SNew(SCefBrowser)
 		.ShowAddressBar(addressShow)
 		.InitialURL(urlInitial)
@@ -138,6 +143,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.Pixel(_Pixel)
 		.zoom(_Zoom)
 		.downloadTip(downloadTip)
+		//.webCursor(webCursor)
 		.Visibility(EVisibility::SelfHitTestInvisible)
 		.OnUrlChanged_UObject(this, &UWebBase::HandleOnUrlChanged)
 		.OnBeforePopup_UObject(this, &UWebBase::HandleOnBeforePopup)
@@ -180,6 +186,9 @@ bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
 	//	});
 	//return true;
 
+}
+void UWebBase::ShowAddress(bool show) {
+	CefCoreWidget->ShowAddress(show);
 }
 
 void UWebBase::HandleOnDownloadTip(FString URL, FString File) {

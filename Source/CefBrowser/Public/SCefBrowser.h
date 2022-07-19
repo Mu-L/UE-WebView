@@ -32,6 +32,7 @@ public:
 		, _BackgroundColor(255, 255, 255, 255)
 		, _ShowControls(true)
 		, _ShowAddressBar(false)
+		//, _webCursor(false)
 		, _BrowserFrameRate(30)
 	{
 		_Visibility = EVisibility::SelfHitTestInvisible;
@@ -66,6 +67,8 @@ public:
 		SLATE_ARGUMENT(bool, RightKeyPopup)
 		/** Whether to show an address bar. */
 		SLATE_ARGUMENT(bool, ShowAddressBar)
+		/** Whether to show an Web Cursor . */
+		//SLATE_ARGUMENT(bool, webCursor)
 		/** The frames per second rate that the browser will attempt to use. */
 		SLATE_ARGUMENT(int, BrowserFrameRate)
 		/** fixed pixel. */
@@ -111,6 +114,8 @@ public:
 	void ZoomLevel(float zoomlevel);
 	/** Set Page Zoom level */
 	void WebPixel(FIntPoint pixel);
+	/** Set Page Zoom level */
+	void ShowAddress(bool isShow);
 	/**
 	 * Expose a UObject instance to the browser runtime.
 	 * Properties and Functions will be accessible from JavaScript side.

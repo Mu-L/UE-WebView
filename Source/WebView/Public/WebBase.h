@@ -18,6 +18,7 @@ class WEBVIEW_API UWebBase : public UWidget
 	GENERATED_UCLASS_BODY()
 
 public:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPreReBuild);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStateLoad, int, state);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUrlChanged, const FText&, Url);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnJsStr, const FString&, Type, FString, JSON, const FString&, FuncName);
@@ -42,13 +43,16 @@ public:
 	/** Called when a popup is about to spawn. */
 	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
 	FOnDownloadComplete OnDownloadComplete;
+	/** Called when a popup is about to spawn. */
+	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
+	FOnPreReBuild OnPreReBuild;
 
 	/** this party is blueprint editor params */
 	/** URL that the browser will initially navigate to. The URL should include the protocol, eg http:// */
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Initial URL"), Category = "Web View")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Initial URL"), Category = "Web View")
 		FString urlInitial;
 	/** Configure webpage  mouse is transparency */
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Enable Transparency"), Category = "Web View")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Enable Transparency"), Category = "Web View")
 		bool bEnableTransparency = false;
 	/** Control and Editor show text style  */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Text Style", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
@@ -63,7 +67,7 @@ public:
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Frame Rate", ClampMin = 30, ClampMax = 60), Category = "Web View")
 		int  RateFrame = 30;
 	/** Configure webpage is transparency */
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Background Color"), Category = "Web View")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Background Color"), Category = "Web View")
 		FColor  ColorBackground;
 	/** Whether to show an address bar. */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Show Address", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
@@ -74,10 +78,12 @@ public:
 	/** When Download file Whether to show Tip Dialog. */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Download Tip", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
 		bool  downloadTip = true;
-
+	/** When Download file Whether to show web cursor. */
+	//UPROPERTY(EditAnywhere, meta = (DisplayName = "Use Web Cursor", UIMin = 0, UIMax = 1), Category = "Web View|Screen")
+	//	bool  webCursor = false;
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Web Pixel", UIMin = 64, UIMax = 8192), Category = "Web View|Screen")
 	FIntPoint _Pixel;
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Zoom Level", ClampMin = -7.5, ClampMax = 9.5), Category = "Web View|Screen")
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Zoom Level", ClampMin = 0.0, ClampMax = 5.0), Category = "Web View|Screen")
 	float _Zoom;
 
 protected:
@@ -151,8 +157,15 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void WebPixel(FIntPoint pixel) const;
-public:
 
+	/**
+	* Set web show address
+	* @ show : true:show false:hide
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void ShowAddress(bool show);
+
+public:
 	virtual void ReleaseSlateResources(bool bReleaseChildren) override;
 	virtual void PostLoad() override;
 

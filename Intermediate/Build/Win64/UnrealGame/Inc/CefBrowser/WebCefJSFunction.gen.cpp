@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "CefBrowser/Private/WebCefJSFunction.h"
+#include "CefBrowser/Private/WidgetWrap/WebCefJSFunction.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeWebCefJSFunction() {}
 // Cross Module References
@@ -38,7 +38,7 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<FWebCefJSCallbackBase>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWebCefJSCallbackBase_Statics::Struct_MetaDataParams[] = {
 		{ "Comment", "/** Base class for JS callback objects. */" },
-		{ "ModuleRelativePath", "Private/WebCefJSFunction.h" },
+		{ "ModuleRelativePath", "Private/WidgetWrap/WebCefJSFunction.h" },
 		{ "ToolTip", "Base class for JS callback objects." },
 	};
 #endif
@@ -94,7 +94,7 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<FWebCefJSFunction>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWebCefJSFunction_Statics::Struct_MetaDataParams[] = {
 		{ "Comment", "/**\n * Representation of a remote JS function.\n * FWebCefJSFunction objects represent a JS function and allow calling them from native code.\n * FWebCefJSFunction objects can also be added to delegates and events using the Bind/AddLambda method.\n */" },
-		{ "ModuleRelativePath", "Private/WebCefJSFunction.h" },
+		{ "ModuleRelativePath", "Private/WidgetWrap/WebCefJSFunction.h" },
 		{ "ToolTip", "Representation of a remote JS function.\nFWebCefJSFunction objects represent a JS function and allow calling them from native code.\nFWebCefJSFunction objects can also be added to delegates and events using the Bind/AddLambda method." },
 	};
 #endif
@@ -150,7 +150,7 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<FWebCefJSResponse>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWebCefJSResponse_Statics::Struct_MetaDataParams[] = {
 		{ "Comment", "/** \n *  Representation of a remote JS async response object.\n *  UFUNCTIONs taking a FWebCefJSResponse will get it passed in automatically when called from a web browser.\n *  Pass a result or error back by invoking Success or Failure on the object.\n *  UFunctions accepting a FWebCefJSResponse should have a void return type, as any value returned from the function will be ignored.\n *  Calling the response methods does not have to happen before returning from the function, which means you can use this to implement asynchronous functionality.\n *\n *  Note that the remote object will become invalid as soon as a result has been delivered, so you can only call either Success or Failure once.\n */" },
-		{ "ModuleRelativePath", "Private/WebCefJSFunction.h" },
+		{ "ModuleRelativePath", "Private/WidgetWrap/WebCefJSFunction.h" },
 		{ "ToolTip", "Representation of a remote JS async response object.\nUFUNCTIONs taking a FWebCefJSResponse will get it passed in automatically when called from a web browser.\nPass a result or error back by invoking Success or Failure on the object.\nUFunctions accepting a FWebCefJSResponse should have a void return type, as any value returned from the function will be ignored.\nCalling the response methods does not have to happen before returning from the function, which means you can use this to implement asynchronous functionality.\n\nNote that the remote object will become invalid as soon as a result has been delivered, so you can only call either Success or Failure once." },
 	};
 #endif
@@ -179,17 +179,17 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<FWebCefJSResponse>()
 		}
 		return Z_Registration_Info_UScriptStruct_WebCefJSResponse.InnerSingleton;
 	}
-	struct Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_Statics
+	struct Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_Statics
 	{
 		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
 	};
-	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_Statics::ScriptStructInfo[] = {
-		{ FWebCefJSCallbackBase::StaticStruct, Z_Construct_UScriptStruct_FWebCefJSCallbackBase_Statics::NewStructOps, TEXT("WebCefJSCallbackBase"), &Z_Registration_Info_UScriptStruct_WebCefJSCallbackBase, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWebCefJSCallbackBase), 1041855425U) },
-		{ FWebCefJSFunction::StaticStruct, Z_Construct_UScriptStruct_FWebCefJSFunction_Statics::NewStructOps, TEXT("WebCefJSFunction"), &Z_Registration_Info_UScriptStruct_WebCefJSFunction, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWebCefJSFunction), 253330550U) },
-		{ FWebCefJSResponse::StaticStruct, Z_Construct_UScriptStruct_FWebCefJSResponse_Statics::NewStructOps, TEXT("WebCefJSResponse"), &Z_Registration_Info_UScriptStruct_WebCefJSResponse, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWebCefJSResponse), 834446044U) },
+	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_Statics::ScriptStructInfo[] = {
+		{ FWebCefJSCallbackBase::StaticStruct, Z_Construct_UScriptStruct_FWebCefJSCallbackBase_Statics::NewStructOps, TEXT("WebCefJSCallbackBase"), &Z_Registration_Info_UScriptStruct_WebCefJSCallbackBase, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWebCefJSCallbackBase), 616837680U) },
+		{ FWebCefJSFunction::StaticStruct, Z_Construct_UScriptStruct_FWebCefJSFunction_Statics::NewStructOps, TEXT("WebCefJSFunction"), &Z_Registration_Info_UScriptStruct_WebCefJSFunction, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWebCefJSFunction), 520509557U) },
+		{ FWebCefJSResponse::StaticStruct, Z_Construct_UScriptStruct_FWebCefJSResponse_Statics::NewStructOps, TEXT("WebCefJSResponse"), &Z_Registration_Info_UScriptStruct_WebCefJSResponse, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWebCefJSResponse), 846431381U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_2246684940(TEXT("/Script/CefBrowser"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_2420246902(TEXT("/Script/CefBrowser"),
 		nullptr, 0,
-		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WebCefJSFunction_h_Statics::ScriptStructInfo),
+		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Private_WidgetWrap_WebCefJSFunction_h_Statics::ScriptStructInfo),
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
