@@ -49,6 +49,12 @@ void UWebBase::LoadURL(FString NewURL)
 	return CefCoreWidget->LoadURL(NewURL);
 }
 
+/** Reload the current page. */
+void UWebBase::Reload() {
+	if (!CefCoreWidget.IsValid())return ;
+	CefCoreWidget->Reload();
+}
+
 void UWebBase::ExecuteJavascript(const FString& ScriptText)
 {
 	if (!CefCoreWidget.IsValid())return;
@@ -75,11 +81,7 @@ FString UWebBase::GetUrl() const {
 	if (!CefCoreWidget.IsValid())return FString();
 	return CefCoreWidget->GetUrl();
 }
-void UWebBase::Reload()
-{
-	if (!CefCoreWidget.IsValid())return;
-	return CefCoreWidget->Reload();
-}
+
 void UWebBase::ZoomLevel(float zoom) const {
 	if (!CefCoreWidget.IsValid())return;
 	CefCoreWidget->ZoomLevel(zoom);
