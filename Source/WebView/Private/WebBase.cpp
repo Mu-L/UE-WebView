@@ -48,7 +48,11 @@ void UWebBase::LoadURL(FString NewURL)
 	if (!CefCoreWidget.IsValid())return;
 	return CefCoreWidget->LoadURL(NewURL);
 }
-
+void UWebBase::Reload()
+{
+	if (!CefCoreWidget.IsValid())return;
+	return CefCoreWidget->Reload();
+}
 void UWebBase::ExecuteJavascript(const FString& ScriptText)
 {
 	if (!CefCoreWidget.IsValid())return;
