@@ -75,7 +75,11 @@ FString UWebBase::GetUrl() const {
 	if (!CefCoreWidget.IsValid())return FString();
 	return CefCoreWidget->GetUrl();
 }
-
+void UWebBase::Reload()
+{
+	if (!CefCoreWidget.IsValid())return;
+	return CefCoreWidget->Reload();
+}
 void UWebBase::ZoomLevel(float zoom) const {
 	if (!CefCoreWidget.IsValid())return;
 	CefCoreWidget->ZoomLevel(zoom);
