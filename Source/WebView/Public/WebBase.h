@@ -106,6 +106,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void LoadURL(FString NewURL);
 
+	/**
+	 * Load the specified URL
+	 * @param NewURL New URL to load
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void LoadURL(FString NewURL);
+	
 	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Data", AutoCreateRefTerm = "Data"))
 		void CallJsonStr(const FString& Function, const FString& Data);
 
