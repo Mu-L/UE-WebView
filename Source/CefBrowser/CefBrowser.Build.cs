@@ -7,19 +7,23 @@ public class CefBrowser : ModuleRules
 {
 	public CefBrowser(ReadOnlyTargetRules Target) : base(Target)
 	{
-		bPrecompile = false;
+		//bPrecompile = false;
 		bEnableExceptions = true;
 		bUsePrecompiled = !bPrecompile;
-		if(bUsePrecompiled) PrecompileForTargets = PrecompileTargetsType.None;
+		if (bUsePrecompiled) { 
+			PrecompileForTargets = PrecompileTargetsType.None;
+			//LinkType = TargetLinkType.Modular;
+		}
 		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 		string privatep = Path.Combine(ModuleDirectory, "Private");
 		if (Directory.Exists(privatep)) {
 			PrivateIncludePaths.Add(privatep);
 			PrivateIncludePaths.Add(Path.Combine(privatep, "WidgetWrap"));
 			PrivateIncludePaths.Add(Path.Combine(privatep,"CefWrap"));
-			//PublicDefinitions.Add("CRYPTOPP_ENABLE_NAMESPACE_WEAK=1"); //
+			PrivateIncludePaths.Add(Path.Combine(privatep, "impl"));
+			
 		}
-		
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...

@@ -112,9 +112,9 @@ public:
 	void GoForward();
 	/** Set Page Zoom level */
 	void ZoomLevel(float zoomlevel);
-	/** Set Page Zoom level */
+	/** Set Page pixel */
 	void WebPixel(FIntPoint pixel);
-	/** Set Page Zoom level */
+	/** show or hide address bar */
 	void ShowAddress(bool isShow);
 	/**
 	 * Expose a UObject instance to the browser runtime.
@@ -133,7 +133,6 @@ public:
 	 * @param bIsPermanent Must match the bIsPermanent argument passed to BindUObject.
 	 */
 	void UnbindUObject(const FString& Name, UObject* Object, bool bIsPermanent = true);
-
 	//virtual bool SupportsKeyboardFocus() const override { return true; }
 public:
 	/** Default constructor. */

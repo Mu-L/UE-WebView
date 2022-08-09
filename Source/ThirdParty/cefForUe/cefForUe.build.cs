@@ -91,11 +91,14 @@ public class cefForUe : ModuleRules
                 PublicAdditionalLibraries.Add(FileName);
                 //Console.WriteLine("=============" + FileName);
             }
-        if (Target.Platform == UnrealTargetPlatform.Linux)
-            foreach (string FileName in Directory.EnumerateFiles(LibraryPath, "*.a", SearchOption.TopDirectoryOnly)){
-                PublicAdditionalLibraries.Add(FileName);
-                //Console.WriteLine("=============" + FileName);
-            }
+        if (Target.Platform == UnrealTargetPlatform.Linux) {
+            PublicAdditionalLibraries.Add(Path.Combine(LibraryPath, "libcef_dll_wrapper.a"));
+            //PublicAdditionalLibraries.Add(Path.Combine(LibraryPath, "libcefwrap.a"));
+        }
+            //foreach (string FileName in Directory.EnumerateFiles(LibraryPath, "*.a", SearchOption.TopDirectoryOnly)){
+            //    PublicAdditionalLibraries.Add(FileName);
+            //    //Console.WriteLine("=============" + FileName);
+            //}
         foreach (string FileName in Directory.EnumerateFiles(LibraryPath, "*"+ subfixDLL, SearchOption.TopDirectoryOnly)){
             //System.Console.WriteLine("cef3lib: " + LibraryPath+" "+ System.IO.Path.GetFileName(FileName));
             PublicDelayLoadDLLs.Add(System.IO.Path.GetFileName(FileName));
