@@ -105,6 +105,7 @@ static inline void FOnPreReBuild_DelegateWrapper(const FMulticastScriptDelegate&
 	DECLARE_FUNCTION(execUnbindUObject); \
 	DECLARE_FUNCTION(execBindUObject); \
 	DECLARE_FUNCTION(execCallJsonStr); \
+	DECLARE_FUNCTION(execReload); \
 	DECLARE_FUNCTION(execLoadURL); \
 	DECLARE_FUNCTION(execExecuteJavascript);
 
@@ -118,6 +119,7 @@ static inline void FOnPreReBuild_DelegateWrapper(const FMulticastScriptDelegate&
 	DECLARE_FUNCTION(execUnbindUObject); \
 	DECLARE_FUNCTION(execBindUObject); \
 	DECLARE_FUNCTION(execCallJsonStr); \
+	DECLARE_FUNCTION(execReload); \
 	DECLARE_FUNCTION(execLoadURL); \
 	DECLARE_FUNCTION(execExecuteJavascript);
 

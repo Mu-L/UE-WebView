@@ -311,6 +311,13 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		P_THIS->CallJsonStr(Z_Param_Function,Z_Param_Data);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UWebBase::execReload)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->Reload();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UWebBase::execLoadURL)
 	{
 		P_GET_PROPERTY(FStrProperty,Z_Param_NewURL);
@@ -336,6 +343,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 			{ "ExecuteJavascript", &UWebBase::execExecuteJavascript },
 			{ "GetUrl", &UWebBase::execGetUrl },
 			{ "LoadURL", &UWebBase::execLoadURL },
+			{ "Reload", &UWebBase::execReload },
 			{ "ShowAddress", &UWebBase::execShowAddress },
 			{ "UnbindUObject", &UWebBase::execUnbindUObject },
 			{ "WebPixel", &UWebBase::execWebPixel },
@@ -566,6 +574,31 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UWebBase_LoadURL_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UWebBase_Reload_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_Reload_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Web View" },
+		{ "Comment", "/** Reload the current page. */" },
+		{ "ModuleRelativePath", "Public/WebBase.h" },
+		{ "ToolTip", "Reload the current page." },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_Reload_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "Reload", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_Reload_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_Reload_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UWebBase_Reload()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UWebBase_Reload_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -851,6 +884,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnPreReBuild__DelegateSignature, "OnPreReBuild__DelegateSignature" }, // 706635668
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature, "OnStateLoad__DelegateSignature" }, // 3156875857
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnUrlChanged__DelegateSignature, "OnUrlChanged__DelegateSignature" }, // 4171764297
+		{ &Z_Construct_UFunction_UWebBase_Reload, "Reload" }, // 2570480085
 		{ &Z_Construct_UFunction_UWebBase_ShowAddress, "ShowAddress" }, // 3848631213
 		{ &Z_Construct_UFunction_UWebBase_UnbindUObject, "UnbindUObject" }, // 3186569527
 		{ &Z_Construct_UFunction_UWebBase_WebPixel, "WebPixel" }, // 1627466846
@@ -1134,7 +1168,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UWebBase, 4253828387);
+	IMPLEMENT_CLASS(UWebBase, 3980484055);
 	template<> WEBVIEW_API UClass* StaticClass<UWebBase>()
 	{
 		return UWebBase::StaticClass();
