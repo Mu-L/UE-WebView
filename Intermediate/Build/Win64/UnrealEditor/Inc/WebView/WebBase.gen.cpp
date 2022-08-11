@@ -307,6 +307,13 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		P_THIS->CallJsonStr(Z_Param_Function,Z_Param_Data);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UWebBase::execReload)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->Reload();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UWebBase::execLoadURL)
 	{
 		P_GET_PROPERTY(FStrProperty,Z_Param_NewURL);
@@ -332,6 +339,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 			{ "ExecuteJavascript", &UWebBase::execExecuteJavascript },
 			{ "GetUrl", &UWebBase::execGetUrl },
 			{ "LoadURL", &UWebBase::execLoadURL },
+			{ "Reload", &UWebBase::execReload },
 			{ "ShowAddress", &UWebBase::execShowAddress },
 			{ "UnbindUObject", &UWebBase::execUnbindUObject },
 			{ "WebPixel", &UWebBase::execWebPixel },
@@ -562,6 +570,31 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UWebBase_LoadURL_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UWebBase_Reload_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_Reload_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Web View" },
+		{ "Comment", "/** Reload the current page. */" },
+		{ "ModuleRelativePath", "Public/WebBase.h" },
+		{ "ToolTip", "Reload the current page." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_Reload_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "Reload", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_Reload_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_Reload_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UWebBase_Reload()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UWebBase_Reload_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -848,6 +881,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnPreReBuild__DelegateSignature, "OnPreReBuild__DelegateSignature" }, // 2552426169
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature, "OnStateLoad__DelegateSignature" }, // 1429993099
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnUrlChanged__DelegateSignature, "OnUrlChanged__DelegateSignature" }, // 877326609
+		{ &Z_Construct_UFunction_UWebBase_Reload, "Reload" }, // 3776648100
 		{ &Z_Construct_UFunction_UWebBase_ShowAddress, "ShowAddress" }, // 23700224
 		{ &Z_Construct_UFunction_UWebBase_UnbindUObject, "UnbindUObject" }, // 407138020
 		{ &Z_Construct_UFunction_UWebBase_WebPixel, "WebPixel" }, // 126512765
@@ -1140,9 +1174,9 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 929897659U) },
+		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 3759500859U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_2150569938(TEXT("/Script/WebView"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_4056416884(TEXT("/Script/WebView"),
 		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
