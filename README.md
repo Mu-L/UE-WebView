@@ -28,6 +28,8 @@ https://blog.csdn.net/he_goodluck/article/details/122892847
 # Important/Additional Notes:
 We are committed to providing the most efficient browser plug-in. If you have any questions in the process of using, you can contact us through the following ways.
 
-QQ: 249838638  
+FaceBook: https://www.facebook.com/ue.webview/   
+Email: aSurgingRiver@163.com    aSurgingRiver@gmail.com                                  
+QQ Group: 866972317   
+QQ: 249838628 
 Wechat: aSurgingRiver  
-Email: aSurgingRiver@163.com    aSurgingRiver@gmail.com
