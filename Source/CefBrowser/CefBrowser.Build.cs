@@ -21,7 +21,6 @@ public class CefBrowser : ModuleRules
 			PrivateIncludePaths.Add(Path.Combine(privatep, "WidgetWrap"));
 			PrivateIncludePaths.Add(Path.Combine(privatep,"CefWrap"));
 			PrivateIncludePaths.Add(Path.Combine(privatep, "impl"));
-			
 		}
 
 		PublicIncludePaths.AddRange(
