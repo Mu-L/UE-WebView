@@ -29,6 +29,10 @@ WebView is an enterprise browser plug-in designed for virtual engine. It uses ma
 # Domestic synchronized version
 https://gitee.com/aSurgingRiver/WebView.git
 
+# CefBase Dependent:
+1. https://github.com/aSurgingRiver/CefBase
+2. https://gitee.com/aSurgingRiver/CefBase
+
 # Using tutorials
 https://www.zhihu.com/column/c_1490114276946223104
 

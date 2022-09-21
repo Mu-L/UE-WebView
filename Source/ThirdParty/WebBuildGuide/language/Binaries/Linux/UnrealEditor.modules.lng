@@ -1,0 +1,8 @@
+{
+	"BuildId":"7cd493e1-bddb-4e92-80a7-c19750aea4bc",
+	"Modules":{
+		"CefBrowser":"libUnrealEditor-CefBrowser.so",
+		"CefLoad":"libUnrealEditor-CefLoad.so",
+		"WebView":"libUnrealEditor-WebView.so"
+	}
+}

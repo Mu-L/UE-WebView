@@ -2,7 +2,6 @@
 
 
 #include "WebBase.h"
-#include "SCefBrowser.h"
 #include "Async/Async.h"
 #include "WebViewObject.h"
 #include "Widgets/Layout/SBox.h"
@@ -19,6 +18,12 @@
 #include "Factories/MaterialFactoryNew.h"
 #include "AssetRegistryModule.h"
 #include "PackageHelperFunctions.h"
+#endif
+
+#if CEF_NEW_VERSION
+#include "SCefBrowser.h"
+#else
+#include "SProxyWeb.h"
 #endif
 
 #define LOCTEXT_NAMESPACE "WebBase"
@@ -180,17 +185,6 @@ bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
 	if (!OnBeforePopup.IsBound()) return false;
 	OnBeforePopup.Broadcast(URL, Frame);
 	return true;
-	//if (IsInGameThread()) {
-	//	OnBeforePopup.Broadcast(URL, Frame);
-	//	return true;
-	//}
-	//// Retry on the GameThread.
-	//TWeakObjectPtr<UWebBase> WeakThis = this;
-	//AsyncTask(ENamedThreads::GameThread, [WeakThis, URL, Frame]() {
-	//	if (!WeakThis.IsValid()) return;
-	//	WeakThis->HandleOnBeforePopup(URL, Frame);
-	//	});
-	//return true;
 
 }
 void UWebBase::ShowAddress(bool show) {
