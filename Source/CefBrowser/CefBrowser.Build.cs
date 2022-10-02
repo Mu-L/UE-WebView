@@ -89,42 +89,52 @@ public class CefBrowser : ModuleRules
 			{
 				// ... add any modules that your module loads dynamically here ...
 			}
-			); 
+			);
 		//Console.WriteLine("===============================");
 		string sourcePath = Path.Combine(ModuleDirectory, "..");
 		string pluginPath = Path.Combine(sourcePath, "..");
 		CopyDir(".lng", Path.Combine(sourcePath, "ThirdParty", "WebBuildGuide", "language"), pluginPath);
 		string projFile = "" + Target.ProjectFile;
 		if (Target.Version.MajorVersion >= 5) {
-			CopyCefBrowserUE5(pluginPath, projFile);
-		} 
+			CopyCefBrowser(pluginPath, projFile, "UnrealGame");
+		}
+		else {
+			CopyCefBrowser(pluginPath, projFile, "UE4");
+		}
 		CheckLicense(Path.GetDirectoryName(projFile));
+
 	}
 
-	void CopyCefBrowserUE5(string pluginPath,string projectFile)
+
+	void CopyCefBrowser(string pluginPath, string projectFile, string sw)
 	{
-		string projName = Path.GetFileName(projectFile).Replace(".uproject", "");// 项目文佳
-		string projPath = Path.GetDirectoryName(projectFile); // 目录路径
-		string srcMatch = Path.Combine("UnrealGame", "Development", "CefBrowser");
+		string projName = Path.GetFileName(projectFile).Replace(".uproject", "");// 
+		string projPath = Path.GetDirectoryName(projectFile); // 
+		string srcMatch = Path.Combine(sw, "Development", "CefBrowser");
 		string dstMatch = Path.Combine(projName, "Development", "CefBrowser");
-		foreach (string pathName in Directory.EnumerateDirectories(Path.Combine(pluginPath, "Intermediate"), "CefBrowser", SearchOption.AllDirectories))
+		string pluginInter = Path.Combine(pluginPath, "Intermediate");
+		if (!Directory.Exists(pluginInter)) return;
+		foreach (string pathName in Directory.EnumerateDirectories(pluginInter, "CefBrowser", SearchOption.AllDirectories))
 		{
 			if (!pathName.EndsWith(srcMatch)) continue;
-			foreach (string FileName in Directory.EnumerateFiles(pathName, "*.*", SearchOption.AllDirectories)) {
-				string name = Path.GetFileName(FileName);// 获取拷贝文佳
-				string srcBrowserPath = Path.GetDirectoryName(FileName);// 获取拷贝目录
+			foreach (string FileName in Directory.EnumerateFiles(pathName, "*.*", SearchOption.AllDirectories))
+			{
+				string name = Path.GetFileName(FileName);// 
+				string srcBrowserPath = Path.GetDirectoryName(FileName);// 
 				string dstBrowserPath = srcBrowserPath.Replace(pluginPath, projPath).Replace(srcMatch, dstMatch);
 				string dstFile = Path.Combine(dstBrowserPath, name);
-				if (!Directory.Exists(dstBrowserPath)) {
+				//Console.WriteLine("dstBrowserPath=" + dstBrowserPath);
+				if (!Directory.Exists(dstBrowserPath))
+				{
 					Directory.CreateDirectory(dstBrowserPath);
 				}
 				if (File.Exists(dstFile)) continue;
-				//Console.WriteLine("Frome:" + FileName + " To:" + dstFile);
 				System.IO.File.Copy(FileName, dstFile, true);
 			}
 
 		}
 	}
+
 
 	void CopyDir(string subfix, string outPath, string DstRoot)
 	{
