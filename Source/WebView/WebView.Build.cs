@@ -51,11 +51,20 @@ namespace UnrealBuildTool.Rules
                     "Slate",
                     "SlateCore",
                     "UMG",
-                    "Engine",
-                    "CefBrowser"
+                    "Engine"
                 }
             );
 
+            if (Target.Platform == UnrealTargetPlatform.Win64|| Target.Platform == UnrealTargetPlatform.Linux)
+            {//
+                PublicDependencyModuleNames.Add("CefBase"); 
+                PublicDependencyModuleNames.Add("CefBrowser"); 
+                PublicDefinitions.Add("CEF_NEW_VERSION=1"); //
+            }
+            else {// ºÊ»› WebBrowser
+                PrivateDependencyModuleNames.Add("ProxyWeb");
+                PublicDefinitions.Add("CEF_NEW_VERSION=0"); //
+            }
             if (Target.bBuildEditor == true) {
                 PrivateIncludePathModuleNames.AddRange(
                     new string[] {
@@ -70,17 +79,5 @@ namespace UnrealBuildTool.Rules
             }
         }
 
-        //public string GetMd5Hash(string input){
-        //    if (input == null) {
-        //        return null;
-        //    }
-        //    MD5 md5Hash = MD5.Create();
-        //    byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-        //    StringBuilder sBuilder = new StringBuilder();
-        //    for (int i = 0; i < data.Length; i++) {
-        //        sBuilder.Append(data[i].ToString("x2"));
-        //    }
-        //    return sBuilder.ToString();
-        //}
     }
 }

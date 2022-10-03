@@ -5,6 +5,7 @@ Efficient UE browser uses CEF open source kernel; When the frame rate is 60 per 
 # LONG DESCRIPTION:
 WebView is an enterprise browser plug-in designed for virtual engine. It uses many advanced technologies. It doesn't drop frames when browsing the web or watching video. The kernel adopts the latest CEF version and optimizes it. It has GPU binding function, supports the separation of game and browser rendering, adds rendering cache inside the plug-in, and the rendering effect is smooth. In terms of communication with web pages, V8 technology is adopted to make the Unreal Engine interact with web pages in real time. It is recommended to use phantom engine to render the scene and JavaScript for UI interaction, which can greatly improve the efficiency of system development.
 
+
 # Features:
 1. Support h264, h265, AV1 video codec
 2. Various video websites, such as youtube and bilibili
@@ -21,18 +22,25 @@ WebView is an enterprise browser plug-in designed for virtual engine. It uses ma
 13. load custom protocols on the web page, such as SVN
 14. 8K video 60fps without frame dropping
 15. GPU binding separates virtual engine and browser rendering
+16. Local domain name resolution
+17. Scale page
+18. 120 frame rate does not drop frames
 
 # Domestic synchronized version
 https://gitee.com/aSurgingRiver/WebView.git
 
+# CefBase Dependent:
+1. https://github.com/aSurgingRiver/CefBase
+2. https://gitee.com/aSurgingRiver/CefBase
+
 # Using tutorials
-https://blog.csdn.net/he_goodluck/article/details/122892847
+https://www.zhihu.com/column/c_1490114276946223104
 
 # Important/Additional Notes:
 We are committed to providing the most efficient browser plug-in. If you have any questions in the process of using, you can contact us through the following ways.
 
-FaceBook: https://www.facebook.com/ue.webview/
-Email: aSurgingRiver@163.com aSurgingRiver@gmail.com
-QQ Group: 866972317
-QQ: 249838628 Wechat: aSurgingRiver
-
+FaceBook: https://www.facebook.com/ue.webview/   
+Email: aSurgingRiver@163.com    aSurgingRiver@gmail.com                                  
+QQ Group: 866972317   
+QQ: 249838628 
+Wechat: aSurgingRiver  

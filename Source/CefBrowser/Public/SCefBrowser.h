@@ -8,7 +8,7 @@
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Framework/SlateDelegates.h"
-
+#include "Styling/SlateTypes.h"
 
 
 class UWebCoreData;

@@ -2,8 +2,10 @@
 
 #include "WebView.h"
 #include "Modules/ModuleManager.h"
-#include "WebModule.h"
 #include "Materials/Material.h"
+#if CEF_NEW_VERSION
+#include "WebModule.h"
+#endif
 
 #define LOCTEXT_NAMESPACE "FWebViewModule"
 
@@ -24,7 +26,7 @@ void FWebViewModule::ShutdownModule()
 
 void FWebViewModule::StartupModule()
 {
-#if WITH_EDITOR
+#if WITH_EDITOR && CEF_NEW_VERSION
 	FEditorDelegates::PausePIE.AddLambda([](bool) {IWebModule::Get().OnEndPIE(); });
 	FEditorDelegates::BeginPIE.AddLambda([](bool) {IWebModule::Get().OnBeginPIE(); });
 	FEditorDelegates::EndPIE.AddLambda([](bool) {IWebModule::Get().OnEndPIE(); });
