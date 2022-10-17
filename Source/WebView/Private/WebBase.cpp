@@ -120,12 +120,6 @@ void UWebBase::PostLoad() {
 	Super::PostLoad();
 	//SetFlags(RF_Transactional);
 }
-
-
-void UWebBase::BeginDestroy() {
-	Super::BeginDestroy();
-}
-
 #if WITH_ACCESSIBILITY
 TSharedPtr<SWidget> UWebBase::GetAccessibleWidget() const
 {
@@ -195,10 +189,6 @@ bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
 }
 void UWebBase::ShowAddress(bool show) {
 	CefCoreWidget->ShowAddress(show);
-}
-
-void UWebBase::ReopenRender(FString NewURL) {
-	CefCoreWidget->ReopenRender(NewURL);
 }
 
 void UWebBase::HandleOnDownloadTip(FString URL, FString File) {

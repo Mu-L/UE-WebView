@@ -85,12 +85,6 @@ public:
 		* @param NewURL New URL to load.
 		*/
 	void LoadURL(FString NewURL);
-	/**
-		* reopen a new render to replace old render.
-		* @param NewURL New URL to load.
-		*        if NewURL is empty,will Assign old URL.
-		*/
-	void ReopenRender(FString NewURL);
 
 	/** Get the current title of the web page. */
 	FText GetTitleText() const;
@@ -148,7 +142,7 @@ public:
 	 * Construct the widget.
 	 * @param InArgs  Declaration from which to construct the widget.
 	 */
-	void Construct(const FArguments& InArgs,const bool isFirst=true);
+	void Construct(const FArguments& InArgs);
 private:
 	//
 	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime);

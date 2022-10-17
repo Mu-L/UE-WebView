@@ -6,7 +6,6 @@
 #include "Components/Widget.h"
 #include "Styling/SlateTypes.h"
 #include "Components/WidgetSwitcherSlot.h"
-#include "Containers/Map.h"
 #include "WebBase.generated.h"
 class UWebViewObject;
 /**
@@ -170,17 +169,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void ShowAddress(bool show);
 
-	/**
-	* reopen a new render to replace old render.
-	* @param NewURL New URL to load.
-	*        if NewURL is empty,will Assign old URL.
-	*/
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void ReopenRender(FString NewURL="");
 public:
 	virtual void ReleaseSlateResources(bool bReleaseChildren) override;
 	virtual void PostLoad() override;
-	virtual void BeginDestroy() override;
 
 #if WITH_EDITOR
 	virtual const FText GetPaletteCategory() override;
@@ -200,5 +191,5 @@ protected:
 	bool HandleOnBeforePopup(FString URL, FString Frame);
 	void HandleOnDownloadTip(FString URL, FString File);
 
-	TMap<UObject* ,FString> BindInfo;
+
 };
