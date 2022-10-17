@@ -191,6 +191,10 @@ void UWebBase::ShowAddress(bool show) {
 	CefCoreWidget->ShowAddress(show);
 }
 
+void UWebBase::ReopenRender(FString NewURL) {
+	CefCoreWidget->ReopenRender(NewURL);
+}
+
 void UWebBase::HandleOnDownloadTip(FString URL, FString File) {
 	if (!OnDownloadComplete.IsBound()) return;
 	OnDownloadComplete.Broadcast(URL, File);
