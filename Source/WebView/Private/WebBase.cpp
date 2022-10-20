@@ -162,7 +162,8 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip);
 	_ViewObject = NewObject<UWebViewObject>();// 隔离JS和UE4之间的数据。
 	if (_ViewObject) {
-		BindUObject("interface", _ViewObject);
+		//BindUObject("interface", _ViewObject);
+		BindUObject("$receive", _ViewObject);
 		SetJSOjbect(_ViewObject);
 	}
 	return CefCoreWidget.ToSharedRef();
@@ -189,6 +190,10 @@ bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
 }
 void UWebBase::ShowAddress(bool show) {
 	CefCoreWidget->ShowAddress(show);
+}
+
+void UWebBase::ReopenRender(FString NewURL) {
+	CefCoreWidget->ReopenRender(NewURL);
 }
 
 void UWebBase::HandleOnDownloadTip(FString URL, FString File) {
