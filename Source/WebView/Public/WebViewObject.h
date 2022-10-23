@@ -18,7 +18,7 @@ class WEBVIEW_API UWebViewObject : public UObject
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void SyncCallUe(const FString& Name, const FString& Data, const FString& Callback);
+	void Asyn(const FString& Name, const FString& Data, const FString& Callback);
 
 	void SetUMG(UWebViewWidget* InWidget);
 private:
