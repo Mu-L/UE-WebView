@@ -15,8 +15,11 @@
 </body>
 <script>
     // response function from ue call
-    ue.interface.jsfunc = function(content){alert('jsfunc'); };
+    ue.interface.jsfunc = function(content){
+    	alert('jsfunc');
+    };
     var total = 0;
+    var response=0;
     
 var button=document.getElementById('button');
   button.setAttribute("onclick","playGame()");
@@ -25,14 +28,16 @@ function playGame(){
 		//var url = 'rtsp://113.201.104.35:9090/dss/monitor/param?cameraid=1000054%247&substream=1' ;
 		//alert('qweqwe');
 		
-		//for (var i=0; i<1000; i++){
+		for (var i=0; i<1000; i++){
 		    total++;
             ue4("videoUrl",{"url":"www.baidu.com","total":total},
             function(rv){
-            	alert(rv);
+            	//alert(rv);
+            	response = response+1;
+            	console.log("succed "+JSON.stringify(rv)+" "+response);
             	}
             );
-		//}
+		}
 }
 
 </script>

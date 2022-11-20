@@ -17,12 +17,14 @@ class CEFBROWSER_API SCefBrowser
 	: public SCompoundWidget
 {
 public:
+	typedef TMap<FString, FString> RequestHeaders;
 	DECLARE_DELEGATE_RetVal_OneParam(bool, FOnKeyUp, const FKeyEvent& );
 	DECLARE_DELEGATE_RetVal_OneParam(bool, FOnKeyDown, const FKeyEvent& );
 	DECLARE_DELEGATE_RetVal_OneParam(bool, FOnKeyChar, const FCharacterEvent& );
 	DECLARE_DELEGATE_OneParam(FOnLoadState, const int);
 	DECLARE_DELEGATE_RetVal_TwoParams(bool, FOnBeforePopup, FString, FString);
 	DECLARE_DELEGATE_TwoParams(FOnDownloadComplete, FString, FString);
+	DECLARE_DELEGATE_RetVal_ThreeParams(bool, FOnResourceLoad, FString, int, RequestHeaders&);
 
 	SLATE_BEGIN_ARGS(SCefBrowser)
 		: _ViewportSize(FVector2D::ZeroVector)
@@ -47,6 +49,8 @@ public:
 		SLATE_EVENT(FOnTextChanged, OnUrlChanged)
 		/** Called when file download finish. */
 		SLATE_EVENT(FOnDownloadComplete, OnDownloadComplete)
+		/** Called when resource download finish before load. */
+		SLATE_EVENT(FOnResourceLoad, OnResourceLoad)
 
 		/* this party for params */
 		/** Control and Editor show text style  */
@@ -84,7 +88,7 @@ public:
 		* Load the specified URL.
 		* @param NewURL New URL to load.
 		*/
-	void LoadURL(FString NewURL);
+	void LoadURL(FString NewURL, FString PostData = FString());
 	/**
 		* reopen a new render to replace old render.
 		* @param NewURL New URL to load.
@@ -139,7 +143,10 @@ public:
 	 * @param bIsPermanent Must match the bIsPermanent argument passed to BindUObject.
 	 */
 	void UnbindUObject(const FString& Name, UObject* Object, bool bIsPermanent = true);
-	//virtual bool SupportsKeyboardFocus() const override { return true; }
+	//
+	void StopRender(bool bVisibility);
+	//
+	void ShowDevTools();
 public:
 	/** Default constructor. */
 	SCefBrowser();

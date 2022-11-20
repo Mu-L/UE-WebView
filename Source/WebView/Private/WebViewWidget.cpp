@@ -30,9 +30,15 @@ UWebViewWidget::UWebViewWidget(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-
-void UWebViewWidget::SetJSOjbect(UWebViewObject* object) {
-	object->SetUMG(this);
+bool UWebViewWidget::Asyn(const FString& Name, const FString& Data, const FString& Callback) {
+	if (UWebBase::Asyn(Name, Data, Callback))return true;
+#ifdef JSON_LIB
+	if (OnJsEvent.IsBound()) {
+		OnJsEvent.Broadcast(Name, FJsonLibraryValue::Parse(Data), Callback);
+		return true;
+	}
+#endif
+	return false;
 }
 
 /////////////////////////////////////////////////////
