@@ -1,6 +1,5 @@
 {
 	"OutputFiles": [
-		"Module.WebView.cpp.o",
-		"Module.WebView.gen.cpp.o"
+		"Module.WebView.cpp.o"
 	]
 }
