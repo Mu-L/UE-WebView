@@ -17,9 +17,9 @@ UCLASS()
 class WEBVIEW_API UWebViewWidget : public UWebBase
 {
 	GENERATED_UCLASS_BODY()
-
+protected:
+	virtual bool Asyn(const FString& Name, const FString& Data, const FString& Callback) override;
 public:
-	virtual void SetJSOjbect(UWebViewObject* object);
 	/* this party use for jsonlibaray ,if use ,please delete comment.*/
 	//@TEMPLATE DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnJsEvent, const FString&, Key, FJsonLibraryValue, Json, const FString&, Callback);
 	//@TEMPLATE UPROPERTY(BlueprintAssignable, Category = "Web View | Events") 

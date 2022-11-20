@@ -4,13 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#ifdef JSON_LIB
-#include "JsonLibrary.h"
-#endif
 #include "WebViewObject.generated.h"
 
-//class UCefWidget;
-class UWebViewWidget;
+class UWebBase;
 
 UCLASS()
 class WEBVIEW_API UWebViewObject : public UObject
@@ -20,9 +16,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void Asyn(const FString& Name, const FString& Data, const FString& Callback);
 
-	void SetUMG(UWebViewWidget* InWidget);
+	void SetUMG(UWebBase* InWidget);
 private:
-	TWeakObjectPtr<UWebViewWidget> UMG;
+	TWeakObjectPtr<UWebBase> UMG;
 };
 
 
