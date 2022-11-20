@@ -32,27 +32,53 @@
 /////////////////////////////////////////////////////
 // UWebBase
 
+void UHtmlHeaders::ExistAppend(const FString& Key, const FString& Value) {
+	if (!Headers.Contains(Key))return;
+	FString &V= Headers[Key];
+	V = V + TEXT(" ") +Value;
+}
+
+void UHtmlHeaders::Replace(const FString& Key, const FString& Value) {
+	if (!Headers.Contains(Key)) {
+		Headers.Add(Key, Value);
+		return;
+	}
+	Headers[Key] = Value;
+}
+
 UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 	, styleText(FTextBlockStyle::GetDefault())
 	, ColorBackground(255, 255, 255, 255)
-	, _Pixel(128, 64)
+	, _Pixel(8, 4)
 	, _Zoom(1.0f)
-	, jsWindow(TEXT("ue"))
+	//, jsWindow(TEXT("ue"))
 {
 	bIsVariable = true;
 	Visibility = ESlateVisibility::SelfHitTestInvisible;
-	GConfig->GetString(TEXT("WebView"), TEXT("window"), jsWindow, GGameIni);
+	FString category(TEXT("ue"));
+	FString object(TEXT("interface"));
+	GConfig->GetString(TEXT("WebView"), TEXT("category"), category, GGameIni);
+	GConfig->GetString(TEXT("WebView"), TEXT("object"), object, GGameIni);
+	jsWindow = FString::Printf(TEXT("%s.%s"),*category,*object);
 	styleText.ColorAndOpacity = FSlateColor(FLinearColor(0.0f, 0.0f, 0.0f));
 	styleText.Font.Size = 20;
 	bIsVariable = true;
 }
 
-void UWebBase::LoadURL(FString NewURL)
+void UWebBase::LoadURL(FString NewURL,FString PostData)
 {
 	if (!CefCoreWidget.IsValid())return;
-	return CefCoreWidget->LoadURL(NewURL);
+	CefCoreWidget->LoadURL(NewURL, PostData);
 }
+
+//void UWebBase::NavigationURL(FString NewURL, FString Navigation)
+//{
+//	if (!CefCoreWidget.IsValid())return;
+//	return CefCoreWidget->LoadURL(NewURL, Navigation);
+//}
+
+
 
 void UWebBase::ExecuteJavascript(const FString& ScriptText)
 {
@@ -66,11 +92,11 @@ void UWebBase::CallJsonStr(const FString& Function, const FString& Data)
 		return;
 	FString TextScript;
 	if (Data.Len() >= 2) {
-		TextScript = FString::Printf(TEXT("%s.interface['%s'](%s)"),
+		TextScript = FString::Printf(TEXT("%s['%s'](%s)"),
 			*jsWindow, *Function, *Data);
 	}
 	else {
-		TextScript = FString::Printf(TEXT("%s.interface['%s']()"),
+		TextScript = FString::Printf(TEXT("%s['%s']()"),
 			*jsWindow, *Function);
 	}
 	CefCoreWidget->ExecuteJavascript(TextScript);
@@ -159,14 +185,30 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.OnUrlChanged_UObject(this, &UWebBase::HandleOnUrlChanged)
 		.OnBeforePopup_UObject(this, &UWebBase::HandleOnBeforePopup)
 		.OnLoadState_UObject(this, &UWebBase::HandleOnLoadState)
-		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip);
+		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip)
+		.OnResourceLoad_UObject(this, &UWebBase::HandleOnResourceLoad);
 	_ViewObject = NewObject<UWebViewObject>();// 隔离JS和UE4之间的数据。
 	if (_ViewObject) {
-		//BindUObject("interface", _ViewObject);
+		_ViewObject->SetUMG(this);
 		BindUObject("$receive", _ViewObject);
-		SetJSOjbect(_ViewObject);
 	}
 	return CefCoreWidget.ToSharedRef();
+}
+
+bool UWebBase::Asyn(const FString& Name, const FString& Data, const FString& Callback) {
+	if (!OnJsEventStr.IsBound())return false;
+	OnJsEventStr.Broadcast(Name, Data, Callback);
+	return true;
+}
+
+void UWebBase::SetVisibility(ESlateVisibility InVisibility) {
+	Super::SetVisibility(InVisibility);
+	if (!CefCoreWidget.IsValid())return;
+	bool isShow = true;
+	if (InVisibility == ESlateVisibility::Hidden || InVisibility == ESlateVisibility::Collapsed) {
+		isShow = false;
+	}
+	CefCoreWidget->StopRender(isShow);
 }
 
 inline void UWebBase::CallBrowser(TFunction<void(TSharedPtr<class SCefBrowser>&)>& fun) {
@@ -186,8 +228,8 @@ bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
 	if (!OnBeforePopup.IsBound()) return false;
 	OnBeforePopup.Broadcast(URL, Frame);
 	return true;
-
 }
+
 void UWebBase::ShowAddress(bool show) {
 	CefCoreWidget->ShowAddress(show);
 }
@@ -196,10 +238,24 @@ void UWebBase::ReopenRender(FString NewURL) {
 	CefCoreWidget->ReopenRender(NewURL);
 }
 
+void UWebBase::ShowDevTools() {
+	CefCoreWidget->ShowDevTools();
+}
+
 void UWebBase::HandleOnDownloadTip(FString URL, FString File) {
 	if (!OnDownloadComplete.IsBound()) return;
 	OnDownloadComplete.Broadcast(URL, File);
 }
+
+
+bool UWebBase::HandleOnResourceLoad(FString URL, int ResourceType, TMap<FString, FString>& HtmlHeaders) {
+	if (!OnBeforeRequest.IsBound()) return false;
+	UHtmlHeaders* Headers = NewObject<UHtmlHeaders>(this);
+	Headers->Headers = HtmlHeaders;
+	OnBeforeRequest.Broadcast(URL, ResourceType, Headers);
+	HtmlHeaders = Headers->Headers;
+	return true;
+}	
 
 #if WITH_EDITOR
 const FText UWebBase::GetPaletteCategory() {

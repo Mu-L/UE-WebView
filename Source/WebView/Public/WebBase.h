@@ -9,6 +9,23 @@
 #include "Containers/Map.h"
 #include "WebBase.generated.h"
 class UWebViewObject;
+
+UCLASS(BlueprintType, Blueprintable)
+class UHtmlHeaders : public UObject {
+	GENERATED_BODY()
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Web View|HTML")
+	TMap<FString, FString> Headers;
+
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void ExistAppend(const FString& Key,const FString& Value);
+
+
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void Replace(const FString& Key, const FString& Value);
+};
+
+
 /**
  * , BlueprintType, hidecategories = (Object)
  */
@@ -25,6 +42,29 @@ public:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnJsStr, const FString&, Type, FString, JSON, const FString&, FuncName);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnBeforePopup, FString, Url, FString, Frame);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDownloadComplete, FString, Url, FString, File);
+	/*  ResourceType
+	  0: Top level page.
+	  1: Frame or iframe.
+	  3: CSS stylesheet.
+	  4: External script.
+	  5: Image (jpg/gif/png/etc).
+	  6: Font.
+	  7: Some other subresource. This is the default type if the actual type is unknown.
+	  8: Object (or embed) tag for a plugin, or a resource that a plugin requested.
+	  9: Media resource.
+	  10: Main resource of a dedicated worker.
+	  11: Main resource of a shared worker.
+	  12: Explicitly requested prefetch.
+	  13: Favicon.
+	  14: XMLHttpRequest.
+	  15: A request for a <ping>
+	  16: Main resource of a service worker.
+	  17: A report of Content Security Policy violations.
+	  18: A resource that a plugin requested.
+	  19: A main-frame service worker navigation preload request.
+	  20: A sub-frame service worker navigation preload request.
+	*/
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnBeforeRequest, FString, URL, int, ResourceType, UHtmlHeaders*, Headers);
 public:
 	/** this party is blueprint delegate params */
 	UPROPERTY()
@@ -47,6 +87,9 @@ public:
 	/** Called when a popup is about to spawn. */
 	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
 	FOnPreReBuild OnPreReBuild;
+	/** called when resouce load. */
+	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
+	FOnBeforeRequest OnBeforeRequest;
 
 	/** this party is blueprint editor params */
 	/** URL that the browser will initially navigate to. The URL should include the protocol, eg http:// */
@@ -79,11 +122,10 @@ public:
 	/** When Download file Whether to show Tip Dialog. */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Download Tip", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
 		bool  downloadTip = true;
-	/** When Download file Whether to show web cursor. */
-	//UPROPERTY(EditAnywhere, meta = (DisplayName = "Use Web Cursor", UIMin = 0, UIMax = 1), Category = "Web View|Screen")
-	//	bool  webCursor = false;
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Web Pixel", UIMin = 64, UIMax = 8192), Category = "Web View|Screen")
+	/** set web page rendering pixel size, 8*4 default :The browser calculates the size itself  */
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Web Pixel", UIMin = 4, UIMax = 8192), Category = "Web View|Screen")
 	FIntPoint _Pixel;
+	/**  Page Zoom Level. The value is consistent with that of chrome */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Zoom Level", ClampMin = 0.0, ClampMax = 5.0), Category = "Web View|Screen")
 	float _Zoom;
 
@@ -105,14 +147,17 @@ public:
 	 * @param NewURL New URL to load
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void LoadURL(FString NewURL);
+	void LoadURL(FString NewURL, FString PostData=TEXT(""));
+
+	//UFUNCTION(BlueprintCallable, Category = "Web View")
+	//void NavigationURL(FString NewURL,FString NaviHead);
 
 	/** Reload the current page. */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void Reload();
 	
 	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Data", AutoCreateRefTerm = "Data"))
-		void CallJsonStr(const FString& Function, const FString& Data);
+	void CallJsonStr(const FString& Function, const FString& Data);
 
 	/**
 	 * Expose a UObject instance to the browser runtime.
@@ -177,6 +222,13 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void ReopenRender(FString NewURL="");
+
+
+	/**
+	* Show Dev Tools for debug web 
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void ShowDevTools();
 public:
 	virtual void ReleaseSlateResources(bool bReleaseChildren) override;
 	virtual void PostLoad() override;
@@ -188,9 +240,10 @@ public:
 	virtual TSharedPtr<SWidget> GetAccessibleWidget() const override;
 #endif
 	FString JSWindow();
-
-protected:
-	virtual void SetJSOjbect(UWebViewObject* object) {};
+	// 
+	virtual bool Asyn(const FString& Name, const FString& Data, const FString& Callback);
+	//
+	virtual void SetVisibility(ESlateVisibility InVisibility) override;
 protected:
 	virtual TSharedRef<SWidget> RebuildWidget() override;
 	void CallBrowser(TFunction<void(TSharedPtr<class SCefBrowser>&)>& fun);
@@ -198,5 +251,6 @@ protected:
 	void HandleOnUrlChanged(const FText& Text);
 	bool HandleOnBeforePopup(FString URL, FString Frame);
 	void HandleOnDownloadTip(FString URL, FString File);
-
+	//typedef class SCefBrowser::TMap<FString, FString> RequestHeaders;
+	bool HandleOnResourceLoad(FString URL, int ResourceType, TMap<FString, FString>& HtmlHeaders);
 };

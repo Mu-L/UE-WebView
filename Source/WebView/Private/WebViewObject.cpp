@@ -1,23 +1,16 @@
 // Copyright aSurgingRiver, Inc. All Rights Reserved.
 
 #include "WebViewObject.h"
-#include "WebViewWidget.h"
+#include "WebBase.h"
 
 
 void UWebViewObject::Asyn(const FString& Name, const FString& Data, const FString& Callback)
 {
 	if (!UMG.IsValid())
 		return;
-#ifdef JSON_LIB
-	if (UMG->OnJsEvent.IsBound()){
-		UMG->OnJsEvent.Broadcast(Name, FJsonLibraryValue::Parse(Data), Callback);
-	}
-#endif
-	if (UMG->OnJsEventStr.IsBound()) {
-		UMG->OnJsEventStr.Broadcast(Name, Data, Callback);
-	}
+	UMG->Asyn(Name, Data, Callback);
 }
 
-void UWebViewObject::SetUMG(UWebViewWidget* InUMG){
+void UWebViewObject::SetUMG(UWebBase* InUMG){
 	UMG = InUMG;// StaticCast<UWebViewWidget*>(InWidget);
 }
