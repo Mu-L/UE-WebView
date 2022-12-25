@@ -48,6 +48,7 @@ public class CefBrowser : ModuleRules
 				"InputCore",
 				"Serialization",
 				"MediaUtils",
+				"CefBase",
 				"cefForUe",
 				"OpenSSL"
 			}
@@ -102,7 +103,6 @@ public class CefBrowser : ModuleRules
 			CopyCefBrowser(pluginPath, projFile, "UE4");
 		}
 		CheckLicense(Path.GetDirectoryName(projFile));
-
 	}
 
 
@@ -159,30 +159,21 @@ public class CefBrowser : ModuleRules
 		}
 	}
 
-	void CheckLicense(string Target)
+	void CheckLicense(string ProjectDir)
 	{
-		string licensePath = Path.Combine(Target, "Content", "license");
+		string licensePath = Path.Combine(ProjectDir, "Content", "license");
 		if (!Directory.Exists(licensePath))
 		{
 			Directory.CreateDirectory(licensePath);
 		}
-		string license = Path.Combine(licensePath, "webview.dat");
-		if (!File.Exists(license))
-		{
-			string webviewLic = Path.Combine(ModuleDirectory, "license", "webview.dat");
-			if (File.Exists(webviewLic))
-			{
-				System.IO.File.Copy(webviewLic, license);
-			}
-		}
-		string GamePath = Path.Combine(Target, "Config");
+		if (!File.Exists(Path.Combine(licensePath, "webview.dat")))
+			return;
+		string GamePath = Path.Combine(ProjectDir, "Config");
 		string GameCfg = Path.Combine(GamePath, "DefaultGame.ini");
-		if (!Directory.Exists(GamePath))
-		{
+		if (!Directory.Exists(GamePath)) {
 			Directory.CreateDirectory(GamePath);
 		}
-		if (!File.Exists(GameCfg))
-		{
+		if (!File.Exists(GameCfg)){
 			File.Create(GameCfg);
 		}
 		//if( File.OpenWrite(GameCfg)) return ;

@@ -25,7 +25,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	UMG_API UClass* Z_Construct_UClass_UWidget();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntPoint();
-	WEBVIEW_API UClass* Z_Construct_UClass_UWebViewObject_NoRegister();
 	SLATECORE_API UScriptStruct* Z_Construct_UScriptStruct_FTextBlockStyle();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FColor();
 // End Cross Module References
@@ -1126,10 +1125,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp__ViewObject_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp__ViewObject;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnLoadState_MetaData[];
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnLoadState;
@@ -1248,14 +1243,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		{ "ToolTip", ", BlueprintType, hidecategories = (Object)\n //UCLASS()" },
 	};
 #endif
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject_MetaData[] = {
-		{ "Comment", "/** this party is blueprint delegate params */" },
-		{ "ModuleRelativePath", "Public/WebBase.h" },
-		{ "ToolTip", "this party is blueprint delegate params" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject = { "_ViewObject", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWebBase, _ViewObject), Z_Construct_UClass_UWebViewObject_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState_MetaData[] = {
 		{ "Category", "Web View|Event" },
@@ -1482,7 +1469,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp__Zoom = { "_Zoom", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWebBase, _Zoom), METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp__Zoom_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp__Zoom_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UWebBase_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnUrlChanged,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnJsEventStr,
@@ -1540,9 +1526,9 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UHtmlHeaders, UHtmlHeaders::StaticClass, TEXT("UHtmlHeaders"), &Z_Registration_Info_UClass_UHtmlHeaders, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHtmlHeaders), 2108261102U) },
-		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 1204076729U) },
+		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 4101693532U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_640727893(TEXT("/Script/WebView"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_12366711(TEXT("/Script/WebView"),
 		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

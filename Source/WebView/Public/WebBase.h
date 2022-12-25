@@ -66,9 +66,6 @@ public:
 	*/
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnBeforeRequest, FString, URL, int, ResourceType, UHtmlHeaders*, Headers);
 public:
-	/** this party is blueprint delegate params */
-	UPROPERTY()
-	UWebViewObject* _ViewObject;// 保存UE4与Js的通信数据
 	/** Called when loading stat changed */
 	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
 	FOnStateLoad OnLoadState;
@@ -133,7 +130,7 @@ protected:
 	FString jsWindow;// for javescrit 
 	TSharedPtr<class SCefBrowser> CefCoreWidget; // for slate core widget
 private:
-
+	UWebViewObject* _ViewObject;// 保存UE4与Js的通信数据
 public:
 	/**
 	* Executes a JavaScript string in the context of the web page
@@ -230,24 +227,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void ShowDevTools();
 public:
-	virtual void ReleaseSlateResources(bool bReleaseChildren) override;
-	virtual void PostLoad() override;
-
-#if WITH_EDITOR
-	virtual const FText GetPaletteCategory() override;
-#endif
-#if WITH_ACCESSIBILITY
-	virtual TSharedPtr<SWidget> GetAccessibleWidget() const override;
-#endif
-	FString JSWindow();
+	virtual void BeginDestroy() override;
 	// 
 	virtual bool Asyn(const FString& Name, const FString& Data, const FString& Callback);
 	//
 	virtual void SetVisibility(ESlateVisibility InVisibility) override;
 protected:
 	virtual TSharedRef<SWidget> RebuildWidget() override;
-	void CallBrowser(TFunction<void(TSharedPtr<class SCefBrowser>&)>& fun);
-	inline void HandleOnLoadState(const int state);
+	void HandleOnLoadState(const int state);
 	void HandleOnUrlChanged(const FText& Text);
 	bool HandleOnBeforePopup(FString URL, FString Frame);
 	void HandleOnDownloadTip(FString URL, FString File);
