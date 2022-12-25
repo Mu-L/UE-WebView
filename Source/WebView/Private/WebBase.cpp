@@ -16,7 +16,7 @@
 #include "Materials/MaterialExpressionTextureSampleParameter2D.h"
 #include "Materials/MaterialFunction.h"
 #include "Factories/MaterialFactoryNew.h"
-#include "AssetRegistryModule.h"
+//#include "AssetRegistryModule.h"
 #include "PackageHelperFunctions.h"
 #endif
 
@@ -55,7 +55,7 @@ UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 	//, jsWindow(TEXT("ue"))
 {
 	bIsVariable = true;
-	Visibility = ESlateVisibility::SelfHitTestInvisible;
+	SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 	FString category(TEXT("ue"));
 	FString object(TEXT("interface"));
 	GConfig->GetString(TEXT("WebView"), TEXT("category"), category, GGameIni);
@@ -71,14 +71,6 @@ void UWebBase::LoadURL(FString NewURL,FString PostData)
 	if (!CefCoreWidget.IsValid())return;
 	CefCoreWidget->LoadURL(NewURL, PostData);
 }
-
-//void UWebBase::NavigationURL(FString NewURL, FString Navigation)
-//{
-//	if (!CefCoreWidget.IsValid())return;
-//	return CefCoreWidget->LoadURL(NewURL, Navigation);
-//}
-
-
 
 void UWebBase::ExecuteJavascript(const FString& ScriptText)
 {
@@ -123,10 +115,6 @@ void UWebBase::WebPixel(FIntPoint pixel) const {
 	CefCoreWidget->WebPixel(pixel);
 }
 
-//void UWebBase::PreRebuild_Implementation(){
-//
-//}
-
 void UWebBase::BindUObject(const FString& VarName, UObject* Object, bool bIsPermanent) {
 	if (!CefCoreWidget.IsValid())return;
 	CefCoreWidget->BindUObject(VarName, Object, bIsPermanent);
@@ -137,25 +125,15 @@ void UWebBase::UnbindUObject(const FString& Name, UObject* Object, bool bIsPerma
 	CefCoreWidget->UnbindUObject(Name, Object, bIsPermanent);
 }
 
-void UWebBase::ReleaseSlateResources(bool bReleaseChildren) {
-	CefCoreWidget.Reset();
-	Super::ReleaseSlateResources(bReleaseChildren);
+void UWebBase::BeginDestroy() {
+	if (CefCoreWidget) {
+		CefCoreWidget->SetCanTick(false);
+		CefCoreWidget.Reset();
+	}
+	Super::BeginDestroy();
 }
-
-void UWebBase::PostLoad() {
-	Super::PostLoad();
-	//SetFlags(RF_Transactional);
-}
-#if WITH_ACCESSIBILITY
-TSharedPtr<SWidget> UWebBase::GetAccessibleWidget() const
-{
-	return CefCoreWidget;
-}
-#endif
 
 TSharedRef<SWidget> UWebBase::RebuildWidget() {
-	//FString name;
-	//GetName(name);
 	if ( IsDesignTime() || IsDefaultSubobject()) {
 		return SNew(SBox)
 			.HAlign(HAlign_Center)
@@ -211,11 +189,6 @@ void UWebBase::SetVisibility(ESlateVisibility InVisibility) {
 	CefCoreWidget->StopRender(isShow);
 }
 
-inline void UWebBase::CallBrowser(TFunction<void(TSharedPtr<class SCefBrowser>&)>& fun) {
-	if (!CefCoreWidget.IsValid())return;
-	fun(CefCoreWidget);
-}
-
 void UWebBase::HandleOnUrlChanged(const FText& InText) {
 	OnUrlChanged.Broadcast(InText);
 }
@@ -225,7 +198,10 @@ void UWebBase::HandleOnLoadState(const int state) {
 }
 
 bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
-	if (!OnBeforePopup.IsBound()) return false;
+	if (!OnBeforePopup.IsBound()) {// 如果没有绑定事件则自动跳转URL
+		CefCoreWidget->LoadURL(URL, FString());
+		return true;
+	}
 	OnBeforePopup.Broadcast(URL, Frame);
 	return true;
 }
@@ -255,16 +231,6 @@ bool UWebBase::HandleOnResourceLoad(FString URL, int ResourceType, TMap<FString,
 	OnBeforeRequest.Broadcast(URL, ResourceType, Headers);
 	HtmlHeaders = Headers->Headers;
 	return true;
-}	
-
-#if WITH_EDITOR
-const FText UWebBase::GetPaletteCategory() {
-	return LOCTEXT("Experimental", "Experimental");
-}
-#endif
-
-FString UWebBase::JSWindow() {
-	return jsWindow;
 }
 
 #undef LOCTEXT_NAMESPACE
