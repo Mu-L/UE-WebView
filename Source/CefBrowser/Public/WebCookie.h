@@ -35,15 +35,15 @@ struct CEFBROWSER_API FWebCookie
 
 	// If true the cookie will only be sent for HTTPS requests.
 	UPROPERTY(BlueprintReadWrite, Category = "Web View")
-	bool bSecure;
+	bool bSecure=false;
 
 	// If true the cookie will only be sent for HTTP requests.
 	UPROPERTY(BlueprintReadWrite, Category = "Web View")
-	bool bHttpOnly;
+	bool bHttpOnly=false;
 
 	// If true the cookie will expire at the specified Expires datetime.
 	UPROPERTY(BlueprintReadWrite, Category = "Web View")
-	bool bHasExpires;
+	bool bHasExpires=false;
 
 	// The cookie expiration date is only valid if bHasExpires is true.
 	UPROPERTY(BlueprintReadWrite, Category = "Web View")

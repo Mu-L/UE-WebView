@@ -29,7 +29,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	UMG_API UClass* Z_Construct_UClass_UWidget();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntPoint();
-	WEBVIEW_API UClass* Z_Construct_UClass_UWebViewObject_NoRegister();
 	SLATECORE_API UScriptStruct* Z_Construct_UScriptStruct_FTextBlockStyle();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FColor();
 // End Cross Module References
@@ -1131,10 +1130,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp__ViewObject_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp__ViewObject;
-#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_OnLoadState_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnLoadState;
@@ -1253,14 +1248,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		{ "ToolTip", ", BlueprintType, hidecategories = (Object)\n //UCLASS()" },
 	};
 #endif
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject_MetaData[] = {
-		{ "Comment", "/** this party is blueprint delegate params */" },
-		{ "ModuleRelativePath", "Public/WebBase.h" },
-		{ "ToolTip", "this party is blueprint delegate params" },
-	};
-#endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject = { "_ViewObject", nullptr, (EPropertyFlags)0x0010000000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWebBase, _ViewObject), Z_Construct_UClass_UWebViewObject_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState_MetaData[] = {
 		{ "Category", "Web View|Event" },
@@ -1487,7 +1474,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp__Zoom = { "_Zoom", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWebBase, _Zoom), METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp__Zoom_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp__Zoom_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UWebBase_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp__ViewObject,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnUrlChanged,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnJsEventStr,
@@ -1535,7 +1521,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UWebBase, 3422492815);
+	IMPLEMENT_CLASS(UWebBase, 1922574781);
 	template<> WEBVIEW_API UClass* StaticClass<UWebBase>()
 	{
 		return UWebBase::StaticClass();
