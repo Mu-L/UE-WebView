@@ -40,8 +40,10 @@ void EmptyLinkFunctionForGeneratedCodeWebViewWidget() {}
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebViewWidget_Statics::Class_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
 		{ "Comment", "/**\n * \n */" },
 		{ "IncludePath", "WebViewWidget.h" },
+		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "Public/WebViewWidget.h" },
 	};
 #endif
@@ -72,7 +74,7 @@ void EmptyLinkFunctionForGeneratedCodeWebViewWidget() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UWebViewWidget, 654367290);
+	IMPLEMENT_CLASS(UWebViewWidget, 3354368628);
 	template<> WEBVIEW_API UClass* StaticClass<UWebViewWidget>()
 	{
 		return UWebViewWidget::StaticClass();

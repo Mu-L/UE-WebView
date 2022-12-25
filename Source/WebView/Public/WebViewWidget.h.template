@@ -13,7 +13,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType, Blueprintable)
 class WEBVIEW_API UWebViewWidget : public UWebBase
 {
 	GENERATED_UCLASS_BODY()
