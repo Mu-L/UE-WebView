@@ -574,6 +574,14 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		P_THIS->BindUObject(Z_Param_Name,Z_Param_Object,Z_Param_bIsPermanent);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UWebBase::execPopupURL)
+	{
+		P_GET_PROPERTY(FStrProperty,Z_Param_URL);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->PopupURL(Z_Param_URL);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UWebBase::execCallJsonStr)
 	{
 		P_GET_PROPERTY(FStrProperty,Z_Param_Function);
@@ -616,6 +624,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 			{ "ExecuteJavascript", &UWebBase::execExecuteJavascript },
 			{ "GetUrl", &UWebBase::execGetUrl },
 			{ "LoadURL", &UWebBase::execLoadURL },
+			{ "PopupURL", &UWebBase::execPopupURL },
 			{ "Reload", &UWebBase::execReload },
 			{ "ReopenRender", &UWebBase::execReopenRender },
 			{ "ShowAddress", &UWebBase::execShowAddress },
@@ -854,6 +863,49 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UWebBase_LoadURL_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UWebBase_PopupURL_Statics
+	{
+		struct WebBase_eventPopupURL_Parms
+		{
+			FString URL;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_URL_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_URL;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_PopupURL_Statics::NewProp_URL_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UWebBase_PopupURL_Statics::NewProp_URL = { "URL", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(WebBase_eventPopupURL_Parms, URL), METADATA_PARAMS(Z_Construct_UFunction_UWebBase_PopupURL_Statics::NewProp_URL_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_PopupURL_Statics::NewProp_URL_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UWebBase_PopupURL_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWebBase_PopupURL_Statics::NewProp_URL,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_PopupURL_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Web View" },
+		{ "Comment", "/**\n\x09* open external browser\n\x09* @param URL\n\x09*/" },
+		{ "ModuleRelativePath", "Public/WebBase.h" },
+		{ "ToolTip", "open external browser\n@param URL" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_PopupURL_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "PopupURL", nullptr, nullptr, sizeof(Z_Construct_UFunction_UWebBase_PopupURL_Statics::WebBase_eventPopupURL_Parms), Z_Construct_UFunction_UWebBase_PopupURL_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_PopupURL_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_PopupURL_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_PopupURL_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UWebBase_PopupURL()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UWebBase_PopupURL_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1227,6 +1279,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnPreReBuild__DelegateSignature, "OnPreReBuild__DelegateSignature" }, // 2552426169
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature, "OnStateLoad__DelegateSignature" }, // 1429993099
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnUrlChanged__DelegateSignature, "OnUrlChanged__DelegateSignature" }, // 877326609
+		{ &Z_Construct_UFunction_UWebBase_PopupURL, "PopupURL" }, // 3107148950
 		{ &Z_Construct_UFunction_UWebBase_Reload, "Reload" }, // 3776648100
 		{ &Z_Construct_UFunction_UWebBase_ReopenRender, "ReopenRender" }, // 2004851304
 		{ &Z_Construct_UFunction_UWebBase_ShowAddress, "ShowAddress" }, // 23700224
@@ -1526,9 +1579,9 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UHtmlHeaders, UHtmlHeaders::StaticClass, TEXT("UHtmlHeaders"), &Z_Registration_Info_UClass_UHtmlHeaders, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHtmlHeaders), 2108261102U) },
-		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 4101693532U) },
+		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 3027349276U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_12366711(TEXT("/Script/WebView"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_1821274915(TEXT("/Script/WebView"),
 		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

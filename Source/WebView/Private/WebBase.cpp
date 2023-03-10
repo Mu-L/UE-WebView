@@ -49,7 +49,7 @@ void UHtmlHeaders::Replace(const FString& Key, const FString& Value) {
 UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 	, styleText(FTextBlockStyle::GetDefault())
-	, ColorBackground(255, 255, 255, 255)
+	, ColorBackground(255, 255, 255, 254)
 	, _Pixel(8, 4)
 	, _Zoom(1.0f)
 	//, jsWindow(TEXT("ue"))
@@ -80,7 +80,7 @@ void UWebBase::ExecuteJavascript(const FString& ScriptText)
 
 void UWebBase::CallJsonStr(const FString& Function, const FString& Data)
 {
-	if (!CefCoreWidget.IsValid() || Function.IsEmpty() || Function == TEXT("synccallue"))
+	if (!CefCoreWidget.IsValid() || Function.IsEmpty())
 		return;
 	FString TextScript;
 	if (Data.Len() >= 2) {
@@ -92,6 +92,11 @@ void UWebBase::CallJsonStr(const FString& Function, const FString& Data)
 			*jsWindow, *Function);
 	}
 	CefCoreWidget->ExecuteJavascript(TextScript);
+}
+
+void UWebBase::PopupURL(const FString& URL) {
+	if (!CefCoreWidget.IsValid())return;
+	CefCoreWidget->PopupURL(URL);
 }
 
 FString UWebBase::GetUrl() const {

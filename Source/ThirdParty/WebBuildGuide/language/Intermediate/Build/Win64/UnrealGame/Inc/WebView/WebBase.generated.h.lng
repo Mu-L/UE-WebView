@@ -206,6 +206,7 @@ static inline void FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelega
 	DECLARE_FUNCTION(execGetUrl); \
 	DECLARE_FUNCTION(execUnbindUObject); \
 	DECLARE_FUNCTION(execBindUObject); \
+	DECLARE_FUNCTION(execPopupURL); \
 	DECLARE_FUNCTION(execCallJsonStr); \
 	DECLARE_FUNCTION(execReload); \
 	DECLARE_FUNCTION(execLoadURL); \
@@ -222,6 +223,7 @@ static inline void FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelega
 	DECLARE_FUNCTION(execGetUrl); \
 	DECLARE_FUNCTION(execUnbindUObject); \
 	DECLARE_FUNCTION(execBindUObject); \
+	DECLARE_FUNCTION(execPopupURL); \
 	DECLARE_FUNCTION(execCallJsonStr); \
 	DECLARE_FUNCTION(execReload); \
 	DECLARE_FUNCTION(execLoadURL); \

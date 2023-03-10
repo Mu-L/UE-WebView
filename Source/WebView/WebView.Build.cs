@@ -18,7 +18,7 @@ namespace UnrealBuildTool.Rules
             if (isUsingJson)
             {// use for JsonLibaray
                 PublicDefinitions.Add("JSON_LIB"); //添加 自定义的宏 或者 引擎的宏
-                PublicDependencyModuleNames.Add("JsonLibrary");
+                PublicDependencyModuleNames.Add("JsonUE");
             }
             string RootPath = ModuleDirectory;
             string subfix = ".template";
@@ -51,11 +51,14 @@ namespace UnrealBuildTool.Rules
                     "Slate",
                     "SlateCore",
                     "UMG",
-                    "Engine"
+                    "Engine",
+                    "WebBuildGuide"
                 }
             );
 
-            if (Target.Platform == UnrealTargetPlatform.Win64|| Target.Platform == UnrealTargetPlatform.Linux)
+            if (Target.Platform == UnrealTargetPlatform.Win64
+                || Target.Platform == UnrealTargetPlatform.Linux
+                || Target.Platform == UnrealTargetPlatform.Mac)
             {//
                 PublicDependencyModuleNames.Add("CefBase"); 
                 PublicDependencyModuleNames.Add("CefBrowser"); 
