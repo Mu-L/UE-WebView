@@ -113,6 +113,8 @@ public:
 	bool CanGoForward() const;
 	/** Navigate backwards. */
 	void GoBack();
+
+	void PopupURL(const FString& URL);
 	/**
 	 * Gets the currently loaded URL.
 	 * @return The URL, or empty string if no document is loaded.
