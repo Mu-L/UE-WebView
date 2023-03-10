@@ -8,6 +8,9 @@
 #include "Async/TaskGraphInterfaces.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Misc/ConfigCacheIni.h"
+#ifdef JSON_LIB
+#include "JsonUEFunLib.h"
+#endif
 
 #if WITH_EDITOR
 #include "Materials/MaterialInterface.h"
@@ -31,33 +34,29 @@ UWebViewWidget::UWebViewWidget(const FObjectInitializer& ObjectInitializer)
 }
 
 bool UWebViewWidget::Asyn(const FString& Name, const FString& Data, const FString& Callback) {
-	if (UWebBase::Asyn(Name, Data, Callback))return true;
 #ifdef JSON_LIB
 	if (OnJsEvent.IsBound()) {
-		OnJsEvent.Broadcast(Name, FJsonLibraryValue::Parse(Data), Callback);
+		UJsonUEFunLib::FOnParseAsyncS OnParseAsync;
+		OnParseAsync.BindUObject(this,&UWebViewWidget::ParseAsncHand);
+		UJsonUEFunLib::ParseAsyn(Name,Data, Callback, OnParseAsync);
 		return true;
 	}
 #endif
+	if (UWebBase::Asyn(Name, Data, Callback))return true;
 	return false;
 }
 
 /////////////////////////////////////////////////////
 #ifdef JSON_LIB
-void UWebViewWidget::Call(const FString& Function, const FJsonLibraryValue& Data)
+void UWebViewWidget::Call(const FString& Function, const UJsonUE* Json)
 {
-	if (!CefCoreWidget.IsValid() || Function.IsEmpty() || Function == TEXT("synccallue"))
-		return;
-	FString ScriptText;
-	if (Data.GetType() != EJsonLibraryType::Invalid) {
-		ScriptText = FString::Printf(TEXT("%s.interface[%s](%s)"),
-			*jsWindow, *FJsonLibraryValue(Function).Stringify(),
-			*Data.Stringify());
-	}
-	else {
-		ScriptText = FString::Printf(TEXT("%s.interface[%s]()"),
-			*jsWindow, *FJsonLibraryValue(Function).Stringify());
-	}
-	CefCoreWidget->ExecuteJavascript(ScriptText);
+	if (Json == nullptr)return;
+	CallJsonStr(Function, Json->ToString());
 }
+
+void UWebViewWidget::ParseAsncHand(const FString& Name,UJsonUE* Json, const FString& Callback) {
+	OnJsEvent.Broadcast(Name,Json, Callback);
+}
+
 #endif
 #undef LOCTEXT_NAMESPACE
