@@ -157,6 +157,12 @@ public:
 	void CallJsonStr(const FString& Function, const FString& Data);
 
 	/**
+	* open external browser
+	* @param URL
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void PopupURL(const FString& URL);
+	/**
 	 * Expose a UObject instance to the browser runtime.
 	 * Properties and Functions will be accessible from JavaScript side.
 	 * As all communication with the rendering procesis asynchronous, return values (both for properties and function results) are wrapped into JS Future objects.
@@ -232,6 +238,8 @@ public:
 	virtual bool Asyn(const FString& Name, const FString& Data, const FString& Callback);
 	//
 	virtual void SetVisibility(ESlateVisibility InVisibility) override;
+
+	//virtual void TickRenderResource() override;
 protected:
 	virtual TSharedRef<SWidget> RebuildWidget() override;
 	void HandleOnLoadState(const int state);

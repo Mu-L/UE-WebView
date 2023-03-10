@@ -19,6 +19,7 @@ public class CefBrowser : ModuleRules
 		if (bUsePrecompiled) {
 			PrecompileForTargets = PrecompileTargetsType.None;
 		}
+		bool bOpenCV = false;
 		//PublicDefinitions.Add("WRAPPING_CEF_SHARED=1"); //
 		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 		string privatep = Path.Combine(ModuleDirectory, "Private");
@@ -37,7 +38,8 @@ public class CefBrowser : ModuleRules
 			}
 			);
 
-		PrivateDependencyModuleNames.AddRange(
+		AddEngineThirdPartyPrivateStaticDependencies(Target, "DX12");
+		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
@@ -50,9 +52,38 @@ public class CefBrowser : ModuleRules
 				"MediaUtils",
 				"CefBase",
 				"cefForUe",
-				"OpenSSL"
+				"OpenSSL",
+				"ImageWrapper",
+				"D3D11RHI",
+				"D3D12RHI"
 			}
 		);
+		// WITH_OPENCV
+		if (bOpenCV == true)
+		{
+			PrivateDependencyModuleNames.AddRange(
+				new string[]
+				{
+				"OpenCV",
+				"OpenCVHelper"
+				}
+			);
+		}
+
+		if (Target.Type != TargetType.Server)
+		{
+			PrivateIncludePathModuleNames.AddRange(new string[]
+			{
+				"SlateRHIRenderer",
+			});
+
+			DynamicallyLoadedModuleNames.AddRange(new string[]
+			{
+				//"ImageWrapper",
+				"SlateRHIRenderer",
+			});
+		}
+
 		PrivateIncludePaths.AddRange(
 			new string[] {
 				// ... add other private include paths required here ...
@@ -85,24 +116,38 @@ public class CefBrowser : ModuleRules
 		// We need this one on Android for URL decoding
 		//PrivateDependencyModuleNames.Add("HTTP");
 
+
+		if (Target.Platform == UnrealTargetPlatform.Win64)
+		{
+			PublicSystemLibraries.AddRange(new string[]
+			{
+				"comsuppw.lib",
+				"dxgi.lib",
+				"d3d11.lib",
+				"d3d12.lib"
+			});
+		}
+
+
 		DynamicallyLoadedModuleNames.AddRange(
 			new string[]
 			{
+				"SlateRHIRenderer",
 				// ... add any modules that your module loads dynamically here ...
 			}
 			);
 		//Console.WriteLine("===============================");
-		string sourcePath = Path.Combine(ModuleDirectory, "..");
-		string pluginPath = Path.Combine(sourcePath, "..");
-		CopyDir(".lng", Path.Combine(sourcePath, "ThirdParty", "WebBuildGuide", "language"), pluginPath);
-		string projFile = "" + Target.ProjectFile;
-		if (Target.Version.MajorVersion >= 5) {
-			CopyCefBrowser(pluginPath, projFile, "UnrealGame");
-		}
-		else {
-			CopyCefBrowser(pluginPath, projFile, "UE4");
-		}
-		CheckLicense(Path.GetDirectoryName(projFile));
+		//string sourcePath = Path.Combine(ModuleDirectory, "..");
+		//string pluginPath = Path.Combine(sourcePath, "..");
+		//CopyDir(".lng", Path.Combine(sourcePath, "ThirdParty", "WebBuildGuide", "language"), pluginPath);
+		//string projFile = "" + Target.ProjectFile;
+		//if (Target.Version.MajorVersion >= 5) {
+		//	CopyCefBrowser(pluginPath, projFile, "UnrealGame");
+		//}
+		//else {
+		//	CopyCefBrowser(pluginPath, projFile, "UE4");
+		//}
+		//CheckLicense(Path.GetDirectoryName(projFile));
 	}
 
 

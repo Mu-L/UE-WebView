@@ -1,7 +1,0 @@
-{
-  "BuildId": "23058290",
-  "Modules": {
-    "CefBrowser": "UnrealEditor-CefBrowser.dll",
-    "WebView": "UnrealEditor-WebView.dll"
-  }
-}
