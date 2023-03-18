@@ -35,7 +35,11 @@
   ],
   "Plugins": [
     {
-      "Name": "JsonLibrary",
+      "Name": "JsonUE",
+      "Enabled": false
+    },
+    {
+      "Name": "OpenCV",
       "Enabled": false
     },
     {
