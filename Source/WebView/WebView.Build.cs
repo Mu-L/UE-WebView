@@ -1,12 +1,14 @@
 // Copyright aSurgingRiver, Inc. All Rights Reserved.
 
+using UnrealBuildTool;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.IO.Compression;
 using System.Text;
-
+//using EpicGames.Core;
+using Tools.DotNETCommon;
 
 namespace UnrealBuildTool.Rules
 {
@@ -15,11 +17,17 @@ namespace UnrealBuildTool.Rules
         public WebView(ReadOnlyTargetRules Target) : base(Target)
         {
             bool isUsingJson = false;
-            if (isUsingJson)
+            if (isDependPlugin("JsonLibrary"))
             {// use for JsonLibaray
+                isUsingJson = true;
                 PublicDefinitions.Add("JSON_LIB"); //添加 自定义的宏 或者 引擎的宏
-                PublicDependencyModuleNames.Add("JsonUE");
+                PublicDependencyModuleNames.Add("JsonLibrary");
             }
+            //Path.Combine(DirectoryReference::MakeRemote(PluginDirectory),"..");
+            //Plugins::ReadPluginsFromDirectory();
+            //if (PluginDirectory!="") {
+            //    Console.WriteLine("==================="+ PluginDirectory);
+            //}
             string RootPath = ModuleDirectory;
             string subfix = ".template";
             foreach (string filePath in Directory.EnumerateFiles(RootPath, "*"+subfix, SearchOption.AllDirectories))
@@ -80,6 +88,18 @@ namespace UnrealBuildTool.Rules
                     }
                 );
             }
+        }
+        bool isDependPlugin(string plugin)
+        {
+            bool hasDep = false;
+            FileReference pluginFile = new FileReference(Path.Combine(PluginDirectory, "WebView.uplugin"));
+            PluginInfo Plugin = new PluginInfo(pluginFile, PluginType.Project);
+            foreach (PluginReferenceDescriptor desc in Plugin.Descriptor.Plugins) {
+                if (desc.Name != plugin) continue;
+                hasDep = desc.bEnabled;
+                break;
+            }
+            return hasDep;
         }
 
     }
