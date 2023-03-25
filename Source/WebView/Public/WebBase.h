@@ -120,12 +120,13 @@ public:
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Download Tip", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
 		bool  downloadTip = true;
 	/** set web page rendering pixel size, 8*4 default :The browser calculates the size itself  */
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Web Pixel", UIMin = 4, UIMax = 8192), Category = "Web View|Screen")
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Web Pixel", UIMin = 4, UIMax = 15360), Category = "Web View|Screen")
 	FIntPoint _Pixel;
 	/**  Page Zoom Level. The value is consistent with that of chrome */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Zoom Level", ClampMin = 0.0, ClampMax = 5.0), Category = "Web View|Screen")
 	float _Zoom;
-
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Sync Parse Json", UIMin = 0, UIMax = 1), Category = "Web View")
+	bool  syncJson = true;
 protected:
 	FString jsWindow;// for javescrit 
 	TSharedPtr<class SCefBrowser> CefCoreWidget; // for slate core widget
@@ -160,8 +161,8 @@ public:
 	* open external browser
 	* @param URL
 	*/
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void PopupURL(const FString& URL);
+	//UFUNCTION(BlueprintCallable, Category = "Web View")
+	//void PopupURL(const FString& URL);
 	/**
 	 * Expose a UObject instance to the browser runtime.
 	 * Properties and Functions will be accessible from JavaScript side.
