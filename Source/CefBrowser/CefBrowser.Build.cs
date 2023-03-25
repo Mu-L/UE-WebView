@@ -6,6 +6,9 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.IO.Compression;
+using EpicGames.Core;
+//using Tools.DotNETCommon;
+
 
 public class CefBrowser : ModuleRules
 {
@@ -19,7 +22,16 @@ public class CefBrowser : ModuleRules
 		if (bUsePrecompiled) {
 			PrecompileForTargets = PrecompileTargetsType.None;
 		}
-		bool bOpenCV = false;
+		else {
+			if (isDependPlugin("OpenCV")) {// use for test
+				PrivateDependencyModuleNames.AddRange(
+					new string[] {
+						"OpenCV",
+						"OpenCVHelper"
+					}
+				);
+			}
+		}
 		//PublicDefinitions.Add("WRAPPING_CEF_SHARED=1"); //
 		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 		string privatep = Path.Combine(ModuleDirectory, "Private");
@@ -32,16 +44,12 @@ public class CefBrowser : ModuleRules
 		{
 			PrivateDependencyModuleNames.Add("SDL2");
 		}
-		PublicIncludePaths.AddRange(
-			new string[] {
-				// ... add public include paths required here ...
-			}
-			);
 
-		AddEngineThirdPartyPrivateStaticDependencies(Target, "DX12");
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
+				"Slate",
+				"SlateCore",
 				"Core",
 				"CoreUObject",
 				"ApplicationCore",
@@ -53,25 +61,12 @@ public class CefBrowser : ModuleRules
 				"CefBase",
 				"cefForUe",
 				"OpenSSL",
-				"ImageWrapper",
-				"D3D11RHI",
-				"D3D12RHI"
+				"ImageWrapper"
 			}
 		);
-		// WITH_OPENCV
-		if (bOpenCV == true)
+		if (Target.Type != TargetType.Server && Target.Platform == UnrealTargetPlatform.Win64)
 		{
-			PrivateDependencyModuleNames.AddRange(
-				new string[]
-				{
-				"OpenCV",
-				"OpenCVHelper"
-				}
-			);
-		}
-
-		if (Target.Type != TargetType.Server)
-		{
+			AddEngineThirdPartyPrivateStaticDependencies(Target, "DX12");
 			PrivateIncludePathModuleNames.AddRange(new string[]
 			{
 				"SlateRHIRenderer",
@@ -79,9 +74,23 @@ public class CefBrowser : ModuleRules
 
 			DynamicallyLoadedModuleNames.AddRange(new string[]
 			{
-				//"ImageWrapper",
 				"SlateRHIRenderer",
 			});
+			PublicSystemLibraries.AddRange(new string[]
+			{
+				"comsuppw.lib",
+				"dxgi.lib",
+				"d3d11.lib",
+				"d3d12.lib"
+			});
+			PublicDependencyModuleNames.AddRange(
+				new string[]
+				{
+				"D3D11RHI",
+				"D3D12RHI"
+				}
+			);
+
 		}
 
 		PrivateIncludePaths.AddRange(
@@ -90,15 +99,6 @@ public class CefBrowser : ModuleRules
 			}
 			);
 
-
-		PublicDependencyModuleNames.AddRange(
-			new string[]
-			{
-				"Slate",
-				"SlateCore",
-				// ... add other public dependencies that you statically link with here ...
-			}
-			);
 
 
 		PrivateDependencyModuleNames.AddRange(
@@ -113,41 +113,6 @@ public class CefBrowser : ModuleRules
 			}
 			);
 
-		// We need this one on Android for URL decoding
-		//PrivateDependencyModuleNames.Add("HTTP");
-
-
-		if (Target.Platform == UnrealTargetPlatform.Win64)
-		{
-			PublicSystemLibraries.AddRange(new string[]
-			{
-				"comsuppw.lib",
-				"dxgi.lib",
-				"d3d11.lib",
-				"d3d12.lib"
-			});
-		}
-
-
-		DynamicallyLoadedModuleNames.AddRange(
-			new string[]
-			{
-				"SlateRHIRenderer",
-				// ... add any modules that your module loads dynamically here ...
-			}
-			);
-		//Console.WriteLine("===============================");
-		//string sourcePath = Path.Combine(ModuleDirectory, "..");
-		//string pluginPath = Path.Combine(sourcePath, "..");
-		//CopyDir(".lng", Path.Combine(sourcePath, "ThirdParty", "WebBuildGuide", "language"), pluginPath);
-		//string projFile = "" + Target.ProjectFile;
-		//if (Target.Version.MajorVersion >= 5) {
-		//	CopyCefBrowser(pluginPath, projFile, "UnrealGame");
-		//}
-		//else {
-		//	CopyCefBrowser(pluginPath, projFile, "UE4");
-		//}
-		//CheckLicense(Path.GetDirectoryName(projFile));
 	}
 
 
@@ -246,4 +211,18 @@ public class CefBrowser : ModuleRules
 		File.WriteAllText(GameCfg, content, Encoding.UTF8);
 		Console.WriteLine(GameCfg + " auto configure!");
 	}
+	bool isDependPlugin(string plugin)
+	{
+		bool hasDep = false;
+		FileReference pluginFile = new FileReference(Path.Combine(PluginDirectory, "WebView.uplugin"));
+		PluginInfo Plugin = new PluginInfo(pluginFile, PluginType.Project);
+		foreach (PluginReferenceDescriptor desc in Plugin.Descriptor.Plugins)
+		{
+			if (desc.Name != plugin) continue;
+			hasDep = desc.bEnabled;
+			break;
+		}
+		return hasDep;
+	}
+
 }

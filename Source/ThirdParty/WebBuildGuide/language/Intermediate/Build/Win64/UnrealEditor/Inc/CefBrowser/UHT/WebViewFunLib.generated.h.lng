@@ -18,12 +18,16 @@ struct FWebCookie;
 #define FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_WebViewFunLib_h_16_SPARSE_DATA
 #define FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_WebViewFunLib_h_16_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execPopupURL); \
+	DECLARE_FUNCTION(execEncodeURL); \
 	DECLARE_FUNCTION(execDeleteCookies); \
 	DECLARE_FUNCTION(execSetCookie);
 
 
 #define FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_WebViewFunLib_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execPopupURL); \
+	DECLARE_FUNCTION(execEncodeURL); \
 	DECLARE_FUNCTION(execDeleteCookies); \
 	DECLARE_FUNCTION(execSetCookie);
 

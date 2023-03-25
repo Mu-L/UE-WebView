@@ -8,9 +8,7 @@
 #include "Async/TaskGraphInterfaces.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Misc/ConfigCacheIni.h"
-#ifdef JSON_LIB
-#include "JsonUEFunLib.h"
-#endif
+
 
 #if WITH_EDITOR
 #include "Materials/MaterialInterface.h"
@@ -33,12 +31,22 @@ UWebViewWidget::UWebViewWidget(const FObjectInitializer& ObjectInitializer)
 {
 }
 
+
+
 bool UWebViewWidget::Asyn(const FString& Name, const FString& Data, const FString& Callback) {
 #ifdef JSON_LIB
 	if (OnJsEvent.IsBound()) {
-		UJsonUEFunLib::FOnParseAsyncS OnParseAsync;
-		OnParseAsync.BindUObject(this,&UWebViewWidget::ParseAsncHand);
-		UJsonUEFunLib::ParseAsyn(Name,Data, Callback, OnParseAsync);
+		if (syncJson) {
+			AsyncTask(ENamedThreads::AnyThread, [OnJsEvent= OnJsEvent, Name, Data, cback=Callback]() {
+				auto jsonObj = FJsonLibraryValue::Parse(Data);
+				AsyncTask(ENamedThreads::GameThread, [OnJsEvent, Name, jsonObj, cback]() {
+					OnJsEvent.Broadcast(Name, jsonObj, cback);
+					});
+				});
+		}
+		else {
+			OnJsEvent.Broadcast(Name, FJsonLibraryValue::Parse(Data), Callback);
+		}
 		return true;
 	}
 #endif
@@ -48,15 +56,33 @@ bool UWebViewWidget::Asyn(const FString& Name, const FString& Data, const FStrin
 
 /////////////////////////////////////////////////////
 #ifdef JSON_LIB
-void UWebViewWidget::Call(const FString& Function, const UJsonUE* Json)
+void UWebViewWidget::Call(const FString& Function, const FJsonLibraryValue& Data)
 {
-	if (Json == nullptr)return;
-	CallJsonStr(Function, Json->ToString());
+	//if (Json == nullptr)return;
+	CallJsonStr(Function, Data.Stringify());
 }
 
-void UWebViewWidget::ParseAsncHand(const FString& Name,UJsonUE* Json, const FString& Callback) {
+void UWebViewWidget::ParseAsncHand(const FString& Name, FJsonLibraryValue& Json, const FString& Callback) {
 	OnJsEvent.Broadcast(Name,Json, Callback);
 }
 
 #endif
+
+
+UJLParse::UJLParse(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+}
+
+void UJLParse::SyncParse(FString json) {
+#ifdef JSON_LIB
+	AsyncTask(ENamedThreads::AnyThread, [json, OnParse= OnParse]() {
+		auto jsonObj = FJsonLibraryValue::Parse(json);
+		AsyncTask(ENamedThreads::GameThread, [jsonObj, OnParse]() {
+			OnParse.Broadcast(jsonObj);
+			});
+		});
+#endif
+}
+
 #undef LOCTEXT_NAMESPACE
