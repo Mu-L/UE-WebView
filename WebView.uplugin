@@ -39,6 +39,10 @@
       "Enabled": false
     },
     {
+      "Name": "OpenCV",
+      "Enabled": false
+    },
+    {
       "Name": "CefBase",
       "Enabled": true
     }

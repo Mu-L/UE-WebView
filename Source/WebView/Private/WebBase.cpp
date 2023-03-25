@@ -94,11 +94,6 @@ void UWebBase::CallJsonStr(const FString& Function, const FString& Data)
 	CefCoreWidget->ExecuteJavascript(TextScript);
 }
 
-void UWebBase::PopupURL(const FString& URL) {
-	if (!CefCoreWidget.IsValid())return;
-	CefCoreWidget->PopupURL(URL);
-}
-
 FString UWebBase::GetUrl() const {
 	if (!CefCoreWidget.IsValid())return FString();
 	return CefCoreWidget->GetUrl();

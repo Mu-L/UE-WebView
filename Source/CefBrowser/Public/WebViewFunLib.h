@@ -26,4 +26,18 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	static bool DeleteCookies(const FString& URL, const FString& CookieName);
+	/**
+	* encode url to %%%%
+	* @param URL : 
+	* @param use_plus : is true spaces will change to "+".
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	static FString EncodeURL(const FString& URL,const bool use_plus=false);
+
+	/**
+	* open external browser
+	* @param URL
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void PopupURL(const FString& URL);
 };
