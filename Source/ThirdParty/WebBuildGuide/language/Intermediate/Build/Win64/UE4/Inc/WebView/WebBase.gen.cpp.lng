@@ -589,6 +589,13 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		P_THIS->CallJsonStr(Z_Param_Function,Z_Param_Data);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UWebBase::execIsloaded)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->Isloaded();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UWebBase::execReload)
 	{
 		P_FINISH;
@@ -621,6 +628,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 			{ "CallJsonStr", &UWebBase::execCallJsonStr },
 			{ "ExecuteJavascript", &UWebBase::execExecuteJavascript },
 			{ "GetUrl", &UWebBase::execGetUrl },
+			{ "Isloaded", &UWebBase::execIsloaded },
 			{ "LoadURL", &UWebBase::execLoadURL },
 			{ "Reload", &UWebBase::execReload },
 			{ "ReopenRender", &UWebBase::execReopenRender },
@@ -732,7 +740,9 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		{ "AdvancedDisplay", "Data" },
 		{ "AutoCreateRefTerm", "Data" },
 		{ "Category", "Web View" },
+		{ "Comment", "/**\n\x09 * Call javascript function\n\x09 * @param Function ue.interface.func\n\x09 * @param Data {\"a\":1,\"b\":\"sdf\"}\n\x09 */" },
 		{ "ModuleRelativePath", "Public/WebBase.h" },
+		{ "ToolTip", "Call javascript function\n@param Function ue.interface.func\n@param Data {\"a\":1,\"b\":\"sdf\"}" },
 	};
 #endif
 	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_CallJsonStr_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "CallJsonStr", nullptr, nullptr, sizeof(WebBase_eventCallJsonStr_Parms), Z_Construct_UFunction_UWebBase_CallJsonStr_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_CallJsonStr_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_CallJsonStr_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_CallJsonStr_Statics::Function_MetaDataParams)) };
@@ -823,6 +833,46 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UWebBase_Isloaded_Statics
+	{
+		struct WebBase_eventIsloaded_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UWebBase_Isloaded_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((WebBase_eventIsloaded_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UWebBase_Isloaded_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(WebBase_eventIsloaded_Parms), &Z_Construct_UFunction_UWebBase_Isloaded_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UWebBase_Isloaded_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWebBase_Isloaded_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_Isloaded_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Web View" },
+		{ "Comment", "/**\n\x09 * check url is loaded succesed\n\x09 */" },
+		{ "ModuleRelativePath", "Public/WebBase.h" },
+		{ "ToolTip", "check url is loaded succesed" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_Isloaded_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "Isloaded", nullptr, nullptr, sizeof(WebBase_eventIsloaded_Parms), Z_Construct_UFunction_UWebBase_Isloaded_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_Isloaded_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_Isloaded_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_Isloaded_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UWebBase_Isloaded()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UWebBase_Isloaded_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UWebBase_LoadURL_Statics
 	{
 		struct WebBase_eventLoadURL_Parms
@@ -847,10 +897,10 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_LoadURL_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Web View" },
-		{ "Comment", "/**\n\x09 * Load the specified URL\n\x09 * @param NewURL New URL to load\n\x09 */" },
+		{ "Comment", "/**\n\x09 * Load the specified URL\n\x09 * @param NewURL New URL to load \n\x09 * @param PostData arg1=val1&arg2=val2\n\x09 */" },
 		{ "CPP_Default_PostData", "" },
 		{ "ModuleRelativePath", "Public/WebBase.h" },
-		{ "ToolTip", "Load the specified URL\n@param NewURL New URL to load" },
+		{ "ToolTip", "Load the specified URL\n@param NewURL New URL to load\n@param PostData arg1=val1&arg2=val2" },
 	};
 #endif
 	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_LoadURL_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "LoadURL", nullptr, nullptr, sizeof(WebBase_eventLoadURL_Parms), Z_Construct_UFunction_UWebBase_LoadURL_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_LoadURL_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_LoadURL_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_LoadURL_Statics::Function_MetaDataParams)) };
@@ -1067,9 +1117,9 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_WebPixel_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Web View" },
-		{ "Comment", "/**\n\x09* Set web page zoom level\n\x09* @ pixel.x : between 128 and 1024*8\n\x09* @ pixel.y : between 64 and 756*8\n\x09* when Pixel was set,then zoom invalid\n\x09*/" },
+		{ "Comment", "/*= FIntPoint(8,4)*/" },
 		{ "ModuleRelativePath", "Public/WebBase.h" },
-		{ "ToolTip", "Set web page zoom level\n@ pixel.x : between 128 and 1024*8\n@ pixel.y : between 64 and 756*8\nwhen Pixel was set,then zoom invalid" },
+		{ "ToolTip", "= FIntPoint(8,4)" },
 	};
 #endif
 	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_WebPixel_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "WebPixel", nullptr, nullptr, sizeof(WebBase_eventWebPixel_Parms), Z_Construct_UFunction_UWebBase_WebPixel_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_WebPixel_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x44820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_WebPixel_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_WebPixel_Statics::Function_MetaDataParams)) };
@@ -1102,10 +1152,10 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_ZoomLevel_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Web View" },
-		{ "Comment", "/**\n\x09* Set web page zoom level \n\x09* @ zoom : between -7.5 and 9.0\n\x09* when Pixel was set,then zoom invalid \n\x09*/" },
-		{ "CPP_Default_zoom", "0.000000" },
+		{ "Comment", "/**\n\x09* Set web page zoom level \n\x09* @param zoom : between 0.25 and 5 default is 1\n\x09* when Pixel was set,then zoom invalid \n\x09*/" },
+		{ "CPP_Default_zoom", "1.000000" },
 		{ "ModuleRelativePath", "Public/WebBase.h" },
-		{ "ToolTip", "Set web page zoom level\n@ zoom : between -7.5 and 9.0\nwhen Pixel was set,then zoom invalid" },
+		{ "ToolTip", "Set web page zoom level\n@param zoom : between 0.25 and 5 default is 1\nwhen Pixel was set,then zoom invalid" },
 	};
 #endif
 	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_ZoomLevel_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "ZoomLevel", nullptr, nullptr, sizeof(WebBase_eventZoomLevel_Parms), Z_Construct_UFunction_UWebBase_ZoomLevel_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_ZoomLevel_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x44020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_ZoomLevel_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_ZoomLevel_Statics::Function_MetaDataParams)) };
@@ -1226,10 +1276,11 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UWebBase_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UWebBase_BindUObject, "BindUObject" }, // 642745257
-		{ &Z_Construct_UFunction_UWebBase_CallJsonStr, "CallJsonStr" }, // 1562363459
+		{ &Z_Construct_UFunction_UWebBase_CallJsonStr, "CallJsonStr" }, // 621205201
 		{ &Z_Construct_UFunction_UWebBase_ExecuteJavascript, "ExecuteJavascript" }, // 3595362837
 		{ &Z_Construct_UFunction_UWebBase_GetUrl, "GetUrl" }, // 2666347889
-		{ &Z_Construct_UFunction_UWebBase_LoadURL, "LoadURL" }, // 3213649502
+		{ &Z_Construct_UFunction_UWebBase_Isloaded, "Isloaded" }, // 2789135846
+		{ &Z_Construct_UFunction_UWebBase_LoadURL, "LoadURL" }, // 4019798963
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnBeforePopup__DelegateSignature, "OnBeforePopup__DelegateSignature" }, // 2484736995
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnBeforeRequest__DelegateSignature, "OnBeforeRequest__DelegateSignature" }, // 3878904062
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnDownloadComplete__DelegateSignature, "OnDownloadComplete__DelegateSignature" }, // 2498107504
@@ -1242,8 +1293,8 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		{ &Z_Construct_UFunction_UWebBase_ShowAddress, "ShowAddress" }, // 3848631213
 		{ &Z_Construct_UFunction_UWebBase_ShowDevTools, "ShowDevTools" }, // 162056019
 		{ &Z_Construct_UFunction_UWebBase_UnbindUObject, "UnbindUObject" }, // 3186569527
-		{ &Z_Construct_UFunction_UWebBase_WebPixel, "WebPixel" }, // 1627466846
-		{ &Z_Construct_UFunction_UWebBase_ZoomLevel, "ZoomLevel" }, // 1650409597
+		{ &Z_Construct_UFunction_UWebBase_WebPixel, "WebPixel" }, // 2042428796
+		{ &Z_Construct_UFunction_UWebBase_ZoomLevel, "ZoomLevel" }, // 3079948544
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::Class_MetaDataParams[] = {
@@ -1541,7 +1592,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UWebBase, 2248722956);
+	IMPLEMENT_CLASS(UWebBase, 3479172401);
 	template<> WEBVIEW_API UClass* StaticClass<UWebBase>()
 	{
 		return UWebBase::StaticClass();

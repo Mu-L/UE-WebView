@@ -210,6 +210,7 @@ template<> WEBVIEW_API UClass* StaticClass<class UHtmlHeaders>();
 	DECLARE_FUNCTION(execUnbindUObject); \
 	DECLARE_FUNCTION(execBindUObject); \
 	DECLARE_FUNCTION(execCallJsonStr); \
+	DECLARE_FUNCTION(execIsloaded); \
 	DECLARE_FUNCTION(execReload); \
 	DECLARE_FUNCTION(execLoadURL); \
 	DECLARE_FUNCTION(execExecuteJavascript);
@@ -226,6 +227,7 @@ template<> WEBVIEW_API UClass* StaticClass<class UHtmlHeaders>();
 	DECLARE_FUNCTION(execUnbindUObject); \
 	DECLARE_FUNCTION(execBindUObject); \
 	DECLARE_FUNCTION(execCallJsonStr); \
+	DECLARE_FUNCTION(execIsloaded); \
 	DECLARE_FUNCTION(execReload); \
 	DECLARE_FUNCTION(execLoadURL); \
 	DECLARE_FUNCTION(execExecuteJavascript);

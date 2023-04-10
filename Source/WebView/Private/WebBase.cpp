@@ -105,6 +105,11 @@ void UWebBase::Reload() {
 	CefCoreWidget->Reload();
 }
 
+bool UWebBase::Isloaded() {
+	if (!CefCoreWidget.IsValid())return false;
+	return CefCoreWidget->Isloaded();
+}
+
 void UWebBase::ZoomLevel(float zoom) const {
 	if (!CefCoreWidget.IsValid())return;
 	CefCoreWidget->ZoomLevel(zoom);

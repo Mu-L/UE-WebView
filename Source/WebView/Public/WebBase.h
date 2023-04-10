@@ -142,7 +142,8 @@ public:
 
 	/**
 	 * Load the specified URL
-	 * @param NewURL New URL to load
+	 * @param NewURL New URL to load 
+	 * @param PostData arg1=val1&arg2=val2
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void LoadURL(FString NewURL, FString PostData=TEXT(""));
@@ -153,16 +154,21 @@ public:
 	/** Reload the current page. */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void Reload();
-	
+
+	/**
+	 * check url is loaded succesed
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	bool Isloaded();
+
+	/**
+	 * Call javascript function
+	 * @param Function ue.interface.func
+	 * @param Data {"a":1,"b":"sdf"}
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Data", AutoCreateRefTerm = "Data"))
 	void CallJsonStr(const FString& Function, const FString& Data);
 
-	/**
-	* open external browser
-	* @param URL
-	*/
-	//UFUNCTION(BlueprintCallable, Category = "Web View")
-	//void PopupURL(const FString& URL);
 	/**
 	 * Expose a UObject instance to the browser runtime.
 	 * Properties and Functions will be accessible from JavaScript side.
@@ -197,20 +203,19 @@ public:
 
 	/**
 	* Set web page zoom level 
-	* @ zoom : between -7.5 and 9.0
+	* @param zoom : between 0.25 and 5 default is 1
 	* when Pixel was set,then zoom invalid 
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void ZoomLevel(float zoom=0.0) const;
+	void ZoomLevel(float zoom=1.0) const;
 
 	/**
 	* Set web page zoom level
-	* @ pixel.x : between 128 and 1024*8
-	* @ pixel.y : between 64 and 756*8
+	* @param pixel : X between 8 and 15360, Y between 4 and 8640
 	* when Pixel was set,then zoom invalid
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void WebPixel(FIntPoint pixel) const;
+	void WebPixel(FIntPoint pixel /*= FIntPoint(8,4)*/) const;
 
 	/**
 	* Set web show address

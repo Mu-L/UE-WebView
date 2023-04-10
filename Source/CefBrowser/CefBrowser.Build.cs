@@ -6,9 +6,10 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.IO.Compression;
-//using EpicGames.Core;
-using Tools.DotNETCommon;
 
+// Tools.DotNETCommon ;
+// EpicGames.Core ;
+using Tools.DotNETCommon;
 
 public class CefBrowser : ModuleRules
 {
@@ -85,7 +86,8 @@ public class CefBrowser : ModuleRules
 			});
 			PublicDependencyModuleNames.AddRange(
 				new string[]
-				{
+                {
+                "DX12",
 				"D3D11RHI",
 				"D3D12RHI"
 				}
