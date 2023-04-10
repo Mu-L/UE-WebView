@@ -103,6 +103,8 @@ public:
 	void StopLoad();
 	/** Reload the current page. */
 	void Reload();
+	/** Reload the current page. */
+	bool Isloaded();
 	/** Whether the document is currently being loaded. */
 	bool IsLoading() const;
 	/** Execute javascript on the current window */
