@@ -7,6 +7,7 @@
 #include "Styling/SlateTypes.h"
 #include "Components/WidgetSwitcherSlot.h"
 #include "Containers/Map.h"
+#include "ImitateInput.h"
 #include "WebBase.generated.h"
 class UWebViewObject;
 
@@ -127,6 +128,10 @@ public:
 	float _Zoom;
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Sync Parse Json", UIMin = 0, UIMax = 1), Category = "Web View")
 	bool  syncJson = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View|Imitate")
+	FImitateInput  ImitateInput;
+
 protected:
 	FString jsWindow;// for javescrit 
 	TSharedPtr<class SCefBrowser> CefCoreWidget; // for slate core widget
@@ -168,6 +173,14 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Data", AutoCreateRefTerm = "Data"))
 	void CallJsonStr(const FString& Function, const FString& Data);
+
+	/**
+	 * Call javascript function
+	 * @param Function ue.interface.func
+	 * @param Params 
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Params", AutoCreateRefTerm = "Params"))
+	void CallParams(const FString& Function, const TArray<FString>& Params);
 
 	/**
 	 * Expose a UObject instance to the browser runtime.
