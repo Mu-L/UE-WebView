@@ -7,7 +7,6 @@
 #include "Styling/SlateTypes.h"
 #include "Components/WidgetSwitcherSlot.h"
 #include "Containers/Map.h"
-#include "ImitateInput.h"
 #include "WebBase.generated.h"
 class UWebViewObject;
 
@@ -126,11 +125,6 @@ public:
 	/**  Page Zoom Level. The value is consistent with that of chrome */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Zoom Level", ClampMin = 0.0, ClampMax = 5.0), Category = "Web View|Screen")
 	float _Zoom;
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Sync Parse Json", UIMin = 0, UIMax = 1), Category = "Web View")
-	bool  syncJson = true;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View|Imitate")
-	FImitateInput  ImitateInput;
 
 protected:
 	FString jsWindow;// for javescrit 
@@ -147,8 +141,7 @@ public:
 
 	/**
 	 * Load the specified URL
-	 * @param NewURL New URL to load 
-	 * @param PostData arg1=val1&arg2=val2
+	 * @param NewURL New URL to load
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void LoadURL(FString NewURL, FString PostData=TEXT(""));
@@ -159,29 +152,16 @@ public:
 	/** Reload the current page. */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void Reload();
-
-	/**
-	 * check url is loaded succesed
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	bool Isloaded();
-
-	/**
-	 * Call javascript function
-	 * @param Function ue.interface.func
-	 * @param Data {"a":1,"b":"sdf"}
-	 */
+	
 	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Data", AutoCreateRefTerm = "Data"))
 	void CallJsonStr(const FString& Function, const FString& Data);
 
 	/**
-	 * Call javascript function
-	 * @param Function ue.interface.func
-	 * @param Params 
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Params", AutoCreateRefTerm = "Params"))
-	void CallParams(const FString& Function, const TArray<FString>& Params);
-
+	* open external browser
+	* @param URL
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void PopupURL(const FString& URL);
 	/**
 	 * Expose a UObject instance to the browser runtime.
 	 * Properties and Functions will be accessible from JavaScript side.
@@ -216,19 +196,20 @@ public:
 
 	/**
 	* Set web page zoom level 
-	* @param zoom : between 0.25 and 5 default is 1
+	* @ zoom : between -7.5 and 9.0
 	* when Pixel was set,then zoom invalid 
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void ZoomLevel(float zoom=1.0) const;
+	void ZoomLevel(float zoom=0.0) const;
 
 	/**
 	* Set web page zoom level
-	* @param pixel : X between 8 and 15360, Y between 4 and 8640
+	* @ pixel.x : between 128 and 1024*8
+	* @ pixel.y : between 64 and 756*8
 	* when Pixel was set,then zoom invalid
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void WebPixel(FIntPoint pixel /*= FIntPoint(8,4)*/) const;
+	void WebPixel(FIntPoint pixel) const;
 
 	/**
 	* Set web show address

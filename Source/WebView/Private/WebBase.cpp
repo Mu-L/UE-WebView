@@ -94,18 +94,9 @@ void UWebBase::CallJsonStr(const FString& Function, const FString& Data)
 	CefCoreWidget->ExecuteJavascript(TextScript);
 }
 
-void UWebBase::CallParams(const FString& Function, const TArray<FString>& Params) {
-	if (!CefCoreWidget.IsValid() || Function.IsEmpty())
-		return;
-	FString strParam;
-	for (auto& parm: Params) {
-		if (!strParam.IsEmpty())strParam.Append(TEXT(","));
-		strParam.Append(TEXT("\'")).Append(parm).Append(TEXT("\'"));
-	}
-	FString TextScript;
-	TextScript = FString::Printf(TEXT("%s['%s'](%s)"),
-		*jsWindow, *Function, *strParam);
-	CefCoreWidget->ExecuteJavascript(TextScript);
+void UWebBase::PopupURL(const FString& URL) {
+	if (!CefCoreWidget.IsValid())return;
+	CefCoreWidget->PopupURL(URL);
 }
 
 FString UWebBase::GetUrl() const {
@@ -117,11 +108,6 @@ FString UWebBase::GetUrl() const {
 void UWebBase::Reload() {
 	if (!CefCoreWidget.IsValid())return ;
 	CefCoreWidget->Reload();
-}
-
-bool UWebBase::Isloaded() {
-	if (!CefCoreWidget.IsValid())return false;
-	return CefCoreWidget->Isloaded();
 }
 
 void UWebBase::ZoomLevel(float zoom) const {
@@ -165,7 +151,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 	if (OnPreReBuild.IsBound())OnPreReBuild.Broadcast();
 	CefCoreWidget = SNew(SCefBrowser)
 		.ShowAddressBar(addressShow)
-		//.InitialURL(urlInitial)
+		.InitialURL(urlInitial)
 		.BackgroundColor(ColorBackground)
 		.ShowControls(controlShow)
 		.RightKeyPopup(RightKeyPopup)
@@ -177,7 +163,6 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.Pixel(_Pixel)
 		.zoom(_Zoom)
 		.downloadTip(downloadTip)
-		.ImitateInput(ImitateInput)
 		//.webCursor(webCursor)
 		.Visibility(EVisibility::SelfHitTestInvisible)
 		.OnUrlChanged_UObject(this, &UWebBase::HandleOnUrlChanged)
@@ -190,7 +175,6 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		_ViewObject->SetUMG(this);
 		BindUObject("$receive", _ViewObject);
 	}
-	CefCoreWidget->LoadURL(urlInitial);
 	return CefCoreWidget.ToSharedRef();
 }
 

@@ -1,0 +1,7 @@
+{
+  "BuildId": "d09c4af3-c1dd-4cfc-91d4-3fa47bf378da",
+  "Modules": {
+    "CefBrowser": "libUE4Editor-CefBrowser.so",
+    "WebView": "libUE4Editor-WebView.so"
+  }
+}
