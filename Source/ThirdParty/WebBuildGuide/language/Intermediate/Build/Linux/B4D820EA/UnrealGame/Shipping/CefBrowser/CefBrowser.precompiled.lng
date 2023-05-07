@@ -1,6 +1,5 @@
 {
 	"OutputFiles": [
-		"Module.CefBrowser.cpp.o",
-		"Module.CefBrowser.gen.cpp.o"
+		"Module.CefBrowser.cpp.o"
 	]
 }
