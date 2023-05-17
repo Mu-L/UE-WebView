@@ -7,19 +7,33 @@ using System.Text;
 using System.Collections.Generic;
 using System.IO.Compression;
 
+// Tools.DotNETCommon ;
+// EpicGames.Core ;
+using EpicGames.Core;
+
 public class CefBrowser : ModuleRules
 {
 	public CefBrowser(ReadOnlyTargetRules Target) : base(Target)
 	{
 		//OptimizeCode = CodeOptimization.Never;
 		//Type = ModuleType.CPlusPlus;
+		//CppStandard = CppStandardVersion.Latest;
 		//bPrecompile = false;
 		bEnableExceptions = true;
 		bUsePrecompiled = !bPrecompile;
 		if (bUsePrecompiled) {
 			PrecompileForTargets = PrecompileTargetsType.None;
 		}
-		bool bOpenCV = false;
+		else {
+			if (isDependPlugin("OpenCV")) {// use for test
+				PrivateDependencyModuleNames.AddRange(
+					new string[] {
+						"OpenCV",
+						"OpenCVHelper"
+					}
+				);
+			}
+		}
 		//PublicDefinitions.Add("WRAPPING_CEF_SHARED=1"); //
 		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 		string privatep = Path.Combine(ModuleDirectory, "Private");
@@ -52,17 +66,6 @@ public class CefBrowser : ModuleRules
 				"ImageWrapper"
 			}
 		);
-		// WITH_OPENCV
-		if (bOpenCV == true) {
-			PrivateDependencyModuleNames.AddRange(
-				new string[]
-				{
-				"OpenCV",
-				"OpenCVHelper"
-				}
-			);
-		}
-
 		if (Target.Type != TargetType.Server && Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			AddEngineThirdPartyPrivateStaticDependencies(Target, "DX12");
@@ -84,7 +87,8 @@ public class CefBrowser : ModuleRules
 			});
 			PublicDependencyModuleNames.AddRange(
 				new string[]
-				{
+                {
+                "DX12",
 				"D3D11RHI",
 				"D3D12RHI"
 				}
@@ -210,4 +214,18 @@ public class CefBrowser : ModuleRules
 		File.WriteAllText(GameCfg, content, Encoding.UTF8);
 		Console.WriteLine(GameCfg + " auto configure!");
 	}
+	bool isDependPlugin(string plugin)
+	{
+		bool hasDep = false;
+		FileReference pluginFile = new FileReference(Path.Combine(PluginDirectory, "WebView.uplugin"));
+		PluginInfo Plugin = new PluginInfo(pluginFile, PluginType.Project);
+		foreach (PluginReferenceDescriptor desc in Plugin.Descriptor.Plugins)
+		{
+			if (desc.Name != plugin) continue;
+			hasDep = desc.bEnabled;
+			break;
+		}
+		return hasDep;
+	}
+
 }

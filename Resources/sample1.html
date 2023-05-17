@@ -10,36 +10,47 @@
     <p id="ssStr0">0000</p>
     <p id="ue4Str">strue4Str</p>
     <div id="logo"></div>
-	<button id="button" >Click Me!</button>
+	  <button id="btn_json" >json call </button>
+	  <button id="btn_obj" >object call </button>
     <input id="volumeSlider" type="range" min="0.01" max="1" step="0.01" />	
 </body>
 <script>
     // response function from ue call
-    ue.interface.jsfunc = function(content){
-    	alert('jsfunc');
+    ue.interface.jsfunc = function(jsonObject){
+    	console.log('jsonObject');
+    };
+    ue.interface.multiparams = function(paramStr1,paramStr1){
+    	console.log(paramStr1+'==='+paramStr1);
     };
     var total = 0;
     var response=0;
-    
-var button=document.getElementById('button');
-  button.setAttribute("onclick","playGame()");
+  
+  var btn_json = document.getElementById('btn_json');
+  btn_json.setAttribute("onclick","JsonCall()");
+  var btn_obj = document.getElementById('btn_obj');
+  btn_obj.setAttribute("onclick","ObjCall()");
+  
+  
 		
-function playGame(){
+function JsonCall(){
 		//var url = 'rtsp://113.201.104.35:9090/dss/monitor/param?cameraid=1000054%247&substream=1' ;
 		//alert('qweqwe');
 		
 		//for (var i=0; i<1000; i++){
 		    total++;
             ue4("videoUrl",{"url":"www.baidu.com","total":total},
-            function(rv){
+            function(jsonObject){
             	//alert(rv);
             	response = response+1;
-            	console.log("succed "+JSON.stringify(rv)+" "+response);
+            	console.log("succed "+JSON.stringify(jsonObject)+" "+response);
             	}
             );
 		//}
 }
 
+function ObjCall(){
+		ue.bpbind.forjs('js to bp')
+}
 </script>
 
 </html>
