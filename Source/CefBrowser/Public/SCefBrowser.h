@@ -8,6 +8,7 @@
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Framework/SlateDelegates.h"
+#include "ImitateInput.h"
 #include "Styling/SlateTypes.h"
 
 
@@ -58,6 +59,8 @@ public:
 		/** Desired size of the web browser viewport. */
 		SLATE_ARGUMENT(FVector2D, ViewportSize)
 		/** Desired size of the web browser viewport. */
+		SLATE_ARGUMENT(FImitateInput, ImitateInput)
+		/** Desired size of the web browser viewport. */
 		SLATE_ARGUMENT(bool, SwitchInputMethod)
 		/** allow mouse transcparency webpage */
 		SLATE_ARGUMENT(bool, EnableMouseTransparency)
@@ -89,6 +92,7 @@ public:
 		* @param NewURL New URL to load.
 		*/
 	void LoadURL(FString NewURL, FString PostData = FString());
+
 	/**
 		* reopen a new render to replace old render.
 		* @param NewURL New URL to load.
@@ -103,6 +107,8 @@ public:
 	void StopLoad();
 	/** Reload the current page. */
 	void Reload();
+	/** Reload the current page. */
+	bool Isloaded();
 	/** Whether the document is currently being loaded. */
 	bool IsLoading() const;
 	/** Execute javascript on the current window */
@@ -149,6 +155,8 @@ public:
 	void StopRender(bool bVisibility);
 	//
 	void ShowDevTools();
+	//
+	void KeyboardMode(WebView_Keyboard_Mode);
 public:
 	/** Default constructor. */
 	SCefBrowser();
