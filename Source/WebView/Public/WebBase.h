@@ -7,6 +7,7 @@
 #include "Styling/SlateTypes.h"
 #include "Components/WidgetSwitcherSlot.h"
 #include "Containers/Map.h"
+#include "ImitateInput.h"
 #include "WebBase.generated.h"
 class UWebViewObject;
 
@@ -93,8 +94,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Initial URL"), Category = "Web View")
 		FString urlInitial;
 	/** Configure webpage  mouse is transparency */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Enable Transparency"), Category = "Web View")
-		bool bEnableTransparency = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Enable Mouse"), Category = "Web View|Transparency")
+		bool bEnableMouseTransparency = true;
+	/** Configure webpage  mouse is transparency */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Keyborad Mode"), Category = "Web View|Transparency")
+		WebView_Keyboard_Mode eKeyboradModeTransparency ;
 	/** Control and Editor show text style  */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Text Style", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
 		FTextBlockStyle  styleText;
@@ -125,6 +129,11 @@ public:
 	/**  Page Zoom Level. The value is consistent with that of chrome */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Zoom Level", ClampMin = 0.0, ClampMax = 5.0), Category = "Web View|Screen")
 	float _Zoom;
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Sync Parse Json", UIMin = 0, UIMax = 1), Category = "Web View")
+	bool  syncJson = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View|Imitate")
+	FImitateInput  ImitateInput;
 
 protected:
 	FString jsWindow;// for javescrit 
@@ -141,7 +150,8 @@ public:
 
 	/**
 	 * Load the specified URL
-	 * @param NewURL New URL to load
+	 * @param NewURL New URL to load 
+	 * @param PostData arg1=val1&arg2=val2
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void LoadURL(FString NewURL, FString PostData=TEXT(""));
@@ -152,16 +162,29 @@ public:
 	/** Reload the current page. */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void Reload();
-	
+
+	/**
+	 * check url is loaded succesed
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	bool Isloaded();
+
+	/**
+	 * Call javascript function
+	 * @param Function ue.interface.func
+	 * @param Data {"a":1,"b":"sdf"}
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Data", AutoCreateRefTerm = "Data"))
 	void CallJsonStr(const FString& Function, const FString& Data);
 
 	/**
-	* open external browser
-	* @param URL
-	*/
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void PopupURL(const FString& URL);
+	 * Call javascript function
+	 * @param Function ue.interface.func
+	 * @param Params 
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "Params", AutoCreateRefTerm = "Params"))
+	void CallParams(const FString& Function, const TArray<FString>& Params);
+
 	/**
 	 * Expose a UObject instance to the browser runtime.
 	 * Properties and Functions will be accessible from JavaScript side.
@@ -196,20 +219,19 @@ public:
 
 	/**
 	* Set web page zoom level 
-	* @ zoom : between -7.5 and 9.0
+	* @param zoom : between 0.25 and 5 default is 1
 	* when Pixel was set,then zoom invalid 
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void ZoomLevel(float zoom=0.0) const;
+	void ZoomLevel(float zoom=1.0) const;
 
 	/**
 	* Set web page zoom level
-	* @ pixel.x : between 128 and 1024*8
-	* @ pixel.y : between 64 and 756*8
+	* @param pixel : X between 8 and 15360, Y between 4 and 8640
 	* when Pixel was set,then zoom invalid
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void WebPixel(FIntPoint pixel) const;
+	void WebPixel(FIntPoint pixel /*= FIntPoint(8,4)*/) const;
 
 	/**
 	* Set web show address
