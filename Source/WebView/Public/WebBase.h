@@ -94,8 +94,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Initial URL"), Category = "Web View")
 		FString urlInitial;
 	/** Configure webpage  mouse is transparency */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Enable Transparency"), Category = "Web View")
-		bool bEnableTransparency = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Enable Mouse"), Category = "Web View|Transparency")
+		bool bEnableMouseTransparency = true;
+	/** Configure webpage  mouse is transparency */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Keyborad Mode"), Category = "Web View|Transparency")
+		WebView_Keyboard_Mode eKeyboradModeTransparency ;
 	/** Control and Editor show text style  */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Text Style", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
 		FTextBlockStyle  styleText;
