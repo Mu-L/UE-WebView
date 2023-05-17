@@ -114,7 +114,7 @@ public class WebBuildGuide : ModuleRules
 		{
 			string licensePkg = licenseSrc;
 			licenseSrc = licenseDst;
-			licenseDst = licenseSrc;
+			licenseDst = licensePkg;
 		}
 		if (content.Contains(licenseNode))
 		{

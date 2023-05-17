@@ -155,6 +155,8 @@ public:
 	void StopRender(bool bVisibility);
 	//
 	void ShowDevTools();
+	//
+	void KeyboardMode(WebView_Keyboard_Mode);
 public:
 	/** Default constructor. */
 	SCefBrowser();

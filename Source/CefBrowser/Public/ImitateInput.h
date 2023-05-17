@@ -35,3 +35,13 @@ struct CEFBROWSER_API FImitateInput
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View")
 	TArray<FString> Event;
 };
+
+
+UENUM(BlueprintType, Category = "Web View")
+enum class WebView_Keyboard_Mode: uint8
+{
+	WebView_Keyboard_Mode_Scenes = 1 UMETA(DisplayName = "Scenes"),
+	WebView_Keyboard_Mode_Blend = 0 UMETA(DisplayName = "Blend"),
+	WebView_Keyboard_Mode_Web = 2 UMETA(DisplayName = "Web"),
+};
+

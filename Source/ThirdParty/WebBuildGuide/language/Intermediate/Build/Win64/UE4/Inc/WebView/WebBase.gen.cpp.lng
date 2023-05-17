@@ -29,6 +29,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	UMG_API UClass* Z_Construct_UClass_UWidget();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntPoint();
+	CEFBROWSER_API UEnum* Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode();
 	SLATECORE_API UScriptStruct* Z_Construct_UScriptStruct_FTextBlockStyle();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FColor();
 	CEFBROWSER_API UScriptStruct* Z_Construct_UScriptStruct_FImitateInput();
@@ -1283,10 +1284,15 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 #endif
 		static const UE4CodeGen_Private::FStrPropertyParams NewProp_urlInitial;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bEnableTransparency_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bEnableMouseTransparency_MetaData[];
 #endif
-		static void NewProp_bEnableTransparency_SetBit(void* Obj);
-		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bEnableTransparency;
+		static void NewProp_bEnableMouseTransparency_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bEnableMouseTransparency;
+		static const UE4CodeGen_Private::FBytePropertyParams NewProp_eKeyboradModeTransparency_Underlying;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_eKeyboradModeTransparency_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FEnumPropertyParams NewProp_eKeyboradModeTransparency;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_styleText_MetaData[];
 #endif
@@ -1454,19 +1460,30 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 #endif
 	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_urlInitial = { "urlInitial", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWebBase, urlInitial), METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_urlInitial_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_urlInitial_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableTransparency_MetaData[] = {
-		{ "Category", "Web View" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency_MetaData[] = {
+		{ "Category", "Web View|Transparency" },
 		{ "Comment", "/** Configure webpage  mouse is transparency */" },
-		{ "DisplayName", "Enable Transparency" },
+		{ "DisplayName", "Enable Mouse" },
 		{ "ModuleRelativePath", "Public/WebBase.h" },
 		{ "ToolTip", "Configure webpage  mouse is transparency" },
 	};
 #endif
-	void Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableTransparency_SetBit(void* Obj)
+	void Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency_SetBit(void* Obj)
 	{
-		((UWebBase*)Obj)->bEnableTransparency = 1;
+		((UWebBase*)Obj)->bEnableMouseTransparency = 1;
 	}
-	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableTransparency = { "bEnableTransparency", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UWebBase), &Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableTransparency_SetBit, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableTransparency_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableTransparency_MetaData)) };
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency = { "bEnableMouseTransparency", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UWebBase), &Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency_SetBit, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency_MetaData)) };
+	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency_MetaData[] = {
+		{ "Category", "Web View|Transparency" },
+		{ "Comment", "/** Configure webpage  mouse is transparency */" },
+		{ "DisplayName", "Keyborad Mode" },
+		{ "ModuleRelativePath", "Public/WebBase.h" },
+		{ "ToolTip", "Configure webpage  mouse is transparency" },
+	};
+#endif
+	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency = { "eKeyboradModeTransparency", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWebBase, eKeyboradModeTransparency), Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_styleText_MetaData[] = {
 		{ "Category", "Web View|Show Head" },
@@ -1635,7 +1652,9 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnPreReBuild,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnBeforeRequest,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_urlInitial,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableTransparency,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency_Underlying,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_styleText,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_RightKeyPopup,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_SwitchInputMethod,
@@ -1676,7 +1695,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UWebBase, 2267676618);
+	IMPLEMENT_CLASS(UWebBase, 4218740432);
 	template<> WEBVIEW_API UClass* StaticClass<UWebBase>()
 	{
 		return UWebBase::StaticClass();

@@ -13,9 +13,70 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeImitateInput() {}
 // Cross Module References
-	CEFBROWSER_API UScriptStruct* Z_Construct_UScriptStruct_FImitateInput();
+	CEFBROWSER_API UEnum* Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode();
 	UPackage* Z_Construct_UPackage__Script_CefBrowser();
+	CEFBROWSER_API UScriptStruct* Z_Construct_UScriptStruct_FImitateInput();
 // End Cross Module References
+	static UEnum* WebView_Keyboard_Mode_StaticEnum()
+	{
+		static UEnum* Singleton = nullptr;
+		if (!Singleton)
+		{
+			Singleton = GetStaticEnum(Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode, Z_Construct_UPackage__Script_CefBrowser(), TEXT("WebView_Keyboard_Mode"));
+		}
+		return Singleton;
+	}
+	template<> CEFBROWSER_API UEnum* StaticEnum<WebView_Keyboard_Mode>()
+	{
+		return WebView_Keyboard_Mode_StaticEnum();
+	}
+	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_WebView_Keyboard_Mode(WebView_Keyboard_Mode_StaticEnum, TEXT("/Script/CefBrowser"), TEXT("WebView_Keyboard_Mode"), false, nullptr, nullptr);
+	uint32 Get_Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Hash() { return 3129655955U; }
+	UEnum* Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode()
+	{
+#if WITH_HOT_RELOAD
+		UPackage* Outer = Z_Construct_UPackage__Script_CefBrowser();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("WebView_Keyboard_Mode"), 0, Get_Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Hash(), false);
+#else
+		static UEnum* ReturnEnum = nullptr;
+#endif // WITH_HOT_RELOAD
+		if (!ReturnEnum)
+		{
+			static const UE4CodeGen_Private::FEnumeratorParam Enumerators[] = {
+				{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes },
+				{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend },
+				{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Web", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Web },
+			};
+#if WITH_METADATA
+			const UE4CodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+				{ "BlueprintType", "true" },
+				{ "Category", "Web View" },
+				{ "ModuleRelativePath", "Public/ImitateInput.h" },
+				{ "WebView_Keyboard_Mode_Blend.DisplayName", "Blend" },
+				{ "WebView_Keyboard_Mode_Blend.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend" },
+				{ "WebView_Keyboard_Mode_Scenes.DisplayName", "Scenes" },
+				{ "WebView_Keyboard_Mode_Scenes.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes" },
+				{ "WebView_Keyboard_Mode_Web.DisplayName", "Web" },
+				{ "WebView_Keyboard_Mode_Web.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Web" },
+			};
+#endif
+			static const UE4CodeGen_Private::FEnumParams EnumParams = {
+				(UObject*(*)())Z_Construct_UPackage__Script_CefBrowser,
+				nullptr,
+				"WebView_Keyboard_Mode",
+				"WebView_Keyboard_Mode",
+				Enumerators,
+				UE_ARRAY_COUNT(Enumerators),
+				RF_Public|RF_Transient|RF_MarkAsNative,
+				EEnumFlags::None,
+				UE4CodeGen_Private::EDynamicType::NotDynamic,
+				(uint8)UEnum::ECppForm::EnumClass,
+				METADATA_PARAMS(Enum_MetaDataParams, UE_ARRAY_COUNT(Enum_MetaDataParams))
+			};
+			UE4CodeGen_Private::ConstructUEnum(ReturnEnum, EnumParams);
+		}
+		return ReturnEnum;
+	}
 class UScriptStruct* FImitateInput::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;

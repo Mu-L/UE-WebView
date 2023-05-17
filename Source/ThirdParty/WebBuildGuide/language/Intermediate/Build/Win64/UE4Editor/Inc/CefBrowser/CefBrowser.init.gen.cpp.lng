@@ -21,8 +21,8 @@ void EmptyLinkFunctionForGeneratedCodeCefBrowser_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x26826EA2,
-				0xE69D8FF0,
+				0x7BF66065,
+				0x9F2DD42D,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);
