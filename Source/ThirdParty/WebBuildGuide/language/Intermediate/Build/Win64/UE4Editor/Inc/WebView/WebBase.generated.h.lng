@@ -9,6 +9,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UHtmlHeaders;
+enum class WebView_Keyboard_Mode : uint8;
 struct FIntPoint;
 class UObject;
 #ifdef WEBVIEW_WebBase_generated_h
@@ -201,6 +202,7 @@ template<> WEBVIEW_API UClass* StaticClass<class UHtmlHeaders>();
 #define HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_37_SPARSE_DATA
 #define HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_37_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execKeyboardMode); \
 	DECLARE_FUNCTION(execShowDevTools); \
 	DECLARE_FUNCTION(execReopenRender); \
 	DECLARE_FUNCTION(execShowAddress); \
@@ -219,6 +221,7 @@ template<> WEBVIEW_API UClass* StaticClass<class UHtmlHeaders>();
 
 #define HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_37_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execKeyboardMode); \
 	DECLARE_FUNCTION(execShowDevTools); \
 	DECLARE_FUNCTION(execReopenRender); \
 	DECLARE_FUNCTION(execShowAddress); \

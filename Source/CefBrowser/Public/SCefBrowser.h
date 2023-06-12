@@ -31,7 +31,7 @@ public:
 		: _ViewportSize(FVector2D::ZeroVector)
 		, _SwitchInputMethod(false)
 		, _EnableMouseTransparency(false)
-		, _InitialURL(TEXT("https://www.baidu.com"))
+		, _InitialURL(TEXT(""))
 		, _BackgroundColor(255, 255, 255, 255)
 		, _ShowControls(true)
 		, _ShowAddressBar(false)
@@ -155,6 +155,8 @@ public:
 	void StopRender(bool bVisibility);
 	//
 	void ShowDevTools();
+	//
+	void KeyboardMode(WebView_Keyboard_Mode);
 public:
 	/** Default constructor. */
 	SCefBrowser();

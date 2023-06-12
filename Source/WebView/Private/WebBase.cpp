@@ -64,6 +64,7 @@ UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 	styleText.ColorAndOpacity = FSlateColor(FLinearColor(0.0f, 0.0f, 0.0f));
 	styleText.Font.Size = 20;
 	bIsVariable = true;
+	eKeyboradModeTransparency = WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend;
 }
 
 void UWebBase::LoadURL(FString NewURL,FString PostData)
@@ -171,7 +172,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.RightKeyPopup(RightKeyPopup)
 		.BrowserFrameRate(RateFrame)
 		.TextStyle(styleText)
-		.EnableMouseTransparency(bEnableTransparency)
+		.EnableMouseTransparency(bEnableMouseTransparency)
 		.SwitchInputMethod(SwitchInputMethod)
 		.ViewportSize(GetDesiredSize())
 		.Pixel(_Pixel)
@@ -190,6 +191,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		_ViewObject->SetUMG(this);
 		BindUObject("$receive", _ViewObject);
 	}
+	CefCoreWidget->KeyboardMode(eKeyboradModeTransparency);
 	CefCoreWidget->LoadURL(urlInitial);
 	return CefCoreWidget.ToSharedRef();
 }
@@ -254,6 +256,11 @@ bool UWebBase::HandleOnResourceLoad(FString URL, int ResourceType, TMap<FString,
 	return true;
 }
 
+void UWebBase::KeyboardMode(WebView_Keyboard_Mode KeyMode) {
+	eKeyboradModeTransparency = KeyMode;
+	if(CefCoreWidget)
+	CefCoreWidget->KeyboardMode(eKeyboradModeTransparency);
+}
 #undef LOCTEXT_NAMESPACE
 
 
