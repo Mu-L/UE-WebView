@@ -9,6 +9,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeImitateInput() {}
 // Cross Module References
+	CEFBROWSER_API UEnum* Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode();
 	CEFBROWSER_API UScriptStruct* Z_Construct_UScriptStruct_FImitateInput();
 	UPackage* Z_Construct_UPackage__Script_CefBrowser();
 // End Cross Module References
@@ -134,15 +135,78 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<FImitateInput>()
 		}
 		return Z_Registration_Info_UScriptStruct_ImitateInput.InnerSingleton;
 	}
+	static FEnumRegistrationInfo Z_Registration_Info_UEnum_WebView_Keyboard_Mode;
+	static UEnum* WebView_Keyboard_Mode_StaticEnum()
+	{
+		if (!Z_Registration_Info_UEnum_WebView_Keyboard_Mode.OuterSingleton)
+		{
+			Z_Registration_Info_UEnum_WebView_Keyboard_Mode.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode, Z_Construct_UPackage__Script_CefBrowser(), TEXT("WebView_Keyboard_Mode"));
+		}
+		return Z_Registration_Info_UEnum_WebView_Keyboard_Mode.OuterSingleton;
+	}
+	template<> CEFBROWSER_API UEnum* StaticEnum<WebView_Keyboard_Mode>()
+	{
+		return WebView_Keyboard_Mode_StaticEnum();
+	}
+	struct Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics
+	{
+		static const UECodeGen_Private::FEnumeratorParam Enumerators[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FEnumParams EnumParams;
+	};
+	const UECodeGen_Private::FEnumeratorParam Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::Enumerators[] = {
+		{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes },
+		{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend },
+		{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Both", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Both },
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::Enum_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "Category", "Web View" },
+		{ "ModuleRelativePath", "Public/ImitateInput.h" },
+		{ "WebView_Keyboard_Mode_Blend.DisplayName", "Blend" },
+		{ "WebView_Keyboard_Mode_Blend.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend" },
+		{ "WebView_Keyboard_Mode_Both.DisplayName", "Both" },
+		{ "WebView_Keyboard_Mode_Both.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Both" },
+		{ "WebView_Keyboard_Mode_Scenes.DisplayName", "Scenes" },
+		{ "WebView_Keyboard_Mode_Scenes.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes" },
+	};
+#endif
+	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::EnumParams = {
+		(UObject*(*)())Z_Construct_UPackage__Script_CefBrowser,
+		nullptr,
+		"WebView_Keyboard_Mode",
+		"WebView_Keyboard_Mode",
+		Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::Enumerators,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::Enumerators),
+		RF_Public|RF_Transient|RF_MarkAsNative,
+		EEnumFlags::None,
+		(uint8)UEnum::ECppForm::EnumClass,
+		METADATA_PARAMS(Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::Enum_MetaDataParams))
+	};
+	UEnum* Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode()
+	{
+		if (!Z_Registration_Info_UEnum_WebView_Keyboard_Mode.InnerSingleton)
+		{
+			UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_WebView_Keyboard_Mode.InnerSingleton, Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Statics::EnumParams);
+		}
+		return Z_Registration_Info_UEnum_WebView_Keyboard_Mode.InnerSingleton;
+	}
 	struct Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_Statics
 	{
+		static const FEnumRegisterCompiledInInfo EnumInfo[];
 		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
+	};
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_Statics::EnumInfo[] = {
+		{ WebView_Keyboard_Mode_StaticEnum, TEXT("WebView_Keyboard_Mode"), &Z_Registration_Info_UEnum_WebView_Keyboard_Mode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 4050333593U) },
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_Statics::ScriptStructInfo[] = {
 		{ FImitateInput::StaticStruct, Z_Construct_UScriptStruct_FImitateInput_Statics::NewStructOps, TEXT("ImitateInput"), &Z_Registration_Info_UScriptStruct_ImitateInput, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FImitateInput), 3039254524U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_1469381889(TEXT("/Script/CefBrowser"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_2823346158(TEXT("/Script/CefBrowser"),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_Statics::ScriptStructInfo),
-		nullptr, 0);
+		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_CefBrowser_Public_ImitateInput_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

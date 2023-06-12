@@ -11,6 +11,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UHtmlHeaders;
 class UObject;
+enum class WebView_Keyboard_Mode : uint8;
 #ifdef WEBVIEW_WebBase_generated_h
 #error "WebBase.generated.h already included, missing '#pragma once' in WebBase.h"
 #endif
@@ -203,6 +204,7 @@ static inline void FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelega
 #define FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_37_SPARSE_DATA
 #define FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_37_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execKeyboardMode); \
 	DECLARE_FUNCTION(execShowDevTools); \
 	DECLARE_FUNCTION(execReopenRender); \
 	DECLARE_FUNCTION(execShowAddress); \
@@ -221,6 +223,7 @@ static inline void FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelega
 
 #define FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_37_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execKeyboardMode); \
 	DECLARE_FUNCTION(execShowDevTools); \
 	DECLARE_FUNCTION(execReopenRender); \
 	DECLARE_FUNCTION(execShowAddress); \
