@@ -25,11 +25,10 @@ namespace UnrealBuildTool.Rules
                 PublicDefinitions.Add("JSON_LIB"); //add custom MICRO
                 PublicDependencyModuleNames.Add("JsonLibrary");
             }
-            //Path.Combine(DirectoryReference::MakeRemote(PluginDirectory),"..");
-            //Plugins::ReadPluginsFromDirectory();
-            //if (PluginDirectory!="") {
-            //    Console.WriteLine("==================="+ PluginDirectory);
-            //}
+            if (isDependPlugin("CefBase") && !CheckVersion(Target)) { 
+                Console.WriteLine("CefBase and WebView version mismatch ...... ");
+                throw new InvalidOperationException("CefBase and WebView version mismatch");
+            }
             string RootPath = ModuleDirectory;
             string subfix = ".template";
             foreach (string filePath in Directory.EnumerateFiles(RootPath, "*"+subfix, SearchOption.AllDirectories))
@@ -103,6 +102,26 @@ namespace UnrealBuildTool.Rules
             }
             return hasDep;
         }
-
+        string ReadVersion(string plugin)
+        {
+            FileReference pluginFile = new FileReference(plugin);
+            PluginInfo Plugin = new PluginInfo(pluginFile, PluginType.Project);
+            string version = Plugin.Descriptor.MarketplaceURL;
+            return version.Replace(" ","");
+        }
+        bool CheckVersion(ReadOnlyTargetRules Target) {
+            string projPath = Path.GetDirectoryName(Target.ProjectFile.ToString()); //
+            if (!PluginDirectory.Contains(projPath)) projPath = Path.GetDirectoryName(PluginDirectory);
+            string CefBase = "";
+            string WebView = "";
+            foreach (string pluginFile in Directory.EnumerateFiles(projPath, "*.uplugin", SearchOption.AllDirectories))
+            {
+                if (pluginFile.Contains("CefBase.uplugin")) CefBase = ReadVersion(pluginFile);
+                else if (pluginFile.Contains("WebView.uplugin")) WebView = ReadVersion(pluginFile);
+            }
+            Console.WriteLine("CefBase = " + CefBase);
+            Console.WriteLine("WebView = " + WebView);
+            return CefBase == WebView;
+        }
     }
 }
