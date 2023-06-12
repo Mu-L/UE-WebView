@@ -256,6 +256,11 @@ bool UWebBase::HandleOnResourceLoad(FString URL, int ResourceType, TMap<FString,
 	return true;
 }
 
+void UWebBase::KeyboardMode(WebView_Keyboard_Mode KeyMode) {
+	eKeyboradModeTransparency = KeyMode;
+	if(CefCoreWidget)
+	CefCoreWidget->KeyboardMode(eKeyboradModeTransparency);
+}
 #undef LOCTEXT_NAMESPACE
 
 

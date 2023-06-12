@@ -31,7 +31,7 @@ void EmptyLinkFunctionForGeneratedCodeImitateInput() {}
 		return WebView_Keyboard_Mode_StaticEnum();
 	}
 	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_WebView_Keyboard_Mode(WebView_Keyboard_Mode_StaticEnum, TEXT("/Script/CefBrowser"), TEXT("WebView_Keyboard_Mode"), false, nullptr, nullptr);
-	uint32 Get_Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Hash() { return 3129655955U; }
+	uint32 Get_Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode_Hash() { return 1173413250U; }
 	UEnum* Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode()
 	{
 #if WITH_HOT_RELOAD
@@ -45,7 +45,7 @@ void EmptyLinkFunctionForGeneratedCodeImitateInput() {}
 			static const UE4CodeGen_Private::FEnumeratorParam Enumerators[] = {
 				{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes },
 				{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend },
-				{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Web", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Web },
+				{ "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Both", (int64)WebView_Keyboard_Mode::WebView_Keyboard_Mode_Both },
 			};
 #if WITH_METADATA
 			const UE4CodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
@@ -54,10 +54,10 @@ void EmptyLinkFunctionForGeneratedCodeImitateInput() {}
 				{ "ModuleRelativePath", "Public/ImitateInput.h" },
 				{ "WebView_Keyboard_Mode_Blend.DisplayName", "Blend" },
 				{ "WebView_Keyboard_Mode_Blend.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend" },
+				{ "WebView_Keyboard_Mode_Both.DisplayName", "Both" },
+				{ "WebView_Keyboard_Mode_Both.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Both" },
 				{ "WebView_Keyboard_Mode_Scenes.DisplayName", "Scenes" },
 				{ "WebView_Keyboard_Mode_Scenes.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes" },
-				{ "WebView_Keyboard_Mode_Web.DisplayName", "Web" },
-				{ "WebView_Keyboard_Mode_Web.Name", "WebView_Keyboard_Mode::WebView_Keyboard_Mode_Web" },
 			};
 #endif
 			static const UE4CodeGen_Private::FEnumParams EnumParams = {

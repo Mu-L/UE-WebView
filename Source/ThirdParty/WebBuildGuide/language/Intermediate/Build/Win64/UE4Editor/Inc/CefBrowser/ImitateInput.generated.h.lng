@@ -27,7 +27,7 @@ template<> CEFBROWSER_API UScriptStruct* StaticStruct<struct FImitateInput>();
 #define FOREACH_ENUM_WEBVIEW_KEYBOARD_MODE(op) \
 	op(WebView_Keyboard_Mode::WebView_Keyboard_Mode_Scenes) \
 	op(WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend) \
-	op(WebView_Keyboard_Mode::WebView_Keyboard_Mode_Web) 
+	op(WebView_Keyboard_Mode::WebView_Keyboard_Mode_Both) 
 
 enum class WebView_Keyboard_Mode : uint8;
 template<> CEFBROWSER_API UEnum* StaticEnum<WebView_Keyboard_Mode>();
