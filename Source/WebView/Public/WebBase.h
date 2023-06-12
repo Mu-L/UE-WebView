@@ -254,6 +254,11 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void ShowDevTools();
+	/**
+	* Show Dev Tools for debug web
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+	void KeyboardMode(WebView_Keyboard_Mode KeyMode);
 public:
 	virtual void BeginDestroy() override;
 	// 

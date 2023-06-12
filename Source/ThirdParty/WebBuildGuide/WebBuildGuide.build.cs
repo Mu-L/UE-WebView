@@ -13,11 +13,11 @@ public class WebBuildGuide : ModuleRules
 		Type = ModuleType.External;
 		bool isLicenseToPak = true;
 		//Console.WriteLine("===============================");
-		Console.WriteLine("Target.Architecture" + Target.Architecture);
+		//Console.WriteLine("Target.Architecture" + Target.Architecture);
 		string sourcePath = Path.Combine(ModuleDirectory, "..");
-		string pluginPath = Path.Combine(sourcePath, "..", "..");
+		string pluginPath = PluginDirectory;// Path.Combine(sourcePath, "..", "..");
 		CopyDir(".lng", Path.Combine(ModuleDirectory, "language"), pluginPath);
-		string projFile = "" + Target.ProjectFile;
+		string projFile = Target.ProjectFile.ToString();
 		if (Target.Version.MajorVersion >= 5)
 		{
 			CopyCefBrowser(pluginPath, projFile, "UnrealGame", "" + Target.Configuration, Target);
@@ -28,7 +28,7 @@ public class WebBuildGuide : ModuleRules
 			CopyCefBrowser(pluginPath, projFile, "UE4", "" + Target.Configuration, Target);
 		}
 		CheckLicense(Path.GetDirectoryName(projFile), isLicenseToPak);
-		if (Target.Platform == UnrealTargetPlatform.Linux)
+		if (Target.Version.MajorVersion >= 5 && Target.Platform == UnrealTargetPlatform.Linux)
 		{
 			MakeSymLink(projFile);
 		}
@@ -98,7 +98,7 @@ public class WebBuildGuide : ModuleRules
 		if (!Directory.Exists(pluginInter)) return;
 		foreach (string pathName in Directory.EnumerateDirectories(pluginInter, "CefBrowser", SearchOption.AllDirectories))
 		{
-			Console.WriteLine("pathName=" + pathName);
+			//Console.WriteLine("pathName=" + pathName);
 			if (!pathName.EndsWith(srcMatch)) continue;
 			//Console.WriteLine("pathNameff=" + pathName);
 			foreach (string FileName in Directory.EnumerateFiles(pathName, "*.*", SearchOption.AllDirectories))
