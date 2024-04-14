@@ -288,6 +288,7 @@ bool UWebBase::HandleOnResourceLoad(FString URL, int ResourceType, TMap<FString,
 }
 void UWebBase::ReleaseSlateResources(bool bReleaseChildren) {
 	if (CefCoreWidget) {
+		CefCoreWidget->StopRender(true);
 		CefCoreWidget->SetCanTick(false);
 		CefCoreWidget->Close();
 		CefCoreWidget.Reset();

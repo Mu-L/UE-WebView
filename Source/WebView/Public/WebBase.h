@@ -117,8 +117,8 @@ public:
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Switch Input Method", UIMin = 0, UIMax = 1), Category = "Web View")
 		bool  SwitchInputMethod = false;
 	/** Configure webpage flush frame rate */
-	UPROPERTY(EditAnywhere, meta = (DisplayName = "Frame Rate", ClampMin = 30, ClampMax = 60), Category = "Web View")
-		int  RateFrame = 30;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Frame Rate", ClampMin = 1, ClampMax = 60), Category = "Web View")
+		int  RateFrame = 20;
 	/** Configure webpage is transparency */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (DisplayName = "Background Color", ToolTip="transparent: A+js.A<255,  "), Category = "Web View")
 		FColor  ColorBackground;
@@ -297,6 +297,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void StopRender(bool hidden);
+
 public:
 	virtual void BeginDestroy() override;
 	// 

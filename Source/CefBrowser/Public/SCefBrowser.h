@@ -42,6 +42,7 @@ public:
 		//, _webCursor(false)
 		, _BrowserFrameRate(30)
 	{
+		_Bridge = false;
 		_Visibility = EVisibility::SelfHitTestInvisible;
 	}
 
@@ -85,6 +86,7 @@ public:
 		/** Whether to show an address bar. */
 		SLATE_ARGUMENT(bool, ShowAddressBar)
 		SLATE_ARGUMENT(bool, Touch)
+		SLATE_ARGUMENT(bool, Bridge)
 		/** Whether to show an Web Cursor . */
 		//SLATE_ARGUMENT(bool, webCursor)
 		/** The frames per second rate that the browser will attempt to use. */
