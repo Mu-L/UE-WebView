@@ -28,26 +28,30 @@ enum class WebView_ImitateInput_Key : uint8
 };
 
 
-UCLASS(BlueprintType, Blueprintable)
-class CEFBROWSER_API UImitateInput:public UObject
+USTRUCT(BlueprintType)
+struct CEFBROWSER_API FImitateInput //public UObject
 {
-	GENERATED_UCLASS_BODY()
 public:
-	// spec url
-	//UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Web View")
-	//FString URL;
+	GENERATED_USTRUCT_BODY()
 
-	// Show Imitate Input
+	/*
+	 * Show web content when Imitate Input
+	 */ 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View")
-	bool Show;
+	bool Show = true;
 
-	// command interval time .ms
+	/*
+	 * Time interval between events .ms , If the interval time is insufficient, call the AddDelay node to increase
+	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = 10, UIMax = 10000), Category = "Web View")
-	int interval;
+	int interval = 20;
 
-	// command interval time .ms
+	/*
+	 * Simulate event screen resolution.  After setting, it can adapt to any resolution. 
+	 * Please keep the size and webpixel values the same in the editor
+	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View")
-	FIntPoint Size;
+	FIntPoint Size= FIntPoint(0, 0);
 
 	/* 
 	{"type":"delay","ms":3000}
@@ -61,33 +65,10 @@ public:
 	*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View")
 	TArray<FString> Event;
-
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void AddMouse(const WebView_ImitateInput_Mouse mouse,const FIntPoint& point,const int idx=-1);
-	
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void AddClicked(const FIntPoint& point, const int idx = -1);
-
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void AddText(const FString& text, const int idx = -1);
-
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void AddDelay(const int ms, const int idx = -1);
-
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void AddKeystroke(const WebView_ImitateInput_Key keyboard,const FKey& key,const TArray<FKey>& CombinKey, const int idx = -1);
-
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void AddKey(const FKey& key, const TArray<FKey>& CombinKey, const int idx = -1);
-
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void ShowLog(bool on=false);
-
-	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void Clear();
 };
 
-typedef UImitateInput FImitateInput;
+
+
 
 UENUM(BlueprintType, Category = "Web View")
 enum class WebView_Keyboard_Mode: uint8

@@ -6,6 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "WebCookie.h"
 #include "ZipReader.h"
+#include "ImitateInput.h"
 #include "WebViewFunLib.generated.h"
 
 /**
@@ -96,4 +97,58 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	static bool UnZip(const FString& zipFile, const FString& passwd, UZipReader*& Reader);
 
+
+
+
+
+	/**
+	 * Add Mouse Event
+	 * @param mouse : Mouse Event Type
+	 * @param point : Screen coordinates for mouse event input
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static	FImitateInput& AddMouse(UPARAM(ref) FImitateInput& screen,const WebView_ImitateInput_Mouse mouse, const FIntPoint& point);
+
+	/**
+	 * Add mouse click event
+	 * @param point : Screen coordinates for mouse event input
+	 * @note : Including mouse press and release
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static	FImitateInput& AddClicked(UPARAM(ref) FImitateInput& screen, const FIntPoint& point);
+
+	/**
+	 * Enter text
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static	FImitateInput& AddText(UPARAM(ref) FImitateInput& screen, const FString& text);
+	
+	/**
+	 * Add delay between events
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static	FImitateInput& AddDelay(UPARAM(ref) FImitateInput& screen, const int ms);
+
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static	FImitateInput& AddKeystroke(UPARAM(ref) FImitateInput& screen, const WebView_ImitateInput_Key keyboard, const FKey& key, const TArray<FKey>& CombinKey);
+
+	/**
+	 * Analog keyboard input, 
+	 * @param key : To input button
+	 * @param CombinKey : Combination keys such as shift, ctrl, alt, etc 
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static FImitateInput& AddKey(UPARAM(ref) FImitateInput& screen, const FKey& key, const TArray<FKey>& CombinKey);
+
+	/**
+	* show mouse event position, default off
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static	FImitateInput& ShowLog(UPARAM(ref) FImitateInput& screen, bool on = false);
+	
+	/**
+	* clear all event info
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Web View")
+		static FImitateInput& Clear(UPARAM(ref) FImitateInput& screen);
 };

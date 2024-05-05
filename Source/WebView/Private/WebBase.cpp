@@ -202,7 +202,6 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.OnBeforePopup_UObject(this, &UWebBase::HandleOnBeforePopup)
 		.OnLoadState_UObject(this, &UWebBase::HandleOnLoadState)
 		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip)
-		.OnTextureChanged_UObject(this, &UWebBase::HandleOnTextureChanged)
 		.OnWebError_UObject(this, &UWebBase::HandleOnWebError)
 		.OnResourceLoad_UObject(this, &UWebBase::HandleOnResourceLoad)
 		.OnJsStr_UObject(this, &UWebBase::HandleAsyn);
@@ -213,6 +212,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 	}
 	CefCoreWidget->KeyboardMode(eKeyboradModeTransparency);
 	CefCoreWidget->LoadURL(urlInitial);
+	//CefCoreWidget->SetBlushColor(ColorAndOpacity);
 	return CefCoreWidget.ToSharedRef();
 }
 
@@ -233,10 +233,6 @@ void UWebBase::HandleOnUrlChanged(const FText& InText) {
 
 void UWebBase::HandleOnLoadState(const int state) {
 	if (OnLoadState.IsBound()) OnLoadState.Broadcast(state);
-}
-
-void UWebBase::HandleOnTextureChanged(UTexture2D* OLD, UTexture2D* NEW) {
-	if (OnTextureChanged.IsBound()) OnTextureChanged.Broadcast(OLD, NEW);
 }
 
 bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
@@ -318,7 +314,7 @@ bool UWebBase::CanGoForward() {
 	return CefCoreWidget->CanGoForward();
 }
 
-void UWebBase::SetImitateInput(const FImitateInput* ImitateInput) {
+void UWebBase::SetImitateInput(const FImitateInput& ImitateInput) {
 	if (!CefCoreWidget.IsValid())return;
 	CefCoreWidget->SetImitateInput(ImitateInput);
 }

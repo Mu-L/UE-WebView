@@ -42,7 +42,6 @@ public:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUrlChanged, const FText&, Url);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnJsStr, const FString&, Type,const FString&, JSON, const FString&, FuncName);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnBeforePopup, const FString&, Url, const FString&, Frame);
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTextureChanged, UTexture2D*, OLD, UTexture2D*, NEW);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDownloadComplete, const FString&, Url, const FString&, File);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnWebError, const FString&, Desc, const FString&, Source ,const int,line);
 	/*  ResourceType
@@ -72,9 +71,6 @@ public:
 	/** Called when loading stat changed */
 	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
 	FOnStateLoad OnLoadState;
-	/** Called when the texture changes. */
-	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
-	FOnTextureChanged OnTextureChanged;
 	/** Called when the Url changes. */
 	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
 	FOnUrlChanged OnUrlChanged;
@@ -143,8 +139,6 @@ public:
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Sync Parse Json", UIMin = 0, UIMax = 1), Category = "Web View")
 	bool  syncJson = true;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Web View|Imitate")
-	//FImitateInput  ImitateInput;
 
 protected:
 	FString jsWindow;// for javescrit 
@@ -293,7 +287,7 @@ public:
 
 	//FImitateInput  ImitateInput
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void SetImitateInput(const UImitateInput*  ImitateInput);
+	void SetImitateInput(const FImitateInput&  ImitateInput);
 
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void StopRender(bool hidden);
@@ -307,7 +301,6 @@ public:
 protected:
 	virtual TSharedRef<SWidget> RebuildWidget() override;
 	void HandleOnLoadState(const int state);
-	void HandleOnTextureChanged(UTexture2D* OLD,UTexture2D* NEW);
 	void HandleOnUrlChanged(const FText& Text);
 	bool HandleOnBeforePopup(FString URL, FString Frame);
 	void HandleOnDownloadTip(FString URL, FString File);

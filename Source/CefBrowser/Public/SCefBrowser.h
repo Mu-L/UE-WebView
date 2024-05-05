@@ -25,7 +25,7 @@ public:
 	DECLARE_DELEGATE_OneParam(FOnLoadState, const int);
 	DECLARE_DELEGATE_RetVal_TwoParams(bool, FOnBeforePopup, FString, FString);
 	DECLARE_DELEGATE_TwoParams(FOnDownloadComplete, FString, FString);
-	DECLARE_DELEGATE_TwoParams(FOnTextureChanged, UTexture2D*, UTexture2D*);
+	//DECLARE_DELEGATE_TwoParams(FOnTextureChanged, UTexture2D*, UTexture2D*);
 	DECLARE_DELEGATE_RetVal_ThreeParams(bool, FOnResourceLoad, FString, int, RequestHeaders&);
 	DECLARE_DELEGATE_ThreeParams(FOnJsStr, const FString&, const FString&, const FString&);
 	DECLARE_DELEGATE_FourParams(FOnWebError,const FString&, const FString&, const FString&,int);
@@ -54,7 +54,7 @@ public:
 		/** Called when the Url changes. */
 		SLATE_EVENT(FOnTextChanged, OnUrlChanged)
 		/** Called when the Texture changes. */
-		SLATE_EVENT(FOnTextureChanged, OnTextureChanged)
+		//SLATE_EVENT(FOnTextureChanged, OnTextureChanged)
 		/** Called when file download finish. */
 		SLATE_EVENT(FOnDownloadComplete, OnDownloadComplete)
 		/** Called when resource download finish before load. */
@@ -178,7 +178,7 @@ public:
 	//
 	void Silent(bool onoff=true);
 	//
-	void SetImitateInput(const FImitateInput* ImitateInput);
+	void SetImitateInput(const FImitateInput& ImitateInput);
 public:
 	/** Default constructor. */
 	SCefBrowser();

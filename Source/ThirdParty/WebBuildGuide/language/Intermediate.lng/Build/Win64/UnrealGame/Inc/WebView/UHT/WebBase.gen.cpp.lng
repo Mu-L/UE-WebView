@@ -6,17 +6,17 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "WebView/Public/WebBase.h"
+#include "ImitateInput.h"
 #include "Styling/SlateTypes.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 // Cross Module References
-	CEFBROWSER_API UClass* Z_Construct_UClass_UImitateInput_NoRegister();
 	CEFBROWSER_API UEnum* Z_Construct_UEnum_CefBrowser_WebView_Keyboard_Mode();
+	CEFBROWSER_API UScriptStruct* Z_Construct_UScriptStruct_FImitateInput();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FColor();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntPoint();
-	ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 	SLATECORE_API UScriptStruct* Z_Construct_UScriptStruct_FTextBlockStyle();
 	UMG_API UClass* Z_Construct_UClass_UWidget();
 	UPackage* Z_Construct_UPackage__Script_WebView();
@@ -30,7 +30,6 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnJsStr__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnPreReBuild__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature();
-	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnUrlChanged__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnWebError__DelegateSignature();
 // End Cross Module References
@@ -512,54 +511,6 @@ void UWebBase::FOnBeforePopup_DelegateWrapper(const FMulticastScriptDelegate& On
 	Parms.Frame=Frame;
 	OnBeforePopup.ProcessMulticastDelegate<UObject>(&Parms);
 }
-	struct Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics
-	{
-		struct WebBase_eventOnTextureChanged_Parms
-		{
-			UTexture2D* OLD;
-			UTexture2D* NEW;
-		};
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_OLD;
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_NEW;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::NewProp_OLD = { "OLD", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventOnTextureChanged_Parms, OLD), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::NewProp_NEW = { "NEW", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventOnTextureChanged_Parms, NEW), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::NewProp_OLD,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::NewProp_NEW,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/WebBase.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "OnTextureChanged__DelegateSignature", nullptr, nullptr, sizeof(Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::WebBase_eventOnTextureChanged_Parms), Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
-void UWebBase::FOnTextureChanged_DelegateWrapper(const FMulticastScriptDelegate& OnTextureChanged, UTexture2D* OLD, UTexture2D* NEW)
-{
-	struct WebBase_eventOnTextureChanged_Parms
-	{
-		UTexture2D* OLD;
-		UTexture2D* NEW;
-	};
-	WebBase_eventOnTextureChanged_Parms Parms;
-	Parms.OLD=OLD;
-	Parms.NEW=NEW;
-	OnTextureChanged.ProcessMulticastDelegate<UObject>(&Parms);
-}
 	struct Z_Construct_UDelegateFunction_UWebBase_OnDownloadComplete__DelegateSignature_Statics
 	{
 		struct WebBase_eventOnDownloadComplete_Parms
@@ -776,10 +727,10 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	}
 	DEFINE_FUNCTION(UWebBase::execSetImitateInput)
 	{
-		P_GET_OBJECT(UImitateInput,Z_Param_ImitateInput);
+		P_GET_STRUCT_REF(FImitateInput,Z_Param_Out_ImitateInput);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->SetImitateInput(Z_Param_ImitateInput);
+		P_THIS->SetImitateInput(Z_Param_Out_ImitateInput);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UWebBase::execCanGoForward)
@@ -1599,12 +1550,12 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	{
 		struct WebBase_eventSetImitateInput_Parms
 		{
-			const UImitateInput* ImitateInput;
+			FImitateInput ImitateInput;
 		};
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ImitateInput_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_ImitateInput;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_ImitateInput;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -1616,7 +1567,7 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::NewProp_ImitateInput = { "ImitateInput", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventSetImitateInput_Parms, ImitateInput), Z_Construct_UClass_UImitateInput_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::NewProp_ImitateInput_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::NewProp_ImitateInput_MetaData)) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::NewProp_ImitateInput = { "ImitateInput", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventSetImitateInput_Parms, ImitateInput), Z_Construct_UScriptStruct_FImitateInput, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::NewProp_ImitateInput_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::NewProp_ImitateInput_MetaData)) }; // 3181496976
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::NewProp_ImitateInput,
 	};
@@ -1628,7 +1579,7 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 		{ "ToolTip", "FImitateInput  ImitateInput" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "SetImitateInput", nullptr, nullptr, sizeof(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::WebBase_eventSetImitateInput_Parms), Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "SetImitateInput", nullptr, nullptr, sizeof(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::WebBase_eventSetImitateInput_Parms), Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_SetImitateInput_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UWebBase_SetImitateInput()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -1928,10 +1879,6 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnLoadState;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnTextureChanged_MetaData[];
-#endif
-		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnTextureChanged;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnUrlChanged_MetaData[];
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnUrlChanged;
@@ -2056,12 +2003,11 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnJsStr__DelegateSignature, "OnJsStr__DelegateSignature" }, // 682543798
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnPreReBuild__DelegateSignature, "OnPreReBuild__DelegateSignature" }, // 2552426169
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature, "OnStateLoad__DelegateSignature" }, // 230295980
-		{ &Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature, "OnTextureChanged__DelegateSignature" }, // 445111040
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnUrlChanged__DelegateSignature, "OnUrlChanged__DelegateSignature" }, // 2647974591
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnWebError__DelegateSignature, "OnWebError__DelegateSignature" }, // 1143858611
 		{ &Z_Construct_UFunction_UWebBase_Reload, "Reload" }, // 3776648100
 		{ &Z_Construct_UFunction_UWebBase_ReopenRender, "ReopenRender" }, // 4022469403
-		{ &Z_Construct_UFunction_UWebBase_SetImitateInput, "SetImitateInput" }, // 1919823543
+		{ &Z_Construct_UFunction_UWebBase_SetImitateInput, "SetImitateInput" }, // 1527586502
 		{ &Z_Construct_UFunction_UWebBase_ShowAddress, "ShowAddress" }, // 1778316710
 		{ &Z_Construct_UFunction_UWebBase_ShowDevTools, "ShowDevTools" }, // 4012074784
 		{ &Z_Construct_UFunction_UWebBase_Silent, "Silent" }, // 1052284098
@@ -2087,15 +2033,6 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	};
 #endif
 	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState = { "OnLoadState", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UWebBase, OnLoadState), Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState_MetaData)) }; // 230295980
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_OnTextureChanged_MetaData[] = {
-		{ "Category", "Web View|Event" },
-		{ "Comment", "/** Called when the texture changes. */" },
-		{ "ModuleRelativePath", "Public/WebBase.h" },
-		{ "ToolTip", "Called when the texture changes." },
-	};
-#endif
-	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_OnTextureChanged = { "OnTextureChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UWebBase, OnTextureChanged), Z_Construct_UDelegateFunction_UWebBase_OnTextureChanged__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_OnTextureChanged_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_OnTextureChanged_MetaData)) }; // 445111040
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_OnUrlChanged_MetaData[] = {
 		{ "Category", "Web View|Event" },
@@ -2361,7 +2298,6 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_syncJson = { "syncJson", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UWebBase), &Z_Construct_UClass_UWebBase_Statics::NewProp_syncJson_SetBit, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_syncJson_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_syncJson_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UWebBase_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnLoadState,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnTextureChanged,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnUrlChanged,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnJsEventStr,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnBeforePopup,
@@ -2424,9 +2360,9 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UHtmlHeaders, UHtmlHeaders::StaticClass, TEXT("UHtmlHeaders"), &Z_Registration_Info_UClass_UHtmlHeaders, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHtmlHeaders), 2317238205U) },
-		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 3610730173U) },
+		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 3725731739U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_3468508905(TEXT("/Script/WebView"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_3853812653(TEXT("/Script/WebView"),
 		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
