@@ -34,8 +34,9 @@ public class CefBrowser : ModuleRules
 				);
 			}
 		}
-		//PublicDefinitions.Add("WRAPPING_CEF_SHARED=1"); //
-		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
+		DateTime curTime= DateTime.Now;
+        PublicDefinitions.Add("WEBVIEW_BUILD_DATE=\""+ curTime.ToString("yyyy-MM-dd")+"\""); //
+        PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
         string privatep = Path.Combine(ModuleDirectory, "Private");
 		if (Directory.Exists(privatep))
 		{
