@@ -28,6 +28,7 @@ void EmptyLinkFunctionForGeneratedCodeWebBase() {}
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnBeforeRequest__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnDownloadComplete__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnJsStr__DelegateSignature();
+	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnPreReBuild__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature();
 	WEBVIEW_API UFunction* Z_Construct_UDelegateFunction_UWebBase_OnUrlChanged__DelegateSignature();
@@ -653,6 +654,70 @@ void UWebBase::FOnWebError_DelegateWrapper(const FMulticastScriptDelegate& OnWeb
 	Parms.line=line;
 	OnWebError.ProcessMulticastDelegate<UObject>(&Parms);
 }
+	struct Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics
+	{
+		struct WebBase_eventOnPostResponse_Parms
+		{
+			FString Url;
+			FString Response;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Url_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Url;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Response_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Response;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Url_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Url = { "Url", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventOnPostResponse_Parms, Url), METADATA_PARAMS(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Url_MetaData, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Url_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Response_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Response = { "Response", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventOnPostResponse_Parms, Response), METADATA_PARAMS(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Response_MetaData, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Response_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Url,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::NewProp_Response,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/WebBase.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "OnPostResponse__DelegateSignature", nullptr, nullptr, sizeof(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::WebBase_eventOnPostResponse_Parms), Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+void UWebBase::FOnPostResponse_DelegateWrapper(const FMulticastScriptDelegate& OnPostResponse, const FString& Url, const FString& Response)
+{
+	struct WebBase_eventOnPostResponse_Parms
+	{
+		FString Url;
+		FString Response;
+	};
+	WebBase_eventOnPostResponse_Parms Parms;
+	Parms.Url=Url;
+	Parms.Response=Response;
+	OnPostResponse.ProcessMulticastDelegate<UObject>(&Parms);
+}
 	struct Z_Construct_UDelegateFunction_UWebBase_OnBeforeRequest__DelegateSignature_Statics
 	{
 		struct WebBase_eventOnBeforeRequest_Parms
@@ -888,9 +953,10 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	{
 		P_GET_PROPERTY(FStrProperty,Z_Param_NewURL);
 		P_GET_PROPERTY(FStrProperty,Z_Param_PostData);
+		P_GET_UBOOL(Z_Param_need_response);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->LoadURL(Z_Param_NewURL,Z_Param_PostData);
+		P_THIS->LoadURL(Z_Param_NewURL,Z_Param_PostData,Z_Param_need_response);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UWebBase::execExecuteJavascript)
@@ -1443,12 +1509,15 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 		{
 			FString NewURL;
 			FString PostData;
+			bool need_response;
 		};
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_NewURL_MetaData[];
 #endif
 		static const UECodeGen_Private::FStrPropertyParams NewProp_NewURL;
 		static const UECodeGen_Private::FStrPropertyParams NewProp_PostData;
+		static void NewProp_need_response_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_need_response;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -1462,17 +1531,24 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 #endif
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_NewURL = { "NewURL", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventLoadURL_Parms, NewURL), METADATA_PARAMS(Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_NewURL_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_NewURL_MetaData)) };
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_PostData = { "PostData", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(WebBase_eventLoadURL_Parms, PostData), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_need_response_SetBit(void* Obj)
+	{
+		((WebBase_eventLoadURL_Parms*)Obj)->need_response = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_need_response = { "need_response", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(WebBase_eventLoadURL_Parms), &Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_need_response_SetBit, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UWebBase_LoadURL_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_NewURL,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_PostData,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWebBase_LoadURL_Statics::NewProp_need_response,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWebBase_LoadURL_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Web View" },
-		{ "Comment", "/**\n\x09 * Load the specified URL\n\x09 * @param NewURL New URL to load \n\x09 * @param PostData arg1=val1&arg2=val2\n\x09 */" },
+		{ "Comment", "/**\n\x09 * Load the specified URL\n\x09 * @param NewURL New URL to load \n\x09 * @param PostData arg1=val1&arg2=val2 \n\x09 *        notice: \" don't must need.\n\x09 * @param need_response \n\x09 */" },
+		{ "CPP_Default_need_response", "false" },
 		{ "CPP_Default_PostData", "" },
 		{ "ModuleRelativePath", "Public/WebBase.h" },
-		{ "ToolTip", "Load the specified URL\n@param NewURL New URL to load\n@param PostData arg1=val1&arg2=val2" },
+		{ "ToolTip", "Load the specified URL\n@param NewURL New URL to load\n@param PostData arg1=val1&arg2=val2\n       notice: \" don't must need.\n@param need_response" },
 	};
 #endif
 	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UWebBase_LoadURL_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWebBase, nullptr, "LoadURL", nullptr, nullptr, sizeof(Z_Construct_UFunction_UWebBase_LoadURL_Statics::WebBase_eventLoadURL_Parms), Z_Construct_UFunction_UWebBase_LoadURL_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_LoadURL_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWebBase_LoadURL_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWebBase_LoadURL_Statics::Function_MetaDataParams)) };
@@ -1907,6 +1983,10 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnWebError;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnPostResponse_MetaData[];
+#endif
+		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnPostResponse;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_urlInitial_MetaData[];
 #endif
 		static const UECodeGen_Private::FStrPropertyParams NewProp_urlInitial;
@@ -1996,11 +2076,12 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 		{ &Z_Construct_UFunction_UWebBase_Isloaded, "Isloaded" }, // 3155014701
 		{ &Z_Construct_UFunction_UWebBase_KeyboardMode, "KeyboardMode" }, // 1747187579
 		{ &Z_Construct_UFunction_UWebBase_LoadString, "LoadString" }, // 2787731898
-		{ &Z_Construct_UFunction_UWebBase_LoadURL, "LoadURL" }, // 2204296549
+		{ &Z_Construct_UFunction_UWebBase_LoadURL, "LoadURL" }, // 2610044139
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnBeforePopup__DelegateSignature, "OnBeforePopup__DelegateSignature" }, // 4056097633
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnBeforeRequest__DelegateSignature, "OnBeforeRequest__DelegateSignature" }, // 2411649052
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnDownloadComplete__DelegateSignature, "OnDownloadComplete__DelegateSignature" }, // 3508366531
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnJsStr__DelegateSignature, "OnJsStr__DelegateSignature" }, // 682543798
+		{ &Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature, "OnPostResponse__DelegateSignature" }, // 573526767
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnPreReBuild__DelegateSignature, "OnPreReBuild__DelegateSignature" }, // 2552426169
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnStateLoad__DelegateSignature, "OnStateLoad__DelegateSignature" }, // 230295980
 		{ &Z_Construct_UDelegateFunction_UWebBase_OnUrlChanged__DelegateSignature, "OnUrlChanged__DelegateSignature" }, // 2647974591
@@ -2096,6 +2177,13 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	};
 #endif
 	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_OnWebError = { "OnWebError", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UWebBase, OnWebError), Z_Construct_UDelegateFunction_UWebBase_OnWebError__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_OnWebError_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_OnWebError_MetaData)) }; // 1143858611
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_OnPostResponse_MetaData[] = {
+		{ "Category", "Web View|Event" },
+		{ "ModuleRelativePath", "Public/WebBase.h" },
+	};
+#endif
+	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UWebBase_Statics::NewProp_OnPostResponse = { "OnPostResponse", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UWebBase, OnPostResponse), Z_Construct_UDelegateFunction_UWebBase_OnPostResponse__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UWebBase_Statics::NewProp_OnPostResponse_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWebBase_Statics::NewProp_OnPostResponse_MetaData)) }; // 573526767
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWebBase_Statics::NewProp_urlInitial_MetaData[] = {
 		{ "Category", "Web View" },
@@ -2305,6 +2393,7 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnPreReBuild,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnBeforeRequest,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnWebError,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_OnPostResponse,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_urlInitial,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_bEnableMouseTransparency,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWebBase_Statics::NewProp_eKeyboradModeTransparency_Underlying,
@@ -2360,9 +2449,9 @@ void UWebBase::FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& 
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UHtmlHeaders, UHtmlHeaders::StaticClass, TEXT("UHtmlHeaders"), &Z_Registration_Info_UClass_UHtmlHeaders, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHtmlHeaders), 2317238205U) },
-		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 3725731739U) },
+		{ Z_Construct_UClass_UWebBase, UWebBase::StaticClass, TEXT("UWebBase"), &Z_Registration_Info_UClass_UWebBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWebBase), 1772759816U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_3853812653(TEXT("/Script/WebView"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_816936510(TEXT("/Script/WebView"),
 		Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -44,6 +44,7 @@ public:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnBeforePopup, const FString&, Url, const FString&, Frame);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDownloadComplete, const FString&, Url, const FString&, File);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnWebError, const FString&, Desc, const FString&, Source ,const int,line);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPostResponse, const FString&, Url, const FString&, Response);
 	/*  ResourceType
 	  0: Top level page.
 	  1: Frame or iframe.
@@ -92,6 +93,8 @@ public:
 	/** called when resouce load. */
 	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
 	FOnWebError OnWebError;
+	UPROPERTY(BlueprintAssignable, Category = "Web View|Event")
+	FOnPostResponse OnPostResponse;
 
 	/** this party is blueprint editor params */
 	/** URL that the browser will initially navigate to. The URL should include the protocol, eg http:// */
@@ -156,10 +159,12 @@ public:
 	/**
 	 * Load the specified URL
 	 * @param NewURL New URL to load 
-	 * @param PostData arg1=val1&arg2=val2
+	 * @param PostData arg1=val1&arg2=val2 
+	 *        notice: " don't must need.
+	 * @param need_response 
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
-	void LoadURL(const FString& NewURL, FString PostData=TEXT(""));
+	void LoadURL(const FString& NewURL, FString PostData=TEXT(""),bool need_response=false);
 
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void LoadString(const FString& DummyURL, const FString& Content);
@@ -304,6 +309,7 @@ protected:
 	void HandleOnUrlChanged(const FText& Text);
 	bool HandleOnBeforePopup(FString URL, FString Frame);
 	void HandleOnDownloadTip(FString URL, FString File);
+	void HandleOnPostResponse(const FString& URL,const FString& File);
 	void HandleOnWebError(const FString& Url, const FString& Desc, const FString& Source, const int line);
 	void HandleAsyn(const FString& Name, const FString& Data, const FString& Callback);
 	//typedef class SCefBrowser::TMap<FString, FString> RequestHeaders;

@@ -24,6 +24,7 @@ public:
 	DECLARE_DELEGATE_RetVal_OneParam(bool, FOnKeyChar, const FCharacterEvent& );
 	DECLARE_DELEGATE_OneParam(FOnLoadState, const int);
 	DECLARE_DELEGATE_RetVal_TwoParams(bool, FOnBeforePopup, FString, FString);
+	DECLARE_DELEGATE_TwoParams(FOnPostResponse,const FString&, const FString&);
 	DECLARE_DELEGATE_TwoParams(FOnDownloadComplete, FString, FString);
 	//DECLARE_DELEGATE_TwoParams(FOnTextureChanged, UTexture2D*, UTexture2D*);
 	DECLARE_DELEGATE_RetVal_ThreeParams(bool, FOnResourceLoad, FString, int, RequestHeaders&);
@@ -49,6 +50,8 @@ public:
 		/* this party for event */
 		/** Called before a popup window happens */
 		SLATE_EVENT(FOnBeforePopup, OnBeforePopup)
+		/** Called when post response */
+		SLATE_EVENT(FOnPostResponse, OnPostResponse)
 		/** Called when document loading change. */
 		SLATE_EVENT(FOnLoadState, OnLoadState)
 		/** Called when the Url changes. */
@@ -104,7 +107,7 @@ public:
 		* Load the specified URL.
 		* @param NewURL New URL to load.
 		*/
-	void LoadURL(FString NewURL, FString PostData = FString());
+	void LoadURL(FString NewURL, FString PostData = FString(), bool need_response=false);
 	void LoadString(FString DummyURL, FString Content);
 
 	/**

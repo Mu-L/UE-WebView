@@ -68,10 +68,10 @@ UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 	eKeyboradModeTransparency = WebView_Keyboard_Mode::WebView_Keyboard_Mode_Blend;
 }
 
-void UWebBase::LoadURL(const FString& NewURL,FString PostData)
+void UWebBase::LoadURL(const FString& NewURL,FString PostData, bool need_response)
 {
 	if (!CefCoreWidget.IsValid())return;
-	CefCoreWidget->LoadURL(NewURL, PostData);
+	CefCoreWidget->LoadURL(NewURL, PostData, need_response);
 }
 
 void UWebBase::LoadString(const FString& NewURL, const  FString& Content)
@@ -200,6 +200,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.Visibility(EVisibility::SelfHitTestInvisible)
 		.OnUrlChanged_UObject(this, &UWebBase::HandleOnUrlChanged)
 		.OnBeforePopup_UObject(this, &UWebBase::HandleOnBeforePopup)
+		.OnPostResponse_UObject(this, &UWebBase::HandleOnPostResponse)
 		.OnLoadState_UObject(this, &UWebBase::HandleOnLoadState)
 		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip)
 		.OnWebError_UObject(this, &UWebBase::HandleOnWebError)
@@ -262,6 +263,11 @@ void UWebBase::ShowDevTools() {
 void UWebBase::HandleOnDownloadTip(FString URL, FString File) {
 	if (!OnDownloadComplete.IsBound()) return;
 	OnDownloadComplete.Broadcast(URL, File);
+}
+
+void UWebBase::HandleOnPostResponse(const FString& URL, const FString& PostResponse) {
+	if (!OnPostResponse.IsBound()) return;
+	OnPostResponse.Broadcast(URL, PostResponse);
 }
 
 void UWebBase::HandleOnWebError(const FString& Url, const FString& Desc, const FString& Source, const int line) {

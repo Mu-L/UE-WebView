@@ -133,7 +133,11 @@ static void FOnDownloadComplete_DelegateWrapper(const FMulticastScriptDelegate& 
 static void FOnWebError_DelegateWrapper(const FMulticastScriptDelegate& OnWebError, const FString& Desc, const FString& Source, const int32 line);
 
 
-#define FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_69_DELEGATE \
+#define FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_47_DELEGATE \
+static void FOnPostResponse_DelegateWrapper(const FMulticastScriptDelegate& OnPostResponse, const FString& Url, const FString& Response);
+
+
+#define FID_HostProject_Plugins_WebView_Source_WebView_Public_WebBase_h_70_DELEGATE \
 static void FOnBeforeRequest_DelegateWrapper(const FMulticastScriptDelegate& OnBeforeRequest, const FString& URL, int32 ResourceType, UHtmlHeaders* Headers);
 
 
