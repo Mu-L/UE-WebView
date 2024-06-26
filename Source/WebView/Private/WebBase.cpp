@@ -193,7 +193,7 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.zoom(_Zoom)
 		.Touch(_Touch)
 		.downloadTip(downloadTip)
-//#if !PLATFORM_ANDROID
+//#if defined CEF_ANDROID
 //		.ImitateInput(ImitateInput)
 //#endif
 		//.webCursor(webCursor)

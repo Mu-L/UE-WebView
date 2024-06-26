@@ -5,6 +5,9 @@
 #include "Materials/Material.h"
 #if CEF_NEW_VERSION
 #include "WebModule.h"
+#if WITH_EDITOR
+#include "Editor.h"
+#endif
 #endif
 
 #define LOCTEXT_NAMESPACE "FWebViewModule"
