@@ -8,6 +8,7 @@
 #include "UObject/Class.h"
 #include "WebCefJSFunction.generated.h"
 
+
 class FWebCefJSScripting;
 
 struct CEFBROWSER_API FWebCefJSParam
@@ -212,3 +213,5 @@ struct CEFBROWSER_API FWebCefJSResponse
 
 
 };
+
+

@@ -10,7 +10,7 @@
 /**
  * WebBrowserModule interface
  */
-class IWebModule : public IModuleInterface
+class CEFBROWSER_API IWebModule : public IModuleInterface
 {
 public:
 	/**
@@ -32,4 +32,6 @@ public:
 
 	virtual void OnBeginPIE() = 0;
 	virtual void OnEndPIE() = 0;
+	virtual void Load() = 0;
+	virtual void UnLoad() = 0;
 };

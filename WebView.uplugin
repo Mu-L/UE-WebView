@@ -17,31 +17,13 @@
       "Name": "CefBrowser",
       "PlatformAllowList": [
         "Win64",
-        "Linux",
-        "Mac"
-      ],
-      "TargetAllowList": [
-        "Game",
-        "Editor",
-        "Client",
-        "Program"
+        "Linux"
       ],
       "Type": "Runtime"
     },
     {
       "LoadingPhase": "PreDefault",
       "Name": "WebView",
-      "PlatformAllowList": [
-        "Win64",
-        "Linux",
-        "Mac"
-      ],
-      "TargetAllowList": [
-        "Game",
-        "Editor",
-        "Client",
-        "Program"
-      ],
       "Type": "Runtime"
     }
   ],
@@ -51,15 +33,11 @@
       "Name": "JsonLibrary"
     },
     {
-      "Enabled": false,
-      "Name": "OpenCV"
-    },
-    {
       "Enabled": true,
       "Name": "CefBase"
     }
   ],
   "SupportURL": "https://github.com/aSurgingRiver",
   "Version": 1,
-  "VersionName": "20240714"
+  "VersionName": "20240802"
 }

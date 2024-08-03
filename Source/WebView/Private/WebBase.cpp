@@ -20,7 +20,7 @@
 #include "PackageHelperFunctions.h"
 #endif
 
-#if CEF_NEW_VERSION
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 #include "SCefBrowser.h"
 #else
 #include "SProxyWeb.h"
@@ -71,13 +71,17 @@ UWebBase::UWebBase(const FObjectInitializer& ObjectInitializer)
 void UWebBase::LoadURL(const FString& NewURL,FString PostData, bool need_response)
 {
 	if (!CefCoreWidget.IsValid())return;
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 	CefCoreWidget->LoadURL(NewURL, PostData, need_response);
+#else
+	CefCoreWidget->LoadURL(NewURL);
+#endif
 }
 
 void UWebBase::LoadString(const FString& NewURL, const  FString& Content)
 {
 	if (!CefCoreWidget.IsValid())return;
-	CefCoreWidget->LoadURL(NewURL, Content);
+	CefCoreWidget->LoadString(NewURL, Content);
 }
 
 void UWebBase::ExecuteJavascript(const FString& ScriptText)
@@ -91,7 +95,9 @@ void UWebBase::CallJsonStr(const FString& Function, const FString& Data)
 	if (!CefCoreWidget.IsValid() || Function.IsEmpty())
 		return;
 	FString TextScript;
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 	if (CefCoreWidget->CallJsonStr(Function, Data))return;
+#endif
 	if (Data.Len() >= 2) {
 		TextScript = FString::Printf(TEXT("%s['%s'](%s)"),
 			*jsWindow, *Function, *Data);
@@ -129,8 +135,12 @@ void UWebBase::Reload() {
 }
 
 bool UWebBase::Isloaded() {
-	if (!CefCoreWidget.IsValid())return false;
+	if (!CefCoreWidget.IsValid())return false; 
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 	return CefCoreWidget->Isloaded();
+#else 
+	return true;
+#endif
 }
 
 void UWebBase::ZoomLevel(float zoom) const {
@@ -140,7 +150,9 @@ void UWebBase::ZoomLevel(float zoom) const {
 
 void UWebBase::Silent(bool onoff) {
 	if (!CefCoreWidget.IsValid())return;
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 	CefCoreWidget->Silent(onoff);
+#endif
 }
 
 void UWebBase::WebPixel(FIntPoint pixel) const {
@@ -160,8 +172,10 @@ void UWebBase::UnbindUObject(const FString& Name, UObject* Object, bool bIsPerma
 
 void UWebBase::BeginDestroy() {
 	if (CefCoreWidget) {
-		CefCoreWidget->SetCanTick(false);
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 		CefCoreWidget->Close();
+#endif
+		CefCoreWidget->SetCanTick(false);
 		CefCoreWidget.Reset();
 	}
 	Super::BeginDestroy();
@@ -191,7 +205,9 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.ViewportSize(GetDesiredSize())
 		.Pixel(_Pixel)
 		.zoom(_Zoom)
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 		.Touch(_Touch)
+#endif
 		.downloadTip(downloadTip)
 //#if defined CEF_ANDROID
 //		.ImitateInput(ImitateInput)
@@ -200,18 +216,23 @@ TSharedRef<SWidget> UWebBase::RebuildWidget() {
 		.Visibility(EVisibility::SelfHitTestInvisible)
 		.OnUrlChanged_UObject(this, &UWebBase::HandleOnUrlChanged)
 		.OnBeforePopup_UObject(this, &UWebBase::HandleOnBeforePopup)
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 		.OnPostResponse_UObject(this, &UWebBase::HandleOnPostResponse)
-		.OnLoadState_UObject(this, &UWebBase::HandleOnLoadState)
-		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip)
 		.OnWebError_UObject(this, &UWebBase::HandleOnWebError)
 		.OnResourceLoad_UObject(this, &UWebBase::HandleOnResourceLoad)
-		.OnJsStr_UObject(this, &UWebBase::HandleAsyn);
+		.OnJsStr_UObject(this, &UWebBase::HandleAsyn)
+#endif
+		.OnLoadState_UObject(this, &UWebBase::HandleOnLoadState)
+		.OnDownloadComplete_UObject(this, &UWebBase::HandleOnDownloadTip);
+#ifdef WEBVIEW_CUSTOMIZED_CORE
+	CefCoreWidget->KeyboardMode(webview::toInner(eKeyboradModeTransparency));
+#else
 	_ViewObject = NewObject<UWebViewObject>();// 隔离JS和UE4之间的数据。
 	if (_ViewObject) {
 		_ViewObject->SetUMG(this);
 		BindUObject("$receive", _ViewObject);
 	}
-	CefCoreWidget->KeyboardMode(eKeyboradModeTransparency);
+#endif
 	CefCoreWidget->LoadURL(urlInitial);
 	//CefCoreWidget->SetBlushColor(ColorAndOpacity);
 	return CefCoreWidget.ToSharedRef();
@@ -225,7 +246,9 @@ bool UWebBase::Asyn(const FString& Name, FString& Data, const FString& Callback)
 
 void UWebBase::StopRender(bool hidden) {
 	if (!CefCoreWidget.IsValid())return;
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 	CefCoreWidget->StopRender(hidden);
+#endif
 }
 
 void UWebBase::HandleOnUrlChanged(const FText& InText) {
@@ -238,7 +261,7 @@ void UWebBase::HandleOnLoadState(const int state) {
 
 bool UWebBase::HandleOnBeforePopup(FString URL, FString Frame) {
 	if (!OnBeforePopup.IsBound()) {// 如果没有绑定事件则自动跳转URL
-		CefCoreWidget->LoadURL(URL, FString());
+		LoadURL(URL);
 		return true;
 	}
 	OnBeforePopup.Broadcast(URL, Frame);
@@ -256,8 +279,10 @@ void UWebBase::ReopenRender(FString NewURL) {
 }
 
 void UWebBase::ShowDevTools() {
-	if (CefCoreWidget)
+	if (!CefCoreWidget)return;
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 	CefCoreWidget->ShowDevTools();
+#endif
 }
 
 void UWebBase::HandleOnDownloadTip(FString URL, FString File) {
@@ -290,9 +315,11 @@ bool UWebBase::HandleOnResourceLoad(FString URL, int ResourceType, TMap<FString,
 }
 void UWebBase::ReleaseSlateResources(bool bReleaseChildren) {
 	if (CefCoreWidget) {
+#ifdef WEBVIEW_CUSTOMIZED_CORE
 		CefCoreWidget->StopRender(true);
-		CefCoreWidget->SetCanTick(false);
 		CefCoreWidget->Close();
+#endif
+		CefCoreWidget->SetCanTick(false);
 		CefCoreWidget.Reset();
 	}
 	if (_ViewObject)_ViewObject = nullptr;
@@ -300,8 +327,11 @@ void UWebBase::ReleaseSlateResources(bool bReleaseChildren) {
 
 void UWebBase::KeyboardMode(WebView_Keyboard_Mode KeyMode) {
 	eKeyboradModeTransparency = KeyMode;
-	if(CefCoreWidget)
-	CefCoreWidget->KeyboardMode(eKeyboradModeTransparency);
+	if (CefCoreWidget) {
+#ifdef WEBVIEW_CUSTOMIZED_CORE
+		CefCoreWidget->KeyboardMode(webview::toInner(eKeyboradModeTransparency));
+#endif
+	}
 }
 void UWebBase::GoBack() {
 	if (CefCoreWidget)
@@ -321,8 +351,10 @@ bool UWebBase::CanGoForward() {
 }
 
 void UWebBase::SetImitateInput(const FImitateInput& ImitateInput) {
-	if (!CefCoreWidget.IsValid())return;
-	CefCoreWidget->SetImitateInput(ImitateInput);
+	if (!CefCoreWidget.IsValid())return; 
+#ifdef WEBVIEW_CUSTOMIZED_CORE
+	CefCoreWidget->SetImitateInput(webview::toInner(ImitateInput));
+#endif
 }
 
 #undef LOCTEXT_NAMESPACE

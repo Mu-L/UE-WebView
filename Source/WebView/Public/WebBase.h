@@ -112,7 +112,7 @@ public:
 	/** popup a menu using right mouse in web page */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Show Popup Menu", UIMin = 0, UIMax = 1), Category = "Web View|Show Head")
 		bool RightKeyPopup;
-	/** Whether to show an address bar. */
+	/** Switch Input Method. */
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Switch Input Method", UIMin = 0, UIMax = 1), Category = "Web View")
 		bool  SwitchInputMethod = false;
 	/** Configure webpage flush frame rate */
@@ -163,9 +163,15 @@ public:
 	 *        notice: " don't must need.
 	 * @param need_response 
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Web View")
+	UFUNCTION(BlueprintCallable, Category = "Web View", meta = (AdvancedDisplay = "PostData,need_response"))
 	void LoadURL(const FString& NewURL, FString PostData=TEXT(""),bool need_response=false);
 
+	/**
+	 * Load the specified content
+	 * @param DummyURL use to show 
+	 * @param Content show html content
+	 * @param need_response
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Web View")
 	void LoadString(const FString& DummyURL, const FString& Content);
 

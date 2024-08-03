@@ -60,22 +60,23 @@ namespace UnrealBuildTool.Rules
                     "Slate",
                     "SlateCore",
                     "UMG",
+                    "InputCore",
                     "Engine",
                     "WebBuildGuide"
                 }
             );
 
-            if (Target.Platform == UnrealTargetPlatform.Win64
-                || Target.Platform == UnrealTargetPlatform.Linux
-                || Target.Platform == UnrealTargetPlatform.Mac)
+            if (Target.Platform == UnrealTargetPlatform.Linux ||
+                Target.Platform == UnrealTargetPlatform.Win64 )
             {//
                 PublicDependencyModuleNames.Add("CefBase"); 
                 PublicDependencyModuleNames.Add("CefBrowser"); 
-                PublicDefinitions.Add("CEF_NEW_VERSION=1"); //
             }
-            else {//  WebBrowser
-                PrivateDependencyModuleNames.Add("ProxyWeb");
-                PublicDefinitions.Add("CEF_NEW_VERSION=0"); //
+            else
+            {//  WebBrowser
+                PrivateDependencyModuleNames.Add("WebBrowser");
+                //PrivateDependencyModuleNames.Add("HTTP");
+                //PrivateDependencyModuleNames.Add("ProxyWeb");
             }
             if (Target.bBuildEditor == true) {
                 PrivateIncludePathModuleNames.AddRange(

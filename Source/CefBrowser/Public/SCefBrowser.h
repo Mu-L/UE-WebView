@@ -8,7 +8,7 @@
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Framework/SlateDelegates.h"
-#include "ImitateInput.h"
+#include "CefImitateInput.h"
 #include "Styling/SlateTypes.h"
 
 
@@ -175,13 +175,13 @@ public:
 	//
 	void ShowDevTools();
 	//
-	void KeyboardMode(WebView_Keyboard_Mode);
+	void KeyboardMode(cef::WebView_Keyboard_Mode);
 	//
 	void Close();
 	//
 	void Silent(bool onoff=true);
 	//
-	void SetImitateInput(const FImitateInput& ImitateInput);
+	void SetImitateInput(const cef::FImitateInput& ImitateInput);
 public:
 	/** Default constructor. */
 	SCefBrowser();
