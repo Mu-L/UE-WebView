@@ -22,6 +22,7 @@ public class WebBuildGuide : ModuleRules
         string projFile = Target.ProjectFile.ToString();
 		if (Target.Version.MajorVersion >= 5)
 		{
+			CopyCefBrowser(pluginPath, projFile, Target.ProjectFile.GetFileNameWithoutExtension(), "" + Target.Configuration, Target);
 			CopyCefBrowser(pluginPath, projFile, "UnrealGame", "" + Target.Configuration, Target);
 			CopyCefBrowser(pluginPath, projFile, "UnrealGame", "Inc", Target);
 		}

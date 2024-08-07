@@ -25,7 +25,7 @@ public class CefBrowser : ModuleRules
 			PrecompileForTargets = PrecompileTargetsType.None;
 		}
 		else {
-            PrecompileForTargets = PrecompileTargetsType.Any;
+            //PrecompileForTargets = PrecompileTargetsType.Any;
             if (isDependPlugin("OpenCV")) {// use for test
 				PrivateDependencyModuleNames.AddRange(
 					new string[] {
